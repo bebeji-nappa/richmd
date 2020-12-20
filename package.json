@@ -1,6 +1,6 @@
 {
   "name": "md-converter",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Md Converter make markdown convert to html",
   "main": "src/index.js",
   "scripts": {
