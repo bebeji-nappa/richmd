@@ -59,6 +59,13 @@ describe('paragraph convert', () => {
     expect(result).toEqual(convertedResult)
   })
 
+  it('strong (underline syntax)', () => {
+    const text = `__text__`
+    const convertedResult = `<p><strong>text</strong></p>`
+    const result = mdConvert(text).replace(/\n/g, '')
+    expect(result).toEqual(convertedResult)
+  })
+
   it('del', () => {
     const text = `~~text~~`
     const convertedResult = `<p><del>text</del></p>`
@@ -68,6 +75,13 @@ describe('paragraph convert', () => {
 
   it('em', () => {
     const text = `*text*`
+    const convertedResult = `<p><em>text</em></p>`
+    const result = mdConvert(text).replace(/\n/g, '')
+    expect(result).toEqual(convertedResult)
+  })
+
+  it('em (underline syntax)', () => {
+    const text = `_text_`
     const convertedResult = `<p><em>text</em></p>`
     const result = mdConvert(text).replace(/\n/g, '')
     expect(result).toEqual(convertedResult)
