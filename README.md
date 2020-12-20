@@ -23,14 +23,6 @@ mdConvert(md) // Markdown convert to HTML
 ```
 
 ### Vue.js
-#### Import
-Please be sure to import the css file.
-
-```js
-// import Stylesheet
-import 'md-converter/src/styles/index.css'
-```
-
 #### Simple example usage
 
 ```js
