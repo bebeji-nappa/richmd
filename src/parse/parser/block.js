@@ -1,8 +1,7 @@
-import parseInline from './inline.js';
 import nodes from '../nodes/block.js';
 import helper from './helper.js';
 
-const HEADING_REGEX = /^(#{1,})\s?(.+)$/;
+const HEADING_REGEX = /^(#{1,})\s(.+)$/;
 const ULIST_REGEX = /^(\s*)?(?:\-|\*)\s(.+)$/;
 const OLIST_REGEX = /^(\s*)?([0-9]+)\.\s(.+)$/;
 const HORIZONTAL_RULE_REGEX = /^[\*\-_\s]+$/;
@@ -13,7 +12,6 @@ const TABLE_REGEX = /(?:\s*)?\|(.+)\|(?:\s*)$/;
 
 const MODE_DEFAULT = 0;
 const MODE_CODE = 1;
-const MODE_BLOCKQUOTE = 2;
 
 export default str => {
   const ast = [];
@@ -77,7 +75,7 @@ export default str => {
         parseParagraph(stack);
         stack = '';
         const prev = ast[ast.length - 1];
-        const check = match[2].match(/^\[(x|\u0020)?\]\s?(.+)$/);
+        const check = match[2].match(/^\[(x|\u0020)?\]\s(.+)$/);
         let level = 1;
         if (prev && (prev.name === 'list' || prev.name === 'checklist')) {
           const indent = (match[1] || '').length;

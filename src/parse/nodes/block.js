@@ -83,18 +83,24 @@ class Table extends Node {
   constructor(_rows) {
     super('table', 'block');
     const [heading, separator, ...rows] = _rows.map(line => line.replace(/^\||\|$/g, '').split('|'));
-    this.headings = heading.map(cell => cell.trim());
-    this.aligns = separator.map(cell => {
-      cell = cell.trim();
-      let align = 'left';
-      if (cell[cell.length - 1] === ':') {
-        align = cell[0] === ':' ? 'center': 'right';
-      }
-      return align;
-    });
-    this.rows = rows.map(row => {
-      return row.map(cell => inlineParser(cell.trim()));
-    });
+    if(heading !== undefined) {
+      this.headings = heading.map(cell => cell.trim());
+    }
+    if (separator !== undefined) {
+      this.aligns = separator.map(cell => {
+        cell = cell.trim();
+        let align = 'left';
+        if (cell[cell.length - 1] === ':') {
+          align = cell[0] === ':' ? 'center': 'right';
+        }
+        return align;
+      });
+    }
+    if (rows !== undefined) {
+      this.rows = rows.map(row => {
+        return row.map(cell => inlineParser(cell.trim()));
+      });
+    }
   }
 }
 

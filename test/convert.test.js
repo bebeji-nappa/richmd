@@ -1,4 +1,4 @@
-import { mdConvert } from '../src/index.js'
+import { mdConvert } from '../src/mdconvert.js'
 
 describe('heading convert', () => {
   it('heading1', () => {
@@ -172,20 +172,20 @@ describe('list', () => {
 describe('checklist', () => {
   it('checked checkbox', () => {
     const text = `- [x] list1`
-    const convertedResult = `<ul><li><input type="checkbox" checked="checked">list1</li></ul>`
+    const convertedResult = `<ul class="checklist"><li><input type="checkbox" checked="checked">list1</li></ul>`
     const result = mdConvert(text).replace(/\n/g, '')
     expect(result).toEqual(convertedResult)
   })  
   it('case 1', () => {
     const text = `- [ ] list1\n- [ ] list2\n`
-    const convertedResult = `<ul><li><input type="checkbox">list1</li><li><input type="checkbox">list2</li></ul>`
+    const convertedResult = `<ul class="checklist"><li><input type="checkbox">list1</li><li><input type="checkbox">list2</li></ul>`
     const result = mdConvert(text).replace(/\n/g, '')
     expect(result).toEqual(convertedResult)
   })
 
   it('case 2', () => {
     const text = `- [ ] list1\n  - [ ] list2\n- [ ] list3\n`
-    const convertedResult = `<ul><li><input type="checkbox">list1</li><ul><li><input type="checkbox">list2</li></ul><li><input type="checkbox">list3</li></ul>`
+    const convertedResult = `<ul class="checklist"><li><input type="checkbox">list1</li><ul class="checklist"><li><input type="checkbox">list2</li></ul><li><input type="checkbox">list3</li></ul>`
     const result = mdConvert(text).replace(/\n/g, '')
     expect(result).toEqual(convertedResult)
   })
