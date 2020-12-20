@@ -28,12 +28,9 @@ export const paragraph = (values) => {
 
 export const blockquote = (values) => {
   let bq = `<blockquote>\n`
-  console.log(values)
   for (const data of values) {
-    console.log(data)
     let text = `<p>\n`
     for (const val of data) {
-      console.log(val)
       if (val.name === "em") {
         text += `<strong>${val.value}</strong>`
       } else if (val.name === "strikethrough") {
@@ -56,10 +53,6 @@ export const blockquote = (values) => {
   }
   bq += `</blockquote>\n`
   return bq
-}
-
-export const list = (value, className) => {
-  return className ? `<li class="${className}">${value}</li>\n` : `<li>${value}</li>\n`
 }
 
 export const ulist = (values) => {
@@ -143,7 +136,7 @@ export const checklist = (values) => {
 export const orderedlist = (values) => {
   let olist = `<ol>\n`
   for (const data of values) {
-    olist += list(data.value)
+    olist += `<li>${data[0].value}</li>\n`
   }
   olist += `</ol>\n`
   return olist
@@ -168,7 +161,9 @@ export const table = (data) => {
   for (const row of data.rows) {
     tableblock += `<tr>\n`
     for (const column of row) {
-      tableblock += `<td>${column}</td>\n`
+      for (const obj of column) {
+        tableblock += `<td>${obj.value}</td>\n`
+      }
     }
     tableblock += `</tr>\n`
   }

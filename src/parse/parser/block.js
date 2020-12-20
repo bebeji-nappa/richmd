@@ -3,8 +3,8 @@ import nodes from '../nodes/block.js';
 import helper from './helper.js';
 
 const HEADING_REGEX = /^(#{1,})\s?(.+)$/;
-const ULIST_REGEX = /^(\s*)?(?:\-|\*)\s*(.+)$/;
-const OLIST_REGEX = /^(\s*)?([0-9]+)\.\s*(.+)$/;
+const ULIST_REGEX = /^(\s*)?(?:\-|\*)\s(.+)$/;
+const OLIST_REGEX = /^(\s*)?([0-9]+)\.\s(.+)$/;
 const HORIZONTAL_RULE_REGEX = /^[\*\-_\s]+$/;
 const CODE_REGEX = /^[`~]{3}(.*)|[`~]{3}(.*)\b[\l]+\b$/;
 const BLOCKQUOTE_REGEX = /^(>{1,})\s?(.+)$/;
