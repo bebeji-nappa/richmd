@@ -15,7 +15,10 @@ export const paragraph = (values) => {
       text += `<a href="${data.href}">${data.title}</a>`
     } else if(data.name === "image") {
       text += `<img src="${data.src}" alt="${data.alt}" />`
-    } else {
+    } else if(data.name === "code") {
+      text += `<code>${data.value}</code>`
+    } 
+    else {
       text += data.value
     }
   }
@@ -25,10 +28,31 @@ export const paragraph = (values) => {
 
 export const blockquote = (values) => {
   let bq = `<blockquote>\n`
+  console.log(values)
   for (const data of values) {
-    for (const bqValue of data) {
-      bq += paragraph(bqValue)
+    console.log(data)
+    let text = `<p>\n`
+    for (const val of data) {
+      console.log(val)
+      if (val.name === "em") {
+        text += `<strong>${val.value}</strong>`
+      } else if (val.name === "strikethrough") {
+        text += `<del>${val.value}</del>`
+      } else if (val.name === "italic") {
+        text += `<em>${val.value}</em>`
+      } else if(val.name === "link") {
+        text += `<a href="${val.href}">${val.title}</a>`
+      } else if(val.name === "image") {
+        text += `<img src="${val.src}" alt="${val.alt}" />`
+      } else if(val.name === "code") {
+        text += `<code>${val.value}</code>`
+      } 
+      else {
+        text += val.value
+      }
     }
+    text += `</p>\n`
+    bq += text
   }
   bq += `</blockquote>\n`
   return bq
@@ -44,14 +68,28 @@ export const ulist = (values) => {
   for (const data of values) {
     if (prev && data.level > prev.level) {
       ulist += `<ul>\n`
-    } else if (prev && data.level < prev.level){
-      ulist += `</ul>\n`
-    } 
-    ulist += list(data.value[0].value)
+      ulist += `<li>\n`
+      ulist += `${data.value[0].value}\n`;
+      ulist += `</li>\n`
+    } else if (prev && data.level < prev.level) {
+      for (let i = 0; i < prev.level - data.level; i++) {
+        ulist += `</ul>\n`
+      }
+      ulist += `<li>\n` 
+      ulist += `${data.value[0].value}\n`
+      ulist += `</li>\n`
+    } else if (prev && data.level === prev.level) {
+      ulist += `<li>\n`
+      ulist += `${data.value[0].value}\n`
+      ulist += `</li>\n`
+    } else {
+      ulist += `<li>\n` 
+      ulist += `${data.value[0].value}\n`
+      ulist += `</li>\n`
+    }
     prev = data
   }
   ulist += `</ul>\n`
-  console.log(ulist)
   return ulist
 }
 
@@ -59,22 +97,47 @@ export const checklist = (values) => {
   let prev = null
   let clist = `<ul>\n`
   for (const data of values) {
-    console.log(data)
     if (prev && data.level > prev.level) {
       clist += `<ul>\n`
-    } else if (prev && data.level < prev.level){
-      clist += `</ul>\n`
-    } 
-
-    if (data.checked) { 
-      clist += list(`<input type="checkbox" value="${data.value[0].value}" checked>\n`, "checklist")
-    } else { 
-      clist += list(`<input type="checkbox" value="${data.value[0].value}">\n`, "checklist")
+      clist += `<li>\n`
+      if(data.checked) {
+        clist += `<input type="checkbox" checked="checked">${data.value[0].value}\n`;
+      } else {
+        clist += `<input type="checkbox">${data.value[0].value}\n`;
+      }
+      clist += `</li>\n`
+    } else if (prev && data.level < prev.level) {
+      for (let i = 0; i < prev.level - data.level; i++) {
+        clist += `</ul>\n`
+      }
+      clist += `<li>\n` 
+      if(data.checked) {
+        clist += `<input type="checkbox" checked="checked">${data.value[0].value}\n`;
+      } else {
+        clist += `<input type="checkbox">${data.value[0].value}\n`;
+      }
+      clist += `</li>\n`
+    } else if (prev && data.level === prev.level) {
+      clist += `<li>\n`
+      if(data.checked) {
+        clist += `<input type="checkbox" checked="checked">${data.value[0].value}\n`;
+      } else {
+        clist += `<input type="checkbox">${data.value[0].value}\n`;
+      }
+      clist += `</li>\n`
+    } else {
+      clist += `<li>\n` 
+      if(data.checked) {
+        clist += `<input type="checkbox" checked="checked">${data.value[0].value}\n`;
+      } else {
+        clist += `<input type="checkbox">${data.value[0].value}\n`;
+      }
+      clist += `</li>\n`
     }
     prev = data
   }
- clist += `</ul>\n`
- return clist
+  clist += `</ul>\n`
+  return clist
 }
 
 export const orderedlist = (values) => {

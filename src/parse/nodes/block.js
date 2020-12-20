@@ -38,9 +38,7 @@ class Blockquote extends Node {
   constructor(text, level) {
     super('blockquote', 'block');
     this.level = level;
-    this.values = [
-      new inline.Text(text)
-    ];
+    this.values = new inlineParser(text);
   }
 }
 

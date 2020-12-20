@@ -65,7 +65,6 @@ export default str => {
         parseParagraph(stack);
         stack = '';
         ast.push(new nodes.Blockquote(match[2], match[1].length));
-        
       } else if (HORIZONTAL_RULE_REGEX.test(line) && line.split(/[\*\-_]/).length > 3) {
         parseParagraph(stack);
         stack = '';

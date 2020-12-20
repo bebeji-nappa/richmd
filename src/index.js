@@ -25,7 +25,7 @@ export const mdConvert = (text) => {
       listValue.push({ level: line.level, value: line.values })
       prev = line
     } else if (line.name === "checklist") {
-      listValue.push({ level: line.level, value: line.values })
+      listValue.push({ level: line.level, value: line.values, checked: line.checked })
       prev = line
     } else if (line.name === "orderedlist") {
       htmlValue += convert.orderedlist(line.values)
@@ -35,7 +35,8 @@ export const mdConvert = (text) => {
     } else if (line.name === "horizontal") {
       htmlValue += convert.horizontal()
     } else if (line.name === "br") {
-      if (prev.name === "blockquote") {
+      if (bqValue.length !== 0) {
+        console.log(bqValue)
         htmlValue += convert.blockquote(bqValue)
         bqValue = []
         continue
