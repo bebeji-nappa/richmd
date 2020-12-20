@@ -8,6 +8,12 @@
     "debug": "yarn build; node ./dist/index.js",
     "test": "jest --config=jest.config.js"
   },
+  "keywords": [
+    "md-convertar",
+    "markdown",
+    "preview",
+    "html"
+  ],
   "author": "nappa <masa.yanagawa721@gmail.com>",
   "repository": {
     "type": "git",
