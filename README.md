@@ -62,3 +62,21 @@ export default {
 </script>
 ```
 
+## Suport Syntax
+- strong
+- italic
+- image
+- link
+- headings
+- horizontal rule
+- blockquote
+- unordeed list
+- ordeed list
+- strikethrough
+- code block
+- checkbox list
+- table
+
+## Will be released Support syntax in the future 
+- Code block syntax highlight
+- Original Markdown syntax
