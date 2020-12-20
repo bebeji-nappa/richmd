@@ -17,6 +17,13 @@ class Horizontal extends Node {
   }
 }
 
+class Br extends Node {
+  constructor() {
+    super('br', 'block');
+    this.values = [];
+  }
+}
+
 class Code extends Node {
   constructor(text, syntax) {
     super('code', 'block');
@@ -31,9 +38,7 @@ class Blockquote extends Node {
   constructor(text, level) {
     super('blockquote', 'block');
     this.level = level;
-    this.values = [
-      new inline.Text(text)
-    ];
+    this.values = new inlineParser(text);
   }
 }
 
@@ -102,5 +107,6 @@ export default {
   List,
   CheckList,
   OrderedList,
-  Table
+  Table,
+  Br
 };
