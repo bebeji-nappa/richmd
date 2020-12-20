@@ -88,10 +88,10 @@ export const ulist = (values) => {
 
 export const checklist = (values) => {
   let prev = null
-  let clist = `<ul>\n`
+  let clist = `<ul class="checklist">\n`
   for (const data of values) {
     if (prev && data.level > prev.level) {
-      clist += `<ul>\n`
+      clist += `<ul class="checklist">\n`
       clist += `<li>\n`
       if(data.checked) {
         clist += `<input type="checkbox" checked="checked">${data.value[0].value}\n`;
@@ -135,8 +135,10 @@ export const checklist = (values) => {
 
 export const orderedlist = (values) => {
   let olist = `<ol>\n`
-  for (const data of values) {
-    olist += `<li>${data[0].value}</li>\n`
+  for (const datalist of values) {
+    for (const data of datalist) {
+      olist += `<li>${data.value}</li>\n`
+    }
   }
   olist += `</ol>\n`
   return olist
