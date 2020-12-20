@@ -17,6 +17,13 @@ class Horizontal extends Node {
   }
 }
 
+class Br extends Node {
+  constructor() {
+    super('br', 'block');
+    this.values = [];
+  }
+}
+
 class Code extends Node {
   constructor(text, syntax) {
     super('code', 'block');
@@ -102,5 +109,6 @@ export default {
   List,
   CheckList,
   OrderedList,
-  Table
+  Table,
+  Br
 };
