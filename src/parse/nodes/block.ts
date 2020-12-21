@@ -4,6 +4,7 @@ import inline from './inline.js';
 import SyntaxError from '../parser/syntax-error.js';
 
 class Paragraph extends Node {
+  values: object;
   constructor(text) {
     super('paragraph', 'block');
     this.values = inlineParser(text);
@@ -23,6 +24,8 @@ class Br extends Node {
 }
 
 class Code extends Node {
+  syntax: string;
+  values: object;
   constructor(text, syntax) {
     super('code', 'block');
     this.syntax = syntax;
@@ -33,14 +36,18 @@ class Code extends Node {
 }
 
 class Blockquote extends Node {
+  level: number;
+  values: object;
   constructor(text, level) {
     super('blockquote', 'block');
     this.level = level;
-    this.values = new inlineParser(text);
+    this.values = inlineParser(text);
   }
 }
 
 class Heading extends Node {
+  level: number;
+  values: object;
   constructor(text, level) {
     if (level === 0 || level > 6) {
       throw new SyntaxError('Invalid heading: heading support only between H1 and H6');
@@ -52,6 +59,8 @@ class Heading extends Node {
 }
 
 class List extends Node {
+  level: number;
+  values: object;
   constructor(text, level) {
     super('list', 'block');
     this.level = level;
@@ -60,6 +69,9 @@ class List extends Node {
 }
 
 class OrderedList extends Node {
+  level: number;
+  order: number;
+  values: object;
   constructor(text, order, level) {
     super('orderedlist', 'block');
     this.level = level;
@@ -69,6 +81,9 @@ class OrderedList extends Node {
 }
 
 class CheckList extends Node {
+  level: number;
+  checked: boolean;
+  values: object;
   constructor(text, checked, level) {
     super('checklist', 'block');
     this.level = level;
@@ -78,6 +93,9 @@ class CheckList extends Node {
 }
 
 class Table extends Node {
+  headings: string[];
+  aligns: string[];
+  rows: string[];
   constructor(_rows) {
     super('table', 'block');
     const [heading, separator, ...rows] = _rows.map(line => line.replace(/^\||\|$/g, '').split('|'));
