@@ -20,16 +20,21 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: [ 'babel-loader' ]
+        loader: 'babel-loader',
       },
       {
-        test: /\.css$/,
-        use: [ MiniCssExtractPlugin.loader, 'css-loader' ]
+        test: /\.ts?$/,
+        exclude: /node_modules/,
+        loader: 'ts-loader',
+      },
+      {
+        test: /\.(sc|c)ss$/,
+        use: [ MiniCssExtractPlugin.loader, 'sass-loader', 'css-loader' ],
       }
     ]
   },
   resolve: {
-    extensions: [ '.js' ],
+    extensions: [ '.js', '.ts' ],
   },
   plugins: [
     new CleanWebpackPlugin(),

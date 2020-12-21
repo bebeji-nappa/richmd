@@ -11,16 +11,14 @@ class Paragraph extends Node {
 }
 
 class Horizontal extends Node {
-  constructor(text) {
+  constructor() {
     super('horizontal', 'block');
-    this.values = [];
   }
 }
 
 class Br extends Node {
   constructor() {
     super('br', 'block');
-    this.values = [];
   }
 }
 

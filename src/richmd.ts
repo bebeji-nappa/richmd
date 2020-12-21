@@ -1,7 +1,7 @@
 import mtp from './parse/index.js'
 import * as convert from './convert/index.js'
 
-export const mdConvert = (text) => {
+export const mdConvert = (text: string) => {
   const mdTree = mtp(text);
   let htmlValue = ``
   let prev = null

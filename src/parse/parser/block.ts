@@ -13,7 +13,7 @@ const TABLE_REGEX = /(?:\s*)?\|(.+)\|(?:\s*)$/;
 const MODE_DEFAULT = 0;
 const MODE_CODE = 1;
 
-export default str => {
+export const parser = str => {
   const ast = [];
 
   if (!/\n$/.test(str)) {

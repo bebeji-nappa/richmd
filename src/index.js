@@ -1,4 +1,6 @@
-import './styles/normalize.css'
-import './styles/index.css'
+import UIkit from 'uikit';
+import Icons from 'uikit/dist/js/uikit-icons'
 
-export * from './mdconvert'
+UIkit.use(Icons);
+
+export * from './index.ts'

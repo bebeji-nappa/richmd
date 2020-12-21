@@ -1,4 +1,4 @@
-import parser from './parser/index.js';
+import { parser } from './parser/index.js';
 import Tree from './Tree.js';
 
 const mdParse = mdString => {
