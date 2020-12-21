@@ -1,7 +1,7 @@
-import Node from './Node.js';
-import inlineParser from '../parser/inline.js';
-import inline from './inline.js';
-import SyntaxError from '../parser/syntax-error.js';
+import Node from './Node';
+import inlineParser from '../parser/inline';
+import inline from './inline';
+import SyntaxError from '../parser/syntax-error';
 
 class Paragraph extends Node {
   values: object;

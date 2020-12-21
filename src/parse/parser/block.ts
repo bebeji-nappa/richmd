@@ -1,5 +1,5 @@
-import nodes from '../nodes/block.js';
-import helper from './helper.js';
+import nodes from '../nodes/block';
+import helper from './helper';
 
 const HEADING_REGEX = /^(#{1,})\s(.+)$/;
 const ULIST_REGEX = /^(\s*)?(?:\-|\*)\s(.+)$/;

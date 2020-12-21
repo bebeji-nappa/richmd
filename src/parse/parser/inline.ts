@@ -1,5 +1,5 @@
-import nodes from '../nodes/inline.js';
-import helper from './helper.js';
+import nodes from '../nodes/inline';
+import helper from './helper';
 
 const MODE_DEFAULT = 0;
 const MODE_ASTERISK = 1;

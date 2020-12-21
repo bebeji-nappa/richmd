@@ -1,4 +1,4 @@
-import Node from './Node.js';
+import Node from './Node';
 
 const IMAGE_REGEX = /^!\[([^\]]*)?\]\(([^\)]+)\)$/;
 const LINK_REGEX = /^\[([^\]]*)?\]\(([^\)]+)\)$/;
