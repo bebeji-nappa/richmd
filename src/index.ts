@@ -1,3 +1,6 @@
-import 'uikit';
+import UIkit from "uikit";
+import Icons from "uikit/dist/js/uikit-icons";
 
-export * from './richmd'
+(UIkit.use as (UIkit: object) => void)(Icons);
+
+export * from './richmdParse'
