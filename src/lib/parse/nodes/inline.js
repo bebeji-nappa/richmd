@@ -1,10 +1,9 @@
-import Node from './Node';
+import Node from './Node.js';
 
 const IMAGE_REGEX = /^!\[([^\]]*)?\]\(([^\)]+)\)$/;
 const LINK_REGEX = /^\[([^\]]*)?\]\(([^\)]+)\)$/;
 
 class Text extends Node {
-  value: string;
   constructor(text) {
     super('text', 'inline');
     this.value = text;
@@ -12,7 +11,6 @@ class Text extends Node {
 }
 
 class Html extends Node {
-  value: string;
   constructor(text) {
     super('html', 'inline');
     this.value = text;
@@ -20,7 +18,6 @@ class Html extends Node {
 }
 
 class HtmlComment extends Node {
-  value: string;
   constructor(text) {
     super('htmlcomment', 'inline');
     this.value = text;
@@ -28,7 +25,6 @@ class HtmlComment extends Node {
 }
 
 class Em extends Node {
-  value: string;
   constructor(text) {
     super('em', 'inline');
     this.value = text;
@@ -36,21 +32,18 @@ class Em extends Node {
 }
 
 class Italic extends Node {
-  value: string;
   constructor(text) {
     super('italic', 'inline');
     this.value = text;
   }
 }
 class EmItalic extends Node {
-  value: string;
   constructor(text) {
     super('emitalic', 'inline');
     this.value = text;
   }
 }
 class Strikethrough extends Node {
-  value: string;
   constructor(text) {
     super('strikethrough', 'inline');
     this.value = text;
@@ -58,7 +51,6 @@ class Strikethrough extends Node {
 }
 
 class InlineCode extends Node {
-  value: string;
   constructor(text) {
     super('code', 'inline');
     this.value = text;
@@ -66,8 +58,6 @@ class InlineCode extends Node {
 }
 
 class Image extends Node {
-  alt: string;
-  src: string;
   constructor(text) {
     const match = text.match(IMAGE_REGEX);
     if (!match) {
@@ -80,8 +70,6 @@ class Image extends Node {
 }
 
 class Link extends Node {
-  title: string;
-  href: string;
   constructor(text) {
     const match = text.match(LINK_REGEX);
     if (!match) {

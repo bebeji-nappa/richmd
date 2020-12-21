@@ -1,4 +1,7 @@
-node_modules/
 dist/
+node_modules/
 yarn-error.log
 debug.js
+
+# Ignore katex file
+src/lib/katex/

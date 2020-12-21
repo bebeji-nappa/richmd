@@ -1,7 +1,7 @@
-import mtp from './parse/index'
-import * as convert from './convert/index'
+import { mtp } from './lib/parse/index.js'
+import * as convert from './convert/index.js'
 
-export const richmd = (text: string) => {
+export const richmd = (text) => {
   const mdTree = mtp(text);
   let htmlValue = ``
   let prev = null
@@ -46,7 +46,6 @@ export const richmd = (text: string) => {
       if (line === mdTree[mdTree.length-1]) {
         htmlValue += convert.orderedlist(listValue)
       }
-      // htmlValue += convert.orderedlist(line.values)
       prev = line
     } else if (line.name === "code") {
       htmlValue += convert.code(line)
@@ -54,6 +53,8 @@ export const richmd = (text: string) => {
       htmlValue += convert.horizontal()
     } else if(line.name === "table") {
       htmlValue += convert.table(line)
+    } else if (line.name === "katex") {
+      htmlValue += convert.katex(line)
     } else if (line.name === "br") {
       if (bqValue.length !== 0) {
         htmlValue += convert.blockquote(bqValue)

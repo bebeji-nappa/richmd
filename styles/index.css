@@ -288,3 +288,14 @@ pre {
 input[type="checkbox"] {
   margin: 0 5px;
 }
+
+.math {
+  background-color: #fff;
+  border: none;
+  overflow: auto;
+  padding: 5px 16px;
+}
+
+.katex { 
+  font-size: 22px;
+}
