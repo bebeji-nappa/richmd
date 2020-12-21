@@ -1,3 +1,5 @@
+import Katex from 'katex';
+
 export const heading = (level, value) => {
   return `<h${level}>${value}</h${level}>\n`
 }
@@ -146,6 +148,13 @@ export const orderedlist = (values) => {
 
 export const code = (data) => {
   return `<pre>\n<code class="${data.syntax}">\n${data.values[0].value}\n</code>\n</pre>\n`
+}
+
+export const katex = (data) => {
+  const html = Katex.renderToString(String.raw`${data.values[0].value}`, {
+    throwOnError: false
+  });
+  return `<pre class="math">\n${html}\n</pre>\n`
 }
 
 export const horizontal = () => {

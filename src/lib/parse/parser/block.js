@@ -1,5 +1,5 @@
-import nodes from '../nodes/block';
-import helper from './helper';
+import nodes from '../nodes/block.js';
+import helper from './helper.js';
 
 const HEADING_REGEX = /^(#{1,})\s(.+)$/;
 const ULIST_REGEX = /^(\s*)?(?:\-|\*)\s(.+)$/;
@@ -9,9 +9,11 @@ const CODE_REGEX = /^[`~]{3}(.*)|[`~]{3}(.*)\b[\l]+\b$/;
 const BLOCKQUOTE_REGEX = /^(>{1,})\s?(.+)$/;
 const LINEBREAK_REGEX = /(.+?)[\u0020]{2}$/;
 const TABLE_REGEX = /(?:\s*)?\|(.+)\|(?:\s*)$/;
+const KATEX_REGEX = /^[`\^]{3}(.*)|[`\^]{3}(.*)$/;
 
 const MODE_DEFAULT = 0;
 const MODE_CODE = 1;
+const MODE_KATEX = 2;
 
 export const parser = str => {
   const ast = [];
@@ -57,6 +59,15 @@ export const parser = str => {
           parseParagraph(stack);
           codeLang = line.replace(/\`\`\`/, '').trim();
           mode = MODE_CODE;
+        }
+        stack = '';
+      } else if (KATEX_REGEX.test(line)) {
+        if (mode === MODE_KATEX) {
+          ast.push(new nodes.Katex(stack.trim()));
+          mode = MODE_DEFAULT;
+        } else {
+          parseParagraph(stack);
+          mode = MODE_KATEX;
         }
         stack = '';
       } else if (null !== (match = line.match(BLOCKQUOTE_REGEX))) {
