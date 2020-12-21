@@ -1,4 +1,4 @@
-import { richmd } from '../src/richmdParse'
+import { richmd } from '../dist/richmdParse.js'
 
 describe('heading convert', () => {
   it('heading1', () => {
