@@ -1,7 +1,7 @@
-import mtp from './parse/index.js'
-import * as convert from './convert/index.js'
+import mtp from './parse/index'
+import * as convert from './convert/index'
 
-export const mdConvert = (text: string) => {
+export const richmd = (text: string) => {
   const mdTree = mtp(text);
   let htmlValue = ``
   let prev = null
