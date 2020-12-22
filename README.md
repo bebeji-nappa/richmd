@@ -1,5 +1,5 @@
-# Richmd.js
-Richmd.js make basic Markdown syntax convert to HTML and provide it customaized Markdown syntax.
+# RichMD.js
+RichMD.js make basic Markdown syntax convert to HTML and provide it customaized Markdown syntax.
 
 ## Installation
 
@@ -12,7 +12,7 @@ yarn add richmd
 ```
 
 ## Usage
-You can use Richmd.js as a ECMAScript module.
+You can use RichMD.js as a ECMAScript module.
 
 Import method `richmd` to Entry file.
 ```js
@@ -24,7 +24,7 @@ console.log(richmd(text)) // Markdown convert to HTML
 ```
 
 ### [MUST] SetUp TeX Syntax 
-Richmd.js can use TeX Syntax. This tool use [KaTeX](https://katex.org/). 
+RichMD.js can use TeX Syntax. This tool use [KaTeX](https://katex.org/). 
 
 Plaese add this CDN to HTML template file.
 
@@ -70,7 +70,7 @@ export default {
 ```
 
 ## Markdown Syntax
-Please read a [Richmd Markdown Syntax Documentation](./docs/md-syntax.md).
+Please read a [RichMD.js Markdown Syntax Documentation](./docs/md-syntax.md).
 
 ### Suport syntax
 - strong
