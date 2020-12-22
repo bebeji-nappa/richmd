@@ -20,7 +20,7 @@ export const paragraph = (values) => {
     } else if (data.name === "code") {
       text += `<code>${data.value}</code>`
     } else if (data.name === "katex") {
-      const html = Katex.renderToString(String.raw`${data.value}`, {
+      const html = Katex.renderToString(String.raw`\textstyle ${data.value}`, {
         throwOnError: false
       });
       text += html

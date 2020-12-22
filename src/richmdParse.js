@@ -1,4 +1,4 @@
-import { mtp } from './lib/parse/index.js'
+import { mtp } from './parse/index.js'
 import * as convert from './convert/index.js'
 
 export const richmd = (text) => {
@@ -62,23 +62,19 @@ export const richmd = (text) => {
         htmlValue += convert.blockquote(bqValue)
         bqValue = []
         continue
-      }
-      if (prev && prev.name === "list") {
+      } else if (prev && prev.name === "list") {
         htmlValue += convert.ulist(listValue)
         listValue = []
         continue
-      }
-      if (prev && prev.name === "orderedlist") {
+      } else if (prev && prev.name === "orderedlist") {
         htmlValue += convert.orderedlist(listValue)
         listValue = []
         continue
-      }
-      if (prev && prev.name === "checklist") {
+      } else if (prev && prev.name === "checklist") {
         htmlValue += convert.checklist(listValue)
         listValue = []
         continue
-      }
-      if (prev && prev.name === line.name) {
+      } else if (prev && prev.name === "br") {
         continue
       }
       htmlValue += convert.br()

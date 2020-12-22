@@ -41,9 +41,7 @@ export default text => {
               ast.push(new nodes.EmItalic(stack));
               mode = MODE_DEFAULT;
             } else {
-              if (!helper.isEmpty(stack)) {
-                ast.push(new nodes.Text(stack));
-              }
+              ast.push(new nodes.Text(stack));
               mode = MODE_ASTERISK_TRIPLE;
             }
             stack = '';
@@ -52,9 +50,7 @@ export default text => {
               ast.push(new nodes.Em(stack));
               mode = MODE_DEFAULT;
             } else {
-              if (!helper.isEmpty(stack)) {
-                ast.push(new nodes.Text(stack));
-              }
+              ast.push(new nodes.Text(stack));
               mode = MODE_ASTERISK_DOUBLE;
             }
             stack = '';
@@ -65,9 +61,7 @@ export default text => {
           ast.push(new nodes.Italic(stack));
           mode = MODE_DEFAULT;
         } else {
-          if (!helper.isEmpty(stack)) {
-            ast.push(new nodes.Text(stack));
-          }
+          ast.push(new nodes.Text(stack));
           mode = MODE_ASTERISK;
         }
         stack = '';
@@ -81,9 +75,7 @@ export default text => {
               ast.push(new nodes.EmItalic(stack));
               mode = MODE_DEFAULT;
             } else {
-              if (!helper.isEmpty(stack)) {
-                ast.push(new nodes.Text(stack));
-              }
+              ast.push(new nodes.Text(stack));
               mode = MODE_UNDERLINE_TRIPLE;
             }
             stack = '';
@@ -92,9 +84,7 @@ export default text => {
               ast.push(new nodes.Em(stack));
               mode = MODE_DEFAULT;
             } else {
-              if (!helper.isEmpty(stack)) {
-                ast.push(new nodes.Text(stack));
-              }
+              ast.push(new nodes.Text(stack));
               mode = MODE_UNDERLINE_DOUBLE;
             }
             stack = '';
@@ -105,9 +95,7 @@ export default text => {
           ast.push(new nodes.Italic(stack));
           mode = MODE_DEFAULT;
         } else {
-          if (!helper.isEmpty(stack)) {
-            ast.push(new nodes.Text(stack));
-          }
+          ast.push(new nodes.Text(stack));
           mode = MODE_UNDERLINE;
         }
         stack = '';
@@ -119,9 +107,7 @@ export default text => {
             ast.push(new nodes.Strikethrough(stack));
             mode = MODE_DEFAULT;
           } else {
-            if (!helper.isEmpty(stack)) {
-              ast.push(new nodes.Text(stack));
-            }
+            ast.push(new nodes.Text(stack));
             mode = MODE_STRIKETHROUGH;
           }
           stack = '';
@@ -188,9 +174,7 @@ export default text => {
         continue;
       case "[":
         if (mode !== MODE_IMAGE) {
-          if (!helper.isEmpty(stack)) {
-            ast.push(new nodes.Text(stack));
-          }
+          ast.push(new nodes.Text(stack));
           mode = MODE_LINK;
           stack = char;
           continue
@@ -228,12 +212,13 @@ export default text => {
       switch (mode) {
         case MODE_ASTERISK: prefix = '*'; break;
         case MODE_ASTERISK_DOUBLE: prefix = '**'; break;
-        case MODE_ASTERISK_TRIPLE: prefix = '**'; break;
+        case MODE_ASTERISK_TRIPLE: prefix = '***'; break;
         case MODE_UNDERLINE: prefix = '_'; break;
         case MODE_UNDERLINE_DOUBLE: prefix = '__'; break;
         case MODE_UNDERLINE_TRIPLE: prefix = '___'; break;
         case MODE_STRIKETHROUGH: prefix = '~~'; break;
         case MODE_INLINE_CODE: prefix = '`'; break;
+        case MODE_INLINE_KATEX: prefix = '$'; break;
       }
       prev.value += `${prefix}${stack}`;
     }

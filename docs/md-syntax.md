@@ -89,12 +89,48 @@ Code block
 ### Mathematical formula Block (Use [KaTeX](https://katex.org/))
 Please TeX Syntax details read a [KaTeX Functions Documentation](https://katex.org/docs/supported.html).
 
-Mathematical formula style use `\displaystyle`.
-
-*Future version will able to do setting Mathematical formula style.*
-
-```markdown
+#### Syntax
+```txt
 $$$
 \frac{a}{b}
 $$$
 ```
+
+#### Preview
+![Preview](./images/preview1.png)
+
+### Inline Mathematical formula
+#### Syntax
+```txt
+This is $a=b+c$
+```
+
+#### Preview
+![Preview2](./images/preview2.png)
+
+### Color Block
+#### Syntax
+```txt
+===
+**Default**:
+This is default color block.
+===
+===primary
+**Primary**:
+This is primary color block.
+===
+===success
+**Success**:
+This is success color block.
+===
+===warning
+**Warning**:
+This is warning color block.
+===
+===danger
+**Danger**:
+This is danger color block.
+===
+```
+#### Preview
+![Preview3](./images/preview3.png)
