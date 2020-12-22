@@ -86,8 +86,13 @@ Code block
 ```
 
 ## Original Markdown Syntax
-### Use TeX Syntax ([KaTeX](https://katex.org/))
-TeX Syntax details read a [KaTeX Functions Documentation](https://katex.org/docs/supported.html).
+### Mathematical formula Block (Use [KaTeX](https://katex.org/))
+Please TeX Syntax details read a [KaTeX Functions Documentation](https://katex.org/docs/supported.html).
+
+Mathematical formula style use `\displaystyle`.
+
+*Future version will able to do setting Mathematical formula style.*
+
 ```markdown
 ^^^
 \frac{a}{b}

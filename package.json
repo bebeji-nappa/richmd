@@ -1,9 +1,10 @@
 {
   "name": "richmd",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Richmd.js expand basic Markdown syntax to customaize it.",
   "main": "src/index.js",
   "scripts": {
+    "build": "webpack",
     "debug": "node ./src/index.js",
     "test": "jest --config=jest.config.js"
   },
