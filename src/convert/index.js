@@ -1,4 +1,6 @@
 import Katex from 'katex';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/atom-one-dark.css';
 
 export const heading = (level, value) => {
   return `<h${level}>${value}</h${level}>\n`
@@ -152,7 +154,8 @@ export const orderedlist = (values) => {
 }
 
 export const code = (data) => {
-  return `<pre class="code">\n<code class="${data.syntax}">\n${data.values[0].value}\n</code>\n</pre>\n`
+  const syntax = hljs.highlightAuto(`${data.values[0].value}`).value
+  return `<pre class="code">\n<code class="${data.syntax}">\n${syntax}\n</code>\n</pre>\n`
 }
 
 export const katex = (data) => {

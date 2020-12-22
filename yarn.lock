@@ -2700,6 +2700,11 @@ has@^1.0.3:
   dependencies:
     function-bind "^1.1.1"
 
+highlight.js@^10.4.1:
+  version "10.4.1"
+  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-10.4.1.tgz#d48fbcf4a9971c4361b3f95f302747afe19dbad0"
+  integrity sha512-yR5lWvNz7c85OhVAEAeFhVCc/GV4C30Fjzc/rCP0aCWzc1UUOPUk55dK/qdwTZHBvMZo+eZ2jpk62ndX/xMFlg==
+
 hosted-git-info@^2.1.4:
   version "2.8.8"
   resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.8.8.tgz#7539bd4bc1e0e0a895815a2e0262420b12858488"
@@ -4984,11 +4989,6 @@ typical@^5.0.0, typical@^5.2.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/typical/-/typical-5.2.0.tgz#4daaac4f2b5315460804f0acf6cb69c52bb93066"
   integrity sha512-dvdQgNDNJo+8B2uBQoqdb11eUCE1JQXhvjC/CZtgvZseVd5TYMXnq0+vuUemXbd/Se29cTaUuPX3YIc2xgbvIg==
-
-uikit@^3.6.3:
-  version "3.6.3"
-  resolved "https://registry.yarnpkg.com/uikit/-/uikit-3.6.3.tgz#e3eb2393a7c67bc312bcebb506babedc26a35e11"
-  integrity sha512-TeTIWtV9K/Q9ee7mdABAeGblxwggp9LSU4HehtqTyIkjNLVBSnKZwkrJTP5853PveJvQVvW5y+t+Gnfqj4gNwg==
 
 unicode-canonical-property-names-ecmascript@^1.0.4:
   version "1.0.4"

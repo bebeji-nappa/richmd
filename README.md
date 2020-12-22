@@ -90,8 +90,6 @@ Please read a [RichMD.js Markdown Syntax Documentation](./docs/md-syntax.md).
 - table
 - TeX syntax(Use [KaTeX](https://katex.org/))
 - Color Inline Block
-
-### Will be released support syntax in the future 
 - Code block syntax highlight
 
 ## License
