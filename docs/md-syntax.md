@@ -1,4 +1,4 @@
-# Richmd Markdown Syntax
+# RichMD.js Markdown Syntax
 ## Basic Markdown Syntax
 ### Heading
 ```markdown

@@ -1,6 +1,6 @@
 {
   "name": "richmd",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Richmd.js expand basic Markdown syntax to customaize it.",
   "main": "src/index.js",
   "scripts": {
@@ -9,7 +9,7 @@
     "test": "jest --config=jest.config.js"
   },
   "keywords": [
-    "Richmd.js",
+    "RichMD.js",
     "markdown",
     "richmd",
     "TeX"
