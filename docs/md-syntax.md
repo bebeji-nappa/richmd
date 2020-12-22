@@ -78,6 +78,16 @@ Code block
 ```
 ~~~
 
+#### Use Language syntax
+~~~markdown
+```js
+console.log('Hello World!')
+```
+~~~
+
+It use [highlight.js](https://github.com/highlightjs/highlight.js) syntax support. 
+Please Syntax support details read a [highlight.js Documentation](https://highlightjs.org/static/demo/).
+
 ### Table
 ```markdown
 | TH | TH |
