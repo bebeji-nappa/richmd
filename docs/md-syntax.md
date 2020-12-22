@@ -78,7 +78,7 @@ Code block
 ```
 ~~~
 
-#### Use Language syntax
+#### Enable Language syntax
 ~~~markdown
 ```js
 console.log('Hello World!')
