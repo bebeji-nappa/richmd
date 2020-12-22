@@ -60,24 +60,30 @@ class InlineCode extends Node {
 class Image extends Node {
   constructor(text) {
     const match = text.match(IMAGE_REGEX);
-    if (!match) {
-      throw new Error(`Invalid image syntax: ${text}`);
-    }
     super('image', 'inline');
-    this.alt = match[1] || '';
-    this.src = match[2] || '';
+    if (!match) {
+      this.alt = '';
+      this.src = '';
+    } else {
+      this.alt = match[1] || '';
+      this.src = match[2] || '';
+    }
+    
   }
 }
 
 class Link extends Node {
   constructor(text) {
     const match = text.match(LINK_REGEX);
-    if (!match) {
-      throw new Error(`Invalid link syntax: ${text}`);
-    }
     super('link', 'inline');
-    this.title = match[1] || '';
-    this.href = match[2] || '';
+    if (!match) {
+      this.title = '';
+      this.href = '';
+    } else {
+      this.title = match[1] || '';
+      this.href = match[2] || '';
+    }
+    
   }
 }
 

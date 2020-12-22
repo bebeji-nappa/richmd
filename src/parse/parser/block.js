@@ -99,49 +99,42 @@ export const parser = str => {
         ast.push(new nodes.Heading(match[2], match[1].length));
       } else if (null !== (match = line.match(ULIST_REGEX))) {
         parseParagraph(stack);
-        stack = '';
         const prev = ast[ast.length - 1];
         const check = match[2].match(/^\[(x|\u0020)?\]\s(.+)$/);
         let level = 1;
         if (prev && (prev.name === 'list' || prev.name === 'checklist')) {
           const indent = (match[1] || '').length;
-          if (prev.level * 2 <= indent) {
-            level = prev.level + 1
-          } else if (prev.level === indent) {
-            level = prev.level
-          } else if (indent === 0) {
-            level = 1
+          if(indent % 2 === 0) {
+            if (prev.level * 2 <= indent) {
+              level = prev.level + 1
+            } else if ((prev.level - 1) * 2 === indent) {
+              level = prev.level
+            } else if (indent === 0) {
+              level = 1
+            } else if(prev.level * 2 > indent) {
+              level = prev.level - 1
+            }
           } else {
-            level = prev.level - 1
+            continue
           }
         }
         const list = check ? new nodes.CheckList(check[2], check[1] === 'x', level) : new nodes.List(match[2], level);
         ast.push(list);
+        stack = '';
       } else if (null !== (match = line.match(OLIST_REGEX))) {
         parseParagraph(stack);
-        stack = '';
-        const prev = ast[ast.length - 1];
         let level = 1;
-        if (prev && (prev.name === 'orderedlist')) {
-          const indent = (match[1] || '').length;
-          if (prev.level * 2 <= indent) {
-            level = prev.level + 1
-          } else if (prev.level === indent) {
-            level = prev.level
-          } else {
-            level = prev.level - 1
-          }
-        }
         const list = new nodes.OrderedList(match[3], (match[2] | 0), level);
         ast.push(list);
+        stack = '';
       } else if (null !== (match = line.match(TABLE_REGEX))) {
         tables.push(line);
         stack = '';
       } else if (line === '') {
         if(mode === MODE_DEFAULT) {
           parseParagraph(stack);
-          stack = '';
           ast.push(new nodes.Br());
+          stack = '';
         }
       } else {
         stack += line !== '' ? `${line}\n` : '';

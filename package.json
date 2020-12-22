@@ -1,6 +1,6 @@
 {
   "name": "richmd",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Richmd.js expand basic Markdown syntax to customaize it.",
   "main": "src/index.js",
   "scripts": {

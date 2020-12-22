@@ -191,8 +191,6 @@ export default text => {
           ast.push(new nodes.Link(stack));
           mode = MODE_DEFAULT;
           stack = '';
-        } else {
-          stack += char;
         }
         continue;
       case "\\":
