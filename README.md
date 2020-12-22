@@ -1,6 +1,8 @@
 # RichMD.js
 RichMD.js make basic Markdown syntax convert to HTML and provide it customaized Markdown syntax.
 
+![RichMD.js](./docs/images/preview.png)
+
 ## Installation
 
 ```bash
@@ -87,8 +89,14 @@ Please read a [RichMD.js Markdown Syntax Documentation](./docs/md-syntax.md).
 - checkbox list
 - table
 - TeX syntax(Use [KaTeX](https://katex.org/))
+- Color Inline Block
 
 ### Will be released support syntax in the future 
 - Code block syntax highlight
-- Color Inline Block
-- Using CSS framework [UIkit](https://getuikit.com/)
+
+## License
+MIT
+
+## Thanks you :pray:
+- [Markdown-tree-parser](https://github.com/ysugimoto/markdown-tree-parser)
+  - RichMD.js markdown parser was created using the code in markdown-tree-parser as a reference.

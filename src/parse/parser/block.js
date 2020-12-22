@@ -9,11 +9,12 @@ const CODE_REGEX = /^[`~]{3}(.*)|[`~]{3}(.*)\b[\l]+\b$/;
 const BLOCKQUOTE_REGEX = /^(>{1,})\s?(.+)$/;
 const LINEBREAK_REGEX = /(.+?)[\u0020]{2}$/;
 const TABLE_REGEX = /(?:\s*)?\|(.+)\|(?:\s*)$/;
-const KATEX_REGEX = /^[`\^]{3}(.*)|[`\^]{3}(.*)$/;
-
+const KATEX_REGEX = /^[\$]{3}(.*)|[\$]{3}(.*)$/;
+const COLORBLOCK_REGEX = /^[\=]{3}(.*)|[\=]{3}(.*)\b[\l]+\b$/;
 const MODE_DEFAULT = 0;
 const MODE_CODE = 1;
 const MODE_KATEX = 2;
+const MODE_COLORBLOCK = 3;
 
 export const parser = str => {
   const ast = [];
@@ -28,7 +29,7 @@ export const parser = str => {
   let tables = [];
   let match;
   let codeLang = '';
-
+  let messageType = 'default';
   const parseParagraph = stack => {
     if (tables.length > 0) {
       ast.push(new nodes.Table(tables));
@@ -68,6 +69,20 @@ export const parser = str => {
         } else {
           parseParagraph(stack);
           mode = MODE_KATEX;
+        }
+        stack = '';
+      } else if (COLORBLOCK_REGEX.test(line)) {
+        if (mode === MODE_COLORBLOCK) {
+          ast.push(new nodes.ColorBlock(stack.trim(), messageType));
+          messageType = 'default'
+          mode = MODE_DEFAULT;
+        } else {
+          parseParagraph(stack);
+          messageType = line.replace(/\=\=\=/, '').trim();
+          if(messageType === '') {
+            messageType = 'default'
+          }
+          mode = MODE_COLORBLOCK;
         }
         stack = '';
       } else if (null !== (match = line.match(BLOCKQUOTE_REGEX))) {
@@ -123,9 +138,11 @@ export const parser = str => {
         tables.push(line);
         stack = '';
       } else if (line === '') {
-        parseParagraph(stack);
-        stack = '';
-        ast.push(new nodes.Br());
+        if(mode === MODE_DEFAULT) {
+          parseParagraph(stack);
+          stack = '';
+          ast.push(new nodes.Br());
+        }
       } else {
         stack += line !== '' ? `${line}\n` : '';
       }
