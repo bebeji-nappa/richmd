@@ -13,13 +13,18 @@ export const paragraph = (values) => {
       text += `<del>${data.value}</del>`
     } else if (data.name === "italic") {
       text += `<em>${data.value}</em>`
-    } else if(data.name === "link") {
+    } else if (data.name === "link") {
       text += `<a href="${data.href}">${data.title}</a>`
-    } else if(data.name === "image") {
+    } else if (data.name === "image") {
       text += `<img src="${data.src}" alt="${data.alt}" />`
-    } else if(data.name === "code") {
+    } else if (data.name === "code") {
       text += `<code>${data.value}</code>`
-    } 
+    } else if (data.name === "katex") {
+      const html = Katex.renderToString(String.raw`${data.value}`, {
+        throwOnError: false
+      });
+      text += html
+    }
     else {
       text += data.value
     }
@@ -147,14 +152,14 @@ export const orderedlist = (values) => {
 }
 
 export const code = (data) => {
-  return `<pre>\n<code class="${data.syntax}">\n${data.values[0].value}\n</code>\n</pre>\n`
+  return `<pre class="code">\n<code class="${data.syntax}">\n${data.values[0].value}\n</code>\n</pre>\n`
 }
 
 export const katex = (data) => {
   const html = Katex.renderToString(String.raw`\displaystyle${data.values[0].value}`, {
     throwOnError: false
   });
-  return `<pre class="math">\n${html}\n</pre>\n`
+  return `<pre class="math katex-center">\n${html}\n</pre>\n`
 }
 
 export const horizontal = () => {
@@ -185,4 +190,28 @@ export const table = (data) => {
 
 export const br = () => {
   return `<br />\n`
+}
+
+export const colorBlock = (datas) => {
+  let text = `<pre class="message-${datas.style}">\n`
+  for(const data of datas.values) {
+    if (data.name === "em") {
+      text += `<strong>${data.value}</strong>`
+    } else if (data.name === "strikethrough") {
+      text += `<del>${data.value}</del>`
+    } else if (data.name === "italic") {
+      text += `<em>${data.value}</em>`
+    } else if(data.name === "link") {
+      text += `<a href="${data.href}">${data.title}</a>`
+    } else if(data.name === "image") {
+      text += `<img src="${data.src}" alt="${data.alt}" />`
+    } else if(data.name === "code") {
+      text += `<code>${data.value}</code>`
+    } 
+    else {
+      text += data.value
+    }
+  }
+  text += `</pre>\n`
+  return text
 }

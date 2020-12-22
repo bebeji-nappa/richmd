@@ -55,6 +55,8 @@ export const richmd = (text) => {
       htmlValue += convert.table(line)
     } else if (line.name === "katex") {
       htmlValue += convert.katex(line)
+    }else if (line.name === "color") {
+      htmlValue += convert.colorBlock(line)
     } else if (line.name === "br") {
       if (bqValue.length !== 0) {
         htmlValue += convert.blockquote(bqValue)

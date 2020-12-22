@@ -81,6 +81,13 @@ class Link extends Node {
   }
 }
 
+class InlineKatex extends Node {
+  constructor(text) {
+    super('katex', 'inline');
+    this.value = text;
+  }
+}
+
 export default {
   Text,
   Html,
@@ -91,5 +98,6 @@ export default {
   Strikethrough,
   InlineCode,
   Image,
-  Link
+  Link,
+  InlineKatex
 };

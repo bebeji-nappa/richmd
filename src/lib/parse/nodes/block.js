@@ -41,6 +41,14 @@ class Katex extends Node {
   }
 }
 
+class ColorBlock extends Node {
+  constructor(text, style) {
+    super('color', 'block');
+    this.style = style;
+    this.values = inlineParser(text);
+  }
+}
+
 class Blockquote extends Node {
   constructor(text, level) {
     super('blockquote', 'block');
@@ -116,6 +124,7 @@ export default {
   Horizontal,
   Code,
   Katex,
+  ColorBlock,
   Blockquote,
   Heading,
   List,

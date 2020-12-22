@@ -94,7 +94,7 @@ Mathematical formula style use `\displaystyle`.
 *Future version will able to do setting Mathematical formula style.*
 
 ```markdown
-^^^
+$$$
 \frac{a}{b}
-^^^
+$$$
 ```

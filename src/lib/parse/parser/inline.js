@@ -12,6 +12,7 @@ const MODE_STRIKETHROUGH = 7;
 const MODE_IMAGE = 8;
 const MODE_LINK = 9;
 const MODE_INLINE_CODE = 10;
+const MODE_INLINE_KATEX = 11;
 
 export default text => {
   const ast = [];
@@ -137,6 +138,18 @@ export default text => {
             ast.push(new nodes.Text(stack));
           }
           mode = MODE_INLINE_CODE;
+        }
+        stack = '';
+        continue;
+      case "$":
+        if (mode === MODE_INLINE_KATEX) {
+          ast.push(new nodes.InlineKatex(stack));
+          mode = MODE_DEFAULT;
+        } else {
+          if (!helper.isEmpty(stack)) {
+            ast.push(new nodes.Text(stack));
+          }
+          mode = MODE_INLINE_KATEX;
         }
         stack = '';
         continue;
