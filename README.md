@@ -39,13 +39,6 @@ Plaese add this CDN to HTML template file.
 
 *This problem will be resolved by future version.*
 
-#### Usage TeX Syntax
-```markdown
-^^^
-\frac{a}{b} + \frac{c}{d}
-^^^
-```
-
 ### Vue.js Simple Example
 ```js
 <template>
@@ -76,7 +69,10 @@ export default {
 </script>
 ```
 
-## Suport syntax
+## Markdown Syntax
+Please read a [Richmd Markdown Syntax.](./docs/md-syntax.md)
+
+### Suport syntax
 - strong
 - italic
 - image
@@ -85,14 +81,14 @@ export default {
 - horizontal rule
 - blockquote
 - unordeed list
-- ordeed list
+- ordered list
 - strikethrough
 - code block
 - checkbox list
 - table
 - TeX syntax(Use [KaTeX](https://katex.org/))
 
-## Will be released support syntax in the future 
+### Will be released support syntax in the future 
 - Code block syntax highlight
 - Color Inline Block
 - Using CSS framework [UIkit](https://getuikit.com/)
