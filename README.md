@@ -70,7 +70,7 @@ export default {
 ```
 
 ## Markdown Syntax
-Please read a [Richmd Markdown Syntax.](./docs/md-syntax.md)
+Please read a [Richmd Markdown Syntax Documentation](./docs/md-syntax.md).
 
 ### Suport syntax
 - strong

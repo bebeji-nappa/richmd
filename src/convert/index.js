@@ -151,7 +151,7 @@ export const code = (data) => {
 }
 
 export const katex = (data) => {
-  const html = Katex.renderToString(String.raw`${data.values[0].value}`, {
+  const html = Katex.renderToString(String.raw`\displaystyle${data.values[0].value}`, {
     throwOnError: false
   });
   return `<pre class="math">\n${html}\n</pre>\n`
