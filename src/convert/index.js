@@ -15,6 +15,8 @@ export const paragraph = (values) => {
       text += `<del>${data.value}</del>`
     } else if (data.name === "italic") {
       text += `<em>${data.value}</em>`
+    } else if (data.name === "emitalic") {
+      text += `<em><strong>${data.value}</strong></em>`
     } else if (data.name === "link") {
       text += `<a href="${data.href}">${data.title}</a>`
     } else if (data.name === "image") {
@@ -97,11 +99,11 @@ export const ulist = (values) => {
 
 export const checklist = (values) => {
   let prev = null
-  let clist = `<ul class="checklist">\n`
+  let clist = `<ul>\n`
   for (const data of values) {
     if (prev && data.level > prev.level) {
-      clist += `<ul class="checklist">\n`
-      clist += `<li>\n`
+      clist += `<ul>\n`
+      clist += `<li class="checklist">\n`
       if(data.checked) {
         clist += `<input type="checkbox" checked="checked">${data.value[0].value}\n`;
       } else {
@@ -112,7 +114,7 @@ export const checklist = (values) => {
       for (let i = 0; i < prev.level - data.level; i++) {
         clist += `</ul>\n`
       }
-      clist += `<li>\n` 
+      clist += `<li class="checklist">\n` 
       if(data.checked) {
         clist += `<input type="checkbox" checked="checked">${data.value[0].value}\n`;
       } else {
@@ -120,7 +122,7 @@ export const checklist = (values) => {
       }
       clist += `</li>\n`
     } else if (prev && data.level === prev.level) {
-      clist += `<li>\n`
+      clist += `<li class="checklist">\n`
       if(data.checked) {
         clist += `<input type="checkbox" checked="checked">${data.value[0].value}\n`;
       } else {
@@ -128,7 +130,7 @@ export const checklist = (values) => {
       }
       clist += `</li>\n`
     } else {
-      clist += `<li>\n` 
+      clist += `<li class="checklist">\n` 
       if(data.checked) {
         clist += `<input type="checkbox" checked="checked">${data.value[0].value}\n`;
       } else {
@@ -196,7 +198,7 @@ export const br = () => {
 }
 
 export const colorBlock = (datas) => {
-  let text = `<pre class="message-${datas.style}">\n`
+  let text = `<pre class="message message-${datas.style}">\n`
   for(const data of datas.values) {
     if (data.name === "em") {
       text += `<strong>${data.value}</strong>`
