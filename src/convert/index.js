@@ -1,4 +1,5 @@
 import Katex from 'katex';
+import 'katex/dist/katex.css';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/atom-one-dark.css';
 
@@ -22,7 +23,7 @@ export const paragraph = (values) => {
     } else if (data.name === "image") {
       text += `<img src="${data.src}" alt="${data.alt}" />`
     } else if (data.name === "code") {
-      text += `<code>${data.value}</code>`
+      text += `<code class="inline-code">${data.value}</code>`
     } else if (data.name === "katex") {
       const html = Katex.renderToString(String.raw`\textstyle ${data.value}`, {
         throwOnError: false
@@ -53,7 +54,7 @@ export const blockquote = (values) => {
       } else if(val.name === "image") {
         text += `<img src="${val.src}" alt="${val.alt}" />`
       } else if(val.name === "code") {
-        text += `<code>${val.value}</code>`
+        text += `<code class="inline-code">${val.value}</code>`
       } 
       else {
         text += val.value
@@ -157,7 +158,7 @@ export const orderedlist = (values) => {
 
 export const code = (data) => {
   const syntax = hljs.highlightAuto(`${data.values[0].value}`).value
-  return `<pre class="code">\n<code class="${data.syntax}">\n${syntax}\n</code>\n</pre>\n`
+  return `<pre class="code">\n<span class="filename">${data.file}</span>\n<code class="codefont ${data.syntax}">\n${syntax}\n</code>\n</pre>\n`
 }
 
 export const katex = (data) => {
@@ -211,7 +212,7 @@ export const colorBlock = (datas) => {
     } else if(data.name === "image") {
       text += `<img src="${data.src}" alt="${data.alt}" />`
     } else if(data.name === "code") {
-      text += `<code>${data.value}</code>`
+      text += `<code class="inline-code">${data.value}</code>`
     } 
     else {
       text += data.value

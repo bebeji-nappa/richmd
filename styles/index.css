@@ -254,20 +254,11 @@ span.float-right {
     margin: 13px auto 0;
     text-align: right; }
 
-code, tt {
-  margin: 0 2px;
-  padding: 0 5px;
-  white-space: nowrap;
-  border: 1px solid #eaeaea;
-  background-color: #f8f8f8;
-  font-family: 'Source Code Pro', monospace;
-  border-radius: 5px; }
 
 pre code {
   margin: 0;
   padding: 0;
   white-space: pre;
-  font-family: 'Source Code Pro', monospace;
   border: none;
   background: transparent; }
 
@@ -296,10 +287,10 @@ pre {
   background-color: #030e2b;
   color: #fff;
   border: none;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 19px;
   overflow: auto;
-  padding: 5px 16px;
+  padding: 5px 14px;
   border-radius: 3px;
 }
 
@@ -365,4 +356,27 @@ input[type="checkbox"] {
   background-color: #a4fcc6;
   border-left: solid 10px #4ad981;
   color: #1e9656;
+}
+
+.inline-code {
+  margin: 0 2px;
+  padding: 0 5px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  color: #24374a;
+  font-family: 'Source Code Pro', monospace;
+  border-radius: 3px;
+}
+
+.codefont {
+  font-family: 'Source Code Pro', monospace;
+}
+
+.filename {
+  background-color: rgba(255, 255, 255, .3);
+  color: #fff;
+  font-size: 12px;
+  margin: 0;
+  padding: 5px;
 }
