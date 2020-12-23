@@ -17,7 +17,7 @@ yarn add richmd
 Must be use [webpack](https://webpack.js.org/) to build RichMD.js, Please read Usage Documentations.
 If you don't know usage webpack, reading [offical webpack documentation](https://webpack.js.org/concepts/).
 
-- [Simple example using RichMD.js](./docs/usage.md)
+- [Simple Usage of RichMD.js](./docs/usage.md)
 - [Usage RichMD.js for React](./docs/usage-react.md)
 - [Usage RichMD.js for Vue(v2)](./docs/usage-vue.md)
 
