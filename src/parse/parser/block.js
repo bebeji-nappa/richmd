@@ -5,7 +5,7 @@ const HEADING_REGEX = /^(#{1,})\s(.+)$/;
 const ULIST_REGEX = /^(\s*)?(?:\-|\*)\s(.+)$/;
 const OLIST_REGEX = /^(\s*)?([0-9]+)\.\s(.+)$/;
 const HORIZONTAL_RULE_REGEX = /^[\*\-_\s]+$/;
-const CODE_REGEX = /^[`~]{3}(.*)|[`~]{3}(.*)\b[\l]+\b$/;
+const CODE_REGEX = /^[`~]{3}(.*)|[`~]{3}(.*)\b[\l]+\b\:\b[\l]+\b$/;
 const BLOCKQUOTE_REGEX = /^(>{1,})\s?(.+)$/;
 const LINEBREAK_REGEX = /(.+?)[\u0020]{2}$/;
 const TABLE_REGEX = /(?:\s*)?\|(.+)\|(?:\s*)$/;
@@ -29,6 +29,7 @@ export const parser = str => {
   let tables = [];
   let match;
   let codeLang = '';
+  let filename = '';
   let messageType = 'default';
   const parseParagraph = stack => {
     if (tables.length > 0) {
@@ -53,12 +54,15 @@ export const parser = str => {
         stack = '';
       } else if (CODE_REGEX.test(line)) {
         if (mode === MODE_CODE) {
-          ast.push(new nodes.Code(stack.trim(), codeLang));
+          ast.push(new nodes.Code(stack.trim(), codeLang, filename));
           codeLang = ''
+          filename = ''
           mode = MODE_DEFAULT;
         } else {
           parseParagraph(stack);
-          codeLang = line.replace(/\`\`\`/, '').trim();
+          const codeData = line.replace(/\`\`\`/, '').trim().split(`\:`);
+          codeLang = codeData[0]
+          filename = codeData[1]
           mode = MODE_CODE;
         }
         stack = '';

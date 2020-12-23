@@ -23,9 +23,10 @@ class Br extends Node {
 }
 
 class Code extends Node {
-  constructor(text, syntax) {
+  constructor(text, syntax, file) {
     super('code', 'block');
     this.syntax = syntax;
+    this.file = file;
     this.values = [
       new inline.Text(text)
     ];

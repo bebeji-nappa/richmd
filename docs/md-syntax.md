@@ -85,8 +85,15 @@ console.log('Hello World!')
 ```
 ~~~
 
-It use [highlight.js](https://github.com/highlightjs/highlight.js) syntax support. 
-Please Syntax support details read a [highlight.js Documentation](https://highlightjs.org/static/demo/).
+It can display filename in code block.
+~~~markdown
+```js:main.js
+console.log('Hello World!')
+```
+~~~
+
+It use [highlight.js](https://github.com/highlightjs/highlight.js) code syntax support. 
+Please code syntax support details read a [highlight.js Documentation](https://highlightjs.org/static/demo/).
 
 ### Table
 ```markdown

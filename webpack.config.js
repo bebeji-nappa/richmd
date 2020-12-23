@@ -23,12 +23,27 @@ const app = {
       },
       {
         test: /\.css$/,
-        use: [ MiniCssExtractPlugin.loader, 'css-loader' ],
-      }
+        use: [ 
+          { 
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: ''
+            }
+          }, 
+          'css-loader'
+        ],
+      },
+      { 
+        test: /\.(png|woff|woff2|eot|ttf|svg)$/, 
+        loader: 'url-loader',
+        options: {
+          limit: 10000
+        } 
+      },
     ]
   },
   resolve: {
-    extensions: [ '.js', '.vue', '.css' ],
+    extensions: [ '.js', '.css' ],
   },
   plugins: [
     new CleanWebpackPlugin(),
