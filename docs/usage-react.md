@@ -1,5 +1,5 @@
-# Usage RichMD.js for React
-It is usage example RichMD.js for React. 
+# Usage RichMD for React
+It is usage example RichMD for React. 
 
 ### Install packages
 It execute this commands in CLI, It install required packages.
@@ -23,7 +23,7 @@ webpack.config.js
 babel.config.js
 ```
 
-### Set up RichMD.js
+### Set up RichMD
 
 1. It create `webpack.config.js` in your project, This code add to `webpack.config.js`.
 
@@ -142,7 +142,7 @@ render(<Editor />, document.getElementById('root'))
 <html>
   <head>
     <meta charset="utf-8">
-    <title>RichMD.js Playground</title>
+    <title>RichMD Playground</title>
   </head>
   <body>
     <div id="root" />

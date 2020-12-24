@@ -1,8 +1,8 @@
-import { mtp } from './parse/index.js'
-import * as convert from './convert/index.js'
+const mtp = require("../lib/parse/index.js");
+const convert = require("./convert/index.js");
 
-export const richmd = (text) => {
-  const mdTree = mtp(text);
+exports.richmd = (text) => {
+  const mdTree = mtp(text).ast;
   let htmlValue = ``
   let prev = null
   let bqValue = [];

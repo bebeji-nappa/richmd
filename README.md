@@ -1,28 +1,45 @@
-# RichMD.js
-RichMD.js make basic Markdown syntax convert to HTML and provide it customaized Markdown syntax.
+# RichMD
+## What is RichMD?
+RichMD is a tool for making Markdown richer.
 
-![RichMD.js](./docs/images/preview.png)
+![RichMD](./docs/images/preview.png)
 
 ## Installation
 
 ```bash
 # use npm
-npm install richmd
+$ npm install richmd
 
 # use yarn
-yarn add richmd
+$ yarn add richmd
 ```
 
 ## Usage
-Must be use [webpack](https://webpack.js.org/) to build RichMD.js, Please read Usage Documentations.
+### [New Release :tada:] RichMD file
+
+RichMD has created a new file extension `.richmd` !
+
+With the creation of this extension, the possibilities for RichMD are greatly expanded.
+From now on, we are planning to develop around the RichMD file.
+
+```bash
+# Create Richmd file
+$ touch hello.richmd
+```
+
+Using `richmd` makes it easy to use RichMD.
+If you want to try using RichMD right away, this is useful. Let's a read Usage Documentation!
+- [Usage the `richmd` command](./docs/usage-cli.md)
+
+If you want to use React and Vue with RichMD, you need to build [webpack](https://webpack.js.org/). Please read Usage Documentations.
 If you don't know usage webpack, reading [offical webpack documentation](https://webpack.js.org/concepts/).
 
-- [Simple Usage of RichMD.js](./docs/usage.md)
-- [Usage RichMD.js for React](./docs/usage-react.md)
-- [Usage RichMD.js for Vue(v2)](./docs/usage-vue.md)
+- [Usage for React](./docs/usage-react.md)
+- [Usage for Vue(v2)](./docs/usage-vue.md)
+
 
 ## Markdown Syntax
-Please read a [RichMD.js Markdown Syntax Documentation](./docs/md-syntax.md).
+Please read a [RichMD Markdown Syntax Documentation](./docs/md-syntax.md).
 
 ### Suport syntax
 - strong
@@ -42,9 +59,15 @@ Please read a [RichMD.js Markdown Syntax Documentation](./docs/md-syntax.md).
 - Color Inline Block
 - Code block syntax highlight
 
+### To be implemented in a future release
+- Video
+- Slide view mode
+- Color text
+- Dropdown list
+
 ## License
 MIT
 
-## Thanks you :pray:
+## Thank you :pray:
 - [Markdown-tree-parser](https://github.com/ysugimoto/markdown-tree-parser)
-  - RichMD.js markdown parser was created using the code in markdown-tree-parser as a reference.
+  - RichMD markdown parser was created using the code in markdown-tree-parser as a reference.
