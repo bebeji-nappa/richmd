@@ -1,6 +1,6 @@
 {
   "name": "richmd",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Richmd.js expand basic Markdown syntax to customaize it.",
   "main": "src/index.js",
   "scripts": {
@@ -11,8 +11,10 @@
   "keywords": [
     "RichMD.js",
     "markdown",
+    "front-end",
+    "webpack",
     "richmd",
-    "TeX"
+    "math"
   ],
   "author": "nappa <masa.yanagawa721@gmail.com>",
   "repository": {
