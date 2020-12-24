@@ -1,7 +1,5 @@
 import Katex from 'katex';
-import 'katex/dist/katex.css';
 import hljs from 'highlight.js';
-import 'highlight.js/styles/atom-one-dark.css';
 
 export const heading = (level, value) => {
   return `<h${level}>${value}</h${level}>\n`
@@ -49,6 +47,8 @@ export const blockquote = (values) => {
         text += `<del>${val.value}</del>`
       } else if (val.name === "italic") {
         text += `<em>${val.value}</em>`
+      } else if (data.name === "emitalic") {
+        text += `<em><strong>${data.value}</strong></em>`
       } else if(val.name === "link") {
         text += `<a href="${val.href}">${val.title}</a>`
       } else if(val.name === "image") {
@@ -157,8 +157,19 @@ export const orderedlist = (values) => {
 }
 
 export const code = (data) => {
-  const syntax = hljs.highlightAuto(`${data.values[0].value}`).value
-  return `<pre class="code">\n<span class="filename">${data.file}</span>\n<code class="codefont ${data.syntax}">\n${syntax}\n</code>\n</pre>\n`
+  let codeblock = `<pre class="code">\n`
+  if (data.file !== undefined) {
+    codeblock += `<span class="filename">${data.file}</span>\n`
+  }
+  if (!data.syntax) {
+    codeblock += `<code class="codefont txt">\n${data.values[0].value}\n</code>\n`
+  } else if (data.syntax === "txt") {
+    codeblock += `<code class="codefont txt">\n${data.values[0].value}\n</code>\n`
+  } else {
+    codeblock += `<code class="codefont ${data.syntax}">\n${hljs.highlightAuto(`${data.values[0].value}`).value}\n</code>\n`
+  }
+  codeblock += `</pre>\n`
+  return codeblock
 }
 
 export const katex = (data) => {
@@ -207,6 +218,8 @@ export const colorBlock = (datas) => {
       text += `<del>${data.value}</del>`
     } else if (data.name === "italic") {
       text += `<em>${data.value}</em>`
+    } else if (data.name === "emitalic") {
+      text += `<em><strong>${data.value}</strong></em>`
     } else if(data.name === "link") {
       text += `<a href="${data.href}">${data.title}</a>`
     } else if(data.name === "image") {

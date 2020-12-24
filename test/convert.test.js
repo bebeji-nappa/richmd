@@ -103,7 +103,7 @@ describe('paragraph convert', () => {
 
   it('inline code', () => {
     const text = `\`code\``
-    const convertedResult = `<p><code>code</code></p>`
+    const convertedResult = `<p><code class="inline-code">code</code></p>`
     const result = richmd(text).replace(/\n/g, '')
     expect(result).toEqual(convertedResult)
   })
@@ -172,20 +172,20 @@ describe('list', () => {
 describe('checklist', () => {
   it('checked checkbox', () => {
     const text = `- [x] list1`
-    const convertedResult = `<ul class="checklist"><li><input type="checkbox" checked="checked">list1</li></ul>`
+    const convertedResult = `<ul><li class="checklist"><input type="checkbox" checked="checked">list1</li></ul>`
     const result = richmd(text).replace(/\n/g, '')
     expect(result).toEqual(convertedResult)
   })  
   it('case 1', () => {
     const text = `- [ ] list1\n- [ ] list2\n`
-    const convertedResult = `<ul class="checklist"><li><input type="checkbox">list1</li><li><input type="checkbox">list2</li></ul>`
+    const convertedResult = `<ul><li class="checklist"><input type="checkbox">list1</li><li class="checklist"><input type="checkbox">list2</li></ul>`
     const result = richmd(text).replace(/\n/g, '')
     expect(result).toEqual(convertedResult)
   })
 
   it('case 2', () => {
     const text = `- [ ] list1\n  - [ ] list2\n- [ ] list3\n`
-    const convertedResult = `<ul class="checklist"><li><input type="checkbox">list1</li><ul class="checklist"><li><input type="checkbox">list2</li></ul><li><input type="checkbox">list3</li></ul>`
+    const convertedResult = `<ul><li class="checklist"><input type="checkbox">list1</li><ul><li class="checklist"><input type="checkbox">list2</li></ul><li class="checklist"><input type="checkbox">list3</li></ul>`
     const result = richmd(text).replace(/\n/g, '')
     expect(result).toEqual(convertedResult)
   })
@@ -203,11 +203,39 @@ code block
 \`\`\`
 `
 
-it('code block', () => {
-  const convertedResult = `<pre><code class="">code block</code></pre>`
-  const result = richmd(codeblockData).replace(/\n/g, '')
-  expect(result).toEqual(convertedResult)
+const codeblockTxt = `\`\`\`txt
+const hello = "Hello world"
+console.log(hello)
+\`\`\`
+`
+
+const codeblockJs = `\`\`\`js
+const hello = "Hello world"
+console.log(hello)
+\`\`\`
+`
+
+describe('codeblock', () => {
+  it('Not language & Not filename', () => {
+    const convertedResult = `<pre class="code"><code class="codefont txt">code block</code></pre>`
+    const result = richmd(codeblockData).replace(/\n/g, '')
+    expect(result).toEqual(convertedResult)
+  })
+
+  it('language txt & Not filename', () => {
+    const convertedResult = `<pre class="code"><code class="codefont txt">const hello = "Hello world"console.log(hello)</code></pre>`
+    const result = richmd(codeblockTxt).replace(/\n/g, '')
+    expect(result).toEqual(convertedResult)
+  })
+
+  it('language js & Not filename', () => {
+    const convertedResult = `<pre class="code"><code class="codefont js"><span class=\"hljs-keyword\">const</span> hello = <span class=\"hljs-string\">&quot;Hello world&quot;</span>console.<span class=\"hljs-built_in\">log</span>(hello)</code></pre>`
+    const result = richmd(codeblockJs).replace(/\n/g, '')
+    expect(result).toEqual(convertedResult)
+  })
 })
+
+
 
 describe('horizontal', () => {
   it('---', () => {
