@@ -1,5 +1,5 @@
-import nodes from '../nodes/block.js';
-import helper from './helper.js';
+const nodes = require("../nodes/block.js");
+const helper = require("./helper.js");
 
 const HEADING_REGEX = /^(#{1,})\s(.+)$/;
 const ULIST_REGEX = /^(\s*)?(?:\-|\*)\s(.+)$/;
@@ -16,7 +16,7 @@ const MODE_CODE = 1;
 const MODE_KATEX = 2;
 const MODE_COLORBLOCK = 3;
 
-export const parser = str => {
+exports.parser = str => {
   const ast = [];
 
   if (!/\n$/.test(str)) {

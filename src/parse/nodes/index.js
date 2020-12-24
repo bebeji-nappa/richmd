@@ -1,4 +1,4 @@
-import BlockNodes from './block';
-import InlineNodes from './inline';
+const BlockNodes = require("./block.js");
+const InlineNodes = require("./inline");
 
 module.exports = Object.assign({}, BlockNodes, InlineNodes);

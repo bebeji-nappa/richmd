@@ -1,12 +1,12 @@
-import Katex from 'katex';
-import hljs from 'highlight.js';
+const Katex = require("katex");
+const hljs = require("highlight.js");
 
-export const heading = (level, value) => {
-  return `<h${level}>${value}</h${level}>\n`
+exports.heading = (level, value) => {
+  return `<h${level} class="h${level}">${value}</h${level}>\n`
 }
 
-export const paragraph = (values) => {
-  let text = `<p>\n`
+exports.paragraph = (values) => {
+  let text = `<p class="p">\n`
   for(const data of values) {
     if (data.name === "em") {
       text += `<strong>${data.value}</strong>`
@@ -17,9 +17,9 @@ export const paragraph = (values) => {
     } else if (data.name === "emitalic") {
       text += `<em><strong>${data.value}</strong></em>`
     } else if (data.name === "link") {
-      text += `<a href="${data.href}">${data.title}</a>`
+      text += `<a href="${data.href}" class="a">${data.title}</a>`
     } else if (data.name === "image") {
-      text += `<img src="${data.src}" alt="${data.alt}" />`
+      text += `<img src="${data.src}" alt="${data.alt}" class="img" />`
     } else if (data.name === "code") {
       text += `<code class="inline-code">${data.value}</code>`
     } else if (data.name === "katex") {
@@ -36,10 +36,10 @@ export const paragraph = (values) => {
   return text
 }
 
-export const blockquote = (values) => {
-  let bq = `<blockquote>\n`
+exports.blockquote = (values) => {
+  let bq = `<blockquote class="blockquote">\n`
   for (const data of values) {
-    let text = `<p>\n`
+    let text = `<p class="p">\n`
     for (const val of data) {
       if (val.name === "em") {
         text += `<strong>${val.value}</strong>`
@@ -50,7 +50,7 @@ export const blockquote = (values) => {
       } else if (data.name === "emitalic") {
         text += `<em><strong>${data.value}</strong></em>`
       } else if(val.name === "link") {
-        text += `<a href="${val.href}">${val.title}</a>`
+        text += `<a href="${val.href}" class="a">${val.title}</a>`
       } else if(val.name === "image") {
         text += `<img src="${val.src}" alt="${val.alt}" />`
       } else if(val.name === "code") {
@@ -67,28 +67,28 @@ export const blockquote = (values) => {
   return bq
 }
 
-export const ulist = (values) => {
+exports.ulist = (values) => {
   let prev = null
-  let ulist = `<ul>\n`
+  let ulist = `<ul class="ul">\n`
   for (const data of values) {
     if (prev && data.level > prev.level) {
-      ulist += `<ul>\n`
-      ulist += `<li>\n`
+      ulist += `<ul class="ul">\n`
+      ulist += `<li class="li">\n`
       ulist += `${data.value[0].value}\n`;
       ulist += `</li>\n`
     } else if (prev && data.level < prev.level) {
       for (let i = 0; i < prev.level - data.level; i++) {
         ulist += `</ul>\n`
       }
-      ulist += `<li>\n` 
+      ulist += `<li class="li">\n` 
       ulist += `${data.value[0].value}\n`
       ulist += `</li>\n`
     } else if (prev && data.level === prev.level) {
-      ulist += `<li>\n`
+      ulist += `<li class="li">\n`
       ulist += `${data.value[0].value}\n`
       ulist += `</li>\n`
     } else {
-      ulist += `<li>\n` 
+      ulist += `<li class="li">\n` 
       ulist += `${data.value[0].value}\n`
       ulist += `</li>\n`
     }
@@ -98,13 +98,13 @@ export const ulist = (values) => {
   return ulist
 }
 
-export const checklist = (values) => {
+exports.checklist = (values) => {
   let prev = null
-  let clist = `<ul>\n`
+  let clist = `<ul class="ul">\n`
   for (const data of values) {
     if (prev && data.level > prev.level) {
-      clist += `<ul>\n`
-      clist += `<li class="checklist">\n`
+      clist += `<ul class="ul">\n`
+      clist += `<li class="li checklist">\n`
       if(data.checked) {
         clist += `<input type="checkbox" checked="checked">${data.value[0].value}\n`;
       } else {
@@ -115,7 +115,7 @@ export const checklist = (values) => {
       for (let i = 0; i < prev.level - data.level; i++) {
         clist += `</ul>\n`
       }
-      clist += `<li class="checklist">\n` 
+      clist += `<li class="li checklist">\n` 
       if(data.checked) {
         clist += `<input type="checkbox" checked="checked">${data.value[0].value}\n`;
       } else {
@@ -123,7 +123,7 @@ export const checklist = (values) => {
       }
       clist += `</li>\n`
     } else if (prev && data.level === prev.level) {
-      clist += `<li class="checklist">\n`
+      clist += `<li class="li checklist">\n`
       if(data.checked) {
         clist += `<input type="checkbox" checked="checked">${data.value[0].value}\n`;
       } else {
@@ -131,7 +131,7 @@ export const checklist = (values) => {
       }
       clist += `</li>\n`
     } else {
-      clist += `<li class="checklist">\n` 
+      clist += `<li class="li checklist">\n` 
       if(data.checked) {
         clist += `<input type="checkbox" checked="checked">${data.value[0].value}\n`;
       } else {
@@ -145,18 +145,18 @@ export const checklist = (values) => {
   return clist
 }
 
-export const orderedlist = (values) => {
-  let olist = `<ol>\n`
+exports.orderedlist = (values) => {
+  let olist = `<ol class="ol">\n`
   for (const datalist of values) {
     for (const data of datalist) {
-      olist += `<li>${data.value}</li>\n`
+      olist += `<li class="li">${data.value}</li>\n`
     }
   }
   olist += `</ol>\n`
   return olist
 }
 
-export const code = (data) => {
+exports.code = (data) => {
   let codeblock = `<pre class="code">\n`
   if (data.file !== undefined) {
     codeblock += `<span class="filename">${data.file}</span>\n`
@@ -172,19 +172,19 @@ export const code = (data) => {
   return codeblock
 }
 
-export const katex = (data) => {
+exports.katex = (data) => {
   const html = Katex.renderToString(String.raw`\displaystyle${data.values[0].value}`, {
     throwOnError: false
   });
   return `<pre class="math katex-center">\n${html}\n</pre>\n`
 }
 
-export const horizontal = () => {
+exports.horizontal = () => {
   return `<hr />\n`
 }
 
-export const table = (data) => {
-  let tableblock = `<table>\n`
+exports.table = (data) => {
+  let tableblock = `<table class="table">\n`
   tableblock += `<thead>\n<tr>\n`
   for (const heading of data.headings) {
     tableblock += `<th>${heading}</th>\n`
@@ -205,11 +205,11 @@ export const table = (data) => {
   return tableblock
 }
 
-export const br = () => {
-  return `<br />\n`
+exports.br = () => {
+  return `<br class="br" />\n`
 }
 
-export const colorBlock = (datas) => {
+exports.colorBlock = (datas) => {
   let text = `<pre class="message message-${datas.style}">\n`
   for(const data of datas.values) {
     if (data.name === "em") {
@@ -221,7 +221,7 @@ export const colorBlock = (datas) => {
     } else if (data.name === "emitalic") {
       text += `<em><strong>${data.value}</strong></em>`
     } else if(data.name === "link") {
-      text += `<a href="${data.href}">${data.title}</a>`
+      text += `<a href="${data.href}" class="a">${data.title}</a>`
     } else if(data.name === "image") {
       text += `<img src="${data.src}" alt="${data.alt}" />`
     } else if(data.name === "code") {

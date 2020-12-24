@@ -2,11 +2,14 @@
   "name": "richmd",
   "version": "0.4.1",
   "description": "Richmd.js expand basic Markdown syntax to customaize it.",
-  "main": "src/index.js",
+  "main": "./src/index.js",
   "scripts": {
     "build": "webpack",
     "debug": "node ./src/index.js",
     "test": "jest --config=jest.config.js"
+  },
+  "bin": {
+    "richmd": "./script.js"
   },
   "keywords": [
     "RichMD.js",
@@ -41,8 +44,11 @@
     "webpack-cli": "^4.2.0"
   },
   "dependencies": {
+    "commander": "^6.2.1",
     "core-js": "3",
+    "filereader": "^0.10.3",
     "highlight.js": "^10.4.1",
-    "katex": "^0.12.0"
+    "katex": "^0.12.0",
+    "node-fetch": "^2.6.1"
   }
 }

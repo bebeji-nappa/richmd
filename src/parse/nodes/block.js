@@ -1,7 +1,7 @@
-import Node from './Node.js';
-import inlineParser from '../parser/inline.js';
-import inline from './inline.js';
-import SyntaxError from '../parser/syntax-error.js';
+const Node = require("./Node.js");
+const inlineParser = require("../parser/inline.js");
+const inline = require("./inline.js");
+const SyntaxError = require("../parser/syntax-error.js");
 
 class Paragraph extends Node {
   constructor(text) {
@@ -120,7 +120,7 @@ class Table extends Node {
   }
 }
 
-export default {
+module.exports = {
   Paragraph,
   Horizontal,
   Code,

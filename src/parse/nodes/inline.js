@@ -1,4 +1,4 @@
-import Node from './Node.js';
+const Node = require("./Node.js");
 
 const IMAGE_REGEX = /^!\[([^\]]*)?\]\(([^\)]+)\)$/;
 const LINK_REGEX = /^\[([^\]]*)?\]\(([^\)]+)\)$/;
@@ -94,7 +94,7 @@ class InlineKatex extends Node {
   }
 }
 
-export default {
+module.exports = {
   Text,
   Html,
   HtmlComment,

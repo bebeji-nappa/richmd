@@ -1,10 +1,10 @@
-import { parser } from './parser/index.js';
-import Tree from './Tree.js';
+const { parser } = require("./parser/index.js");
+const Tree = require("./Tree.js");
 
-const mdParse = mdString => {
+module.exports = mdString => {
   const ast = parser(mdString);
 
   return new Tree(ast);
 };
 
-export const mtp = mdParse.parse = parser;
+module.exports.parse = parser;

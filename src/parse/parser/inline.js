@@ -1,5 +1,5 @@
-import nodes from '../nodes/inline.js';
-import helper from './helper.js';
+const nodes = require("../nodes/inline.js");
+const helper = require("./helper.js");
 
 const MODE_DEFAULT = 0;
 const MODE_ASTERISK = 1;
@@ -14,7 +14,7 @@ const MODE_LINK = 9;
 const MODE_INLINE_CODE = 10;
 const MODE_INLINE_KATEX = 11;
 
-export default text => {
+module.exports = text => {
   const ast = [];
 
   let stack = '';

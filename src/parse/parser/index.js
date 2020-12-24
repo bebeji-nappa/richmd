@@ -1,1 +1,1 @@
-export * from './block.js';
+module.exports = require("./block.js");
