@@ -6,8 +6,8 @@ It execute this commands in CLI, It install required packages.
 
 ```txt
 $ npm install --save-dev webpack webpack-cli webpack-dev-server clean-webpack-plugin html-webpack-plugin
-$ npm install --save-dev @babel/core @babel/preset-env babel-loader
-$ npm install core-js@3
+$ npm install --save-dev @babel/core @babel/preset-env @babel/preset-react babel-loader
+$ npm install core-js@3 react react-dom
 $ npm install --save-dev css-loader mini-css-extract-plugin
 $ npm install --save-dev file-loader url-loader
 ```
@@ -102,8 +102,9 @@ module.exports = {
         corejs: 3
       },
     ],
+    "@babel/preset-react"
   ]
-}
+};
 ```
 
 1. This code add `src/index.jsx`.
