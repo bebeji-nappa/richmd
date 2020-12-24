@@ -1,5 +1,5 @@
-# Usage RichMD.js for Vue(v2)
-It is usage example RichMD.js by Vue. 
+# Usage RichMD for Vue(v2)
+It is usage example RichMD by Vue. 
 
 ### Install packages
 It execute this commands in CLI, It install required packages.
@@ -22,7 +22,7 @@ webpack.config.js
 babel.config.js
 ```
 
-### Set up RichMD.js
+### Set up RichMD
 
 1. It create `webpack.config.js` in your project, This code add to `webpack.config.js`.
 
@@ -198,7 +198,7 @@ export default {
 <html>
   <head>
     <meta charset="utf-8">
-    <title>RichMD.js Playground</title>
+    <title>RichMD Playground</title>
   </head>
   <body>
     <div id="app"></div>

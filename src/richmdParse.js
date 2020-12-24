@@ -1,4 +1,4 @@
-const mtp = require("./parse/index.js");
+const mtp = require("../lib/parse/index.js");
 const convert = require("./convert/index.js");
 
 exports.richmd = (text) => {

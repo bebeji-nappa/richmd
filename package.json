@@ -1,7 +1,7 @@
 {
   "name": "richmd",
-  "version": "0.4.1",
-  "description": "Richmd.js expand basic Markdown syntax to customaize it.",
+  "version": "1.0.0",
+  "description": "RichMD is a tool for making Markdown richer.",
   "main": "./src/index.js",
   "scripts": {
     "build": "webpack",
@@ -9,10 +9,10 @@
     "test": "jest --config=jest.config.js"
   },
   "bin": {
-    "richmd": "./script.js"
+    "richmd": "./lib/script.js"
   },
   "keywords": [
-    "RichMD.js",
+    "RichMD",
     "markdown",
     "front-end",
     "webpack",
@@ -22,12 +22,12 @@
   "author": "nappa <masa.yanagawa721@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/bebeji-nappa/richmdjs.git"
+    "url": "https://github.com/bebeji-nappa/richmd.git"
   },
   "bugs": {
-    "url": "https://github.com/bebeji-nappa/richmdjs.git/issues"
+    "url": "https://github.com/bebeji-nappa/richmd.git/issues"
   },
-  "homepage": "https://github.com/bebeji-nappa/richmdjs.git/",
+  "homepage": "https://github.com/bebeji-nappa/richmd.git/",
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.12.10",
@@ -46,9 +46,7 @@
   "dependencies": {
     "commander": "^6.2.1",
     "core-js": "3",
-    "filereader": "^0.10.3",
     "highlight.js": "^10.4.1",
-    "katex": "^0.12.0",
-    "node-fetch": "^2.6.1"
+    "katex": "^0.12.0"
   }
 }

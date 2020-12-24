@@ -1,17 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
 
-body {
+.body {
   font-family: Helvetica, arial, sans-serif;
   width: 95%;
   font-size: 16px;
   line-height: 1.6;
-  margin: 0 auto;
+  margin: 10px auto;
 }
 
-body > *:first-child {
+.body > *:first-child {
   margin-top: 0 !important; 
 }
-body > *:last-child {
+.body > *:last-child {
   margin-bottom: 0 !important; 
 } 
 
