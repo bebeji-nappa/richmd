@@ -63,3 +63,5 @@ MIT
 ## Thank you :pray:
 - [Markdown-tree-parser](https://github.com/ysugimoto/markdown-tree-parser)
   - RichMD markdown parser was created using the code in markdown-tree-parser as a reference.
+- [KaTeX](https://github.com/KaTeX/KaTeX)
+- [highlight.js](https://github.com/highlightjs/highlight.js/)
