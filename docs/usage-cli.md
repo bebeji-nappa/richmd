@@ -1,4 +1,16 @@
 # Usage the `richmd` command
+### RichMD file
+
+RichMD has created a new file extension `.richmd`.
+
+With the creation of this extension, the possibilities for RichMD are greatly expanded.
+From now on, we are planning to develop around the RichMD file.
+
+```bash
+# Create Richmd file
+$ touch hello.richmd
+```
+
 ## Simple usage
 First, create a RichMD file. 
 

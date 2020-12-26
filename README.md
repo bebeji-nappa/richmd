@@ -19,18 +19,6 @@ $ yarn add richmd
 ```
 
 ## Usage
-### [New Release :tada:] RichMD file
-
-RichMD has created a new file extension `.richmd` !
-
-With the creation of this extension, the possibilities for RichMD are greatly expanded.
-From now on, we are planning to develop around the RichMD file.
-
-```bash
-# Create Richmd file
-$ touch hello.richmd
-```
-
 Using `richmd` makes it easy to use RichMD.
 If you want to try using RichMD right away, this is useful. Let's a read Usage Documentation!
 - [Usage the `richmd` command](./docs/usage-cli.md)
@@ -61,13 +49,13 @@ Please read a [RichMD Markdown Syntax Documentation](./docs/md-syntax.md).
 - table
 - TeX syntax(Use [KaTeX](https://katex.org/))
 - Color Inline Block
-- Code block syntax highlight
+- Dropdown details
+- Import CSS file(Only RichMD file is supported)
 
 ### To be implemented in a future release
 - Video
 - Slide view mode
 - Color text
-- Dropdown list
 
 ## License
 MIT

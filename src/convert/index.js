@@ -234,3 +234,15 @@ exports.colorBlock = (datas) => {
   text += `</pre>\n`
   return text
 }
+
+exports.import = (data) => {
+  return `<link rel="stylesheet" href="${data}">\n`
+}
+
+exports.startDetails = (data) => {
+  return `<details><summary>${data}</summary>\n`
+}
+
+exports.endDetails = () => {
+  return `</details>\n`
+}
