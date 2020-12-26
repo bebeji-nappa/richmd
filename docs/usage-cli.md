@@ -85,6 +85,12 @@ Then, Run the `richmd` command.
 $ richmd ./hello.richmd
 ```
 
+To specify the output directory, add the `-d` option.
+
+```txt
+$ richmd -d [path] ./hello.richmd
+```
+
 The output will be `hello.html`. Open the file in your browser.
 
 ```txt
