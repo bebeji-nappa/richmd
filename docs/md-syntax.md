@@ -20,6 +20,11 @@
 *strong*
 ```
 
+### Strong + Italic
+```markdown
+***strong***
+```
+
 ### Strike Through
 ```markdown
 ~~strong~~
@@ -151,3 +156,20 @@ This is danger color block.
 ```
 #### Preview
 ![Preview3](./images/preview3.png)
+
+### Dropdown details
+#### Syntax
+```txt
+:>Summary
+text...
+:>
+```
+#### Preview
+![Preview5](./images/preview5.png)
+
+### Import CSS File(Only RichMD file is supported)
+#### Syntax
+***Be sure to enter at the beginning of the line.***
+```txt
+::style::./styles/style.css
+```
