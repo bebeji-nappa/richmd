@@ -61,6 +61,10 @@ exports.richmd = (text) => {
       htmlValue += convert.startDetails(line.summary)
     } else if (line.name === "endDetails") {
       htmlValue += convert.endDetails()
+    } else if (line.name === "startTag") {
+      htmlValue += convert.startTag(line.tag)
+    } else if (line.name === "endTag") {
+      htmlValue += convert.endTag(line.tag)
     } else if (line.name === "br") {
       if (bqValue.length !== 0) {
         htmlValue += convert.blockquote(bqValue)
@@ -146,12 +150,17 @@ exports.richmdCli = (text) => {
       htmlValue += convert.table(line)
     } else if (line.name === "katex") {
       htmlValue += convert.katex(line)
-    }else if (line.name === "color") {
+    } else if (line.name === "color") {
       htmlValue += convert.colorBlock(line)
     } else if (line.name === "startDetails") {
       htmlValue += convert.startDetails(line.summary)
     } else if (line.name === "endDetails") {
       htmlValue += convert.endDetails()
+    } else if (line.name === "startTag") {
+      htmlValue += convert.startTag(line)
+    } else if (line.name === "endTag") {
+      htmlValue += convert.endTag(line)
+      prev = line
     } else if (line.name === "br") {
       if (bqValue.length !== 0) {
         htmlValue += convert.blockquote(bqValue)
@@ -169,7 +178,7 @@ exports.richmdCli = (text) => {
         htmlValue += convert.checklist(listValue)
         listValue = []
         continue
-      } else if (prev && prev.name === "br") {
+      } else if (prev && prev.name === "br" || prev.name === "endTag") {
         continue
       } else if (prev && prev.name === "import") {
         htmlValue += `</head>\n<body class="body">\n`

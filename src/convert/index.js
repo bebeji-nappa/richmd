@@ -246,3 +246,59 @@ exports.startDetails = (data) => {
 exports.endDetails = () => {
   return `</details>\n`
 }
+
+exports.startTag = (data) => {
+  const tags = [ 
+    "div", 
+    "menu", 
+    "main", 
+    "section", 
+    "article", 
+    "header", 
+    "aside",
+    "nav",
+    "footer"
+  ]
+
+  if (!data.tag) {
+    if (!data.style) {
+      return `<div>\n`
+    } else {
+      return `<div class="${data.style}">\n`
+    }
+  } else {
+    if (tags.includes(data.tag)) {
+      if (!data.style) {
+        return `<${data.tag}>\n`
+      } else {
+        return `<${data.tag} class="${data.style}">\n`
+      }
+    } else {
+      return `<div>\n`
+    }
+  }
+  
+}
+
+exports.endTag = (data) => {
+  const tags = [ 
+    "div", 
+    "menu", 
+    "main", 
+    "section", 
+    "article", 
+    "header", 
+    "aside",
+    "nav",
+    "footer"
+  ]
+  
+  if(!data.tag) {
+    return `</div>\n`
+  }
+  if (tags.includes(data.tag)) {
+    return `</${data.tag}>\n`
+  } else {
+    return `</div>\n`
+  }
+}
