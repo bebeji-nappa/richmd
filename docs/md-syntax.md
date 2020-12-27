@@ -171,5 +171,53 @@ text...
 #### Syntax
 ***Be sure to enter at the beginning of the line.***
 ```txt
-::style::./styles/style.css
+:style:./styles/style.css
+```
+
+### Custom HTML DOM(Only RichMD file is supported)
+#### Support HTML Tag
+- div 
+- menu
+- main
+- section
+- article
+- header
+- aside
+- nav
+- footer
+
+#### Syntax
+
+```txt
+::<Tag Name>[.ClassName]
+
+::
+```
+#### Example
+```txt
+::menu
+menu
+::
+
+::article.className
+article
+::
+
+::
+div
+::
+```
+##### Preview
+```html
+<menu>
+<p>menu</p>
+</menu>
+
+<article class="className">
+<p>article</p>
+</article>
+
+<div>
+<p>div</p>
+</div>
 ```

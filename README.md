@@ -51,11 +51,10 @@ Please read a [RichMD Markdown Syntax Documentation](./docs/md-syntax.md).
 - Color Inline Block
 - Dropdown details
 - Import CSS file(Only RichMD file is supported)
-
+- Custom HTML DOM(Only RichMD file is supported)
 ### To be implemented in a future release
 - Video
 - Slide view mode
-- Color text
 
 ## License
 MIT

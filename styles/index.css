@@ -6,6 +6,8 @@
   font-size: 16px;
   line-height: 1.6;
   margin: 10px auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .body > *:first-child {
@@ -14,6 +16,10 @@
 .body > *:last-child {
   margin-bottom: 0 !important; 
 } 
+
+.menu {
+  align-self: flex-start;
+}
 
 .a {
   color: #4183C4; }
