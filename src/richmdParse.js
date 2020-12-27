@@ -61,10 +61,6 @@ exports.richmd = (text) => {
       htmlValue += convert.startDetails(line.summary)
     } else if (line.name === "endDetails") {
       htmlValue += convert.endDetails()
-    } else if (line.name === "startTag") {
-      htmlValue += convert.startTag(line.tag)
-    } else if (line.name === "endTag") {
-      htmlValue += convert.endTag(line.tag)
     } else if (line.name === "br") {
       if (bqValue.length !== 0) {
         htmlValue += convert.blockquote(bqValue)
@@ -100,10 +96,16 @@ exports.richmdCli = (text) => {
   let bqValue = [];
   let listValue = [];
   for (const line of mdTree) {
-    if (line.name === "import") {
-      htmlValue += convert.import(line.value)
-      prev = line
-    } else if(line.name === "heading") {
+    if (mdTree[0] === line) {
+      if (line.name === "import") {
+        htmlValue += convert.import(line.value)
+        htmlValue += `</head>\n<body class="body">\n`
+        prev = line
+      } else {
+        htmlValue += `</head>\n<body class="body">\n`
+      }
+    }
+    if(line.name === "heading") {
       if (line.values.length !== 0) {
         htmlValue += convert.heading(line.level, line.values[0].value)
       }
@@ -178,10 +180,11 @@ exports.richmdCli = (text) => {
         htmlValue += convert.checklist(listValue)
         listValue = []
         continue
-      } else if (prev && prev.name === "br" || prev.name === "endTag") {
+      } else if (prev && prev.name === "br") {
+        continue
+      } else if (prev && prev.name === "endTag") {
         continue
       } else if (prev && prev.name === "import") {
-        htmlValue += `</head>\n<body class="body">\n`
         continue
       }
       htmlValue += convert.br()
