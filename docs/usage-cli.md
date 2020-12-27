@@ -1,5 +1,5 @@
 # Usage the `richmd` command
-### RichMD file
+## RichMD file
 
 RichMD has created a new file extension `.richmd`.
 
