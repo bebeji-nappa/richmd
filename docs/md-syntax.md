@@ -167,6 +167,12 @@ text...
 #### Preview
 ![Preview5](./images/preview5.png)
 
+### Video(HTML5 Video Tag)
+#### Syntax
+```txt
+@[movie](./movie.mp4)
+```
+
 ### Import CSS File(Only RichMD file is supported)
 #### Syntax
 ***Be sure to enter at the beginning of the line.***
@@ -174,7 +180,7 @@ text...
 :style:./styles/style.css
 ```
 
-### Custom HTML DOM(Only RichMD file is supported)
+### Custom HTML Tag(Only RichMD file is supported)
 #### Support HTML Tag
 - div 
 - menu
