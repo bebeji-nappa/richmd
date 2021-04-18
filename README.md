@@ -19,13 +19,6 @@ $ yarn add richmd
 ```
 
 ## Usage
-Using `richmd` makes it easy to use RichMD.
-If you want to try using RichMD right away, this is useful. Let's a read Usage Documentation!
-- [Usage the `richmd` command](./docs/usage-cli.md)
-
-If you want to use React and Vue with RichMD, you need to build [webpack](https://webpack.js.org/). Please read Usage Documentations.
-If you don't know usage webpack, reading [offical webpack documentation](https://webpack.js.org/concepts/).
-
 - [Usage for React](./docs/usage-react.md)
 - [Usage for Vue](./docs/usage-vue.md)
 - [Usage Webpack](./docs/Setup-webpack.md)

@@ -1,12 +1,19 @@
 # Usage RichMD for React
 It is usage example RichMD for React. 
 
-This code add to JSX.
+This code add to JSX or TSX.
+```js
+import { richmd } from 'richmd' // import Richmd
+import 'richmd/richmd.css' // import Richmd CSS file
+```
+
+### example
 
 ```js
 import React, { useState } from 'react';
 import { render } from 'react-dom'
 import { richmd } from 'richmd' // import Richmd
+import 'richmd/richmd.css' // import Richmd CSS file
 
 const Editor = () => {
   const [text, setMarkdown] = useState('');

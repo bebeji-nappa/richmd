@@ -9,7 +9,7 @@ It execute this commands in CLI, It install required packages.
 $ npm install --save-dev webpack webpack-cli webpack-dev-server clean-webpack-plugin html-webpack-plugin
 $ npm install --save-dev @babel/core @babel/preset-env babel-loader vue-loader
 $ npm install core-js@3 vue
-$ npm install --save-dev css-loader mini-css-extract-plugin
+$ npm install --save-dev css-loader style-loader
 $ npm install --save-dev file-loader url-loader
 ```
 
@@ -32,7 +32,6 @@ const path = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const ROOT_DIR = __dirname;
 const SRC_DIR = path.resolve(ROOT_DIR, 'src');
@@ -61,15 +60,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [ 
-          { 
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              publicPath: ''
-            }
-          }, 
-          'css-loader'
-        ],
+        use: [ 'style-loader', 'css-loader' ],
       },
       { 
         test: /\.(png|woff|woff2|eot|ttf|svg)$/, 
@@ -89,7 +80,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: TEMPLATE_FILE
     }),
-    new MiniCssExtractPlugin(),
   ],
   devServer: {
     contentBase: DIST_DIR,
