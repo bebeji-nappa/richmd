@@ -250,7 +250,7 @@ body > .h3:first-child, body > .h4:first-child, body > .h5:first-child, body > .
 }
 
 .video {
-  width: 90%;
+  width: 30%;
 }
 
 pre code {
@@ -285,7 +285,7 @@ pre code, pre tt {
 }
 
 .code {
-  margin: 20px;
+  margin: 20px 0;
   background-color: #030e2b;
   color: #fff;
   border: none;
@@ -322,7 +322,7 @@ input[type="checkbox"] {
 }
 
 .message {
-  margin: 5px 20px;
+  margin: 5px 0;
   font-size: 14px;
   line-height: 19px;
   overflow: auto;
