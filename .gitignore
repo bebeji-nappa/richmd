@@ -2,5 +2,5 @@ dist/
 node_modules/
 yarn-error.log
 debug.js
-lib/highlight/
-lib/katex/
+dist/
+richmd/

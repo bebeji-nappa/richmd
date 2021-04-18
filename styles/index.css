@@ -2,7 +2,7 @@
 
 .body {
   font-family: Helvetica, arial, sans-serif;
-  width: 95%;
+  width: 100%;
   font-size: 16px;
   line-height: 1.6;
   margin: 10px auto;
@@ -285,7 +285,7 @@ pre code, pre tt {
 }
 
 .code {
-  margin: 20px auto;
+  margin: 20px;
   background-color: #030e2b;
   color: #fff;
   border: none;
@@ -322,7 +322,7 @@ input[type="checkbox"] {
 }
 
 .message {
-  margin: 20px auto;
+  margin: 5px 20px;
   font-size: 14px;
   line-height: 19px;
   overflow: auto;
