@@ -1,11 +1,10 @@
 {
   "name": "richmd",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "RichMD is a tool for making Markdown richer.",
   "main": "./src/index.js",
   "scripts": {
-    "prettier": "prettier --check '**/*.js'",
-    "prettier:fix": "prettier --write '**/*.js'"
+    "test": "jest"
   },
   "bin": {
     "richmd": "./lib/script.js"
