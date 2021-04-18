@@ -4,8 +4,8 @@
   "description": "RichMD is a tool for making Markdown richer.",
   "main": "./src/index.js",
   "scripts": {
-    "debug": "node ./src/index.js",
-    "test": "jest --config=jest.config.js"
+    "prettier": "prettier --check '**/*.js'",
+    "prettier:fix": "prettier --write '**/*.js'"
   },
   "bin": {
     "richmd": "./lib/script.js"
@@ -33,9 +33,7 @@
     "@babel/preset-env": "^7.12.11",
     "babel-jest": "^26.6.3",
     "jest": "^26.6.3",
-    "webpack": "^5.33.2",
-    "webpack-cli": "^4.6.0",
-    "webpack-dev-server": "^3.11.2"
+    "prettier": "^2.2.1"
   },
   "dependencies": {
     "commander": "^6.2.1",
