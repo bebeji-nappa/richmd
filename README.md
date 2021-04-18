@@ -27,7 +27,8 @@ If you want to use React and Vue with RichMD, you need to build [webpack](https:
 If you don't know usage webpack, reading [offical webpack documentation](https://webpack.js.org/concepts/).
 
 - [Usage for React](./docs/usage-react.md)
-- [Usage for Vue(v2)](./docs/usage-vue.md)
+- [Usage for Vue](./docs/usage-vue.md)
+- [Usage Webpack](./docs/Setup-webpack.md)
 
 
 ## Markdown Syntax
