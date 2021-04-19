@@ -180,7 +180,7 @@ text...
 :style:./styles/style.css
 ```
 
-### Custom HTML Tag(Only RichMD file is supported)
+### Custom HTML Tag
 #### Support HTML Tag
 - div 
 - menu
@@ -216,14 +216,14 @@ div
 ##### Preview
 ```html
 <menu>
-<p>menu</p>
+<p class="p">menu</p>
 </menu>
 
 <article class="className">
-<p>article</p>
+<p class="p">article</p>
 </article>
 
 <div>
-<p>div</p>
+<p class="p">div</p>
 </div>
 ```
