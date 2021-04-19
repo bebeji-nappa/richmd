@@ -70,6 +70,11 @@ const parse = (text, converter) => {
       htmlValue += converter.startDetails(line.summary);
     } else if (line.name === "endDetails") {
       htmlValue += converter.endDetails();
+    } else if (line.name === "startTag") {
+      htmlValue += convert.startTag(line);
+    } else if (line.name === "endTag") {
+      htmlValue += convert.endTag(line);
+      prev = line;
     } else if (line.name === "br") {
       if (bqValue.length !== 0) {
         htmlValue += converter.blockquote(bqValue);
