@@ -1,5 +1,6 @@
 module.exports = {
   presets: [
+    "@babel/preset-typescript",
     [
       "@babel/preset-env",
       {
@@ -8,4 +9,5 @@ module.exports = {
       },
     ],
   ],
+  plugins: ["@babel/plugin-proposal-class-properties"]
 };
