@@ -171,7 +171,7 @@ export const parser = (str: string) => {
         const list = new nodes.OrderedList(match[3], order | 0, level);
         ast.push(list);
         stack = "";
-      } else if (null !== (match = line.match(TABLE_REGEX))) {
+      } else if (mode === MODE_DEFAULT && null !== (match = line.match(TABLE_REGEX))) {
         tables.push(line);
         stack = "";
       } else if (line === "") {
