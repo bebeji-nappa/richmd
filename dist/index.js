@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.richmd = void 0;
+exports.richmdCli = exports.richmd = void 0;
 const index_1 = require("./parse/index");
 const convert = require("./convert/index");
 const parse = (text) => {
@@ -119,3 +119,7 @@ const richmd = (text) => {
     return parse(text);
 };
 exports.richmd = richmd;
+const richmdCli = (text) => {
+    return parse(text);
+};
+exports.richmdCli = richmdCli;
