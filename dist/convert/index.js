@@ -3,6 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.endTag = exports.startTag = exports.endDetails = exports.startDetails = exports.Import = exports.colorBlock = exports.br = exports.table = exports.horizontal = exports.katex = exports.code = exports.orderedlist = exports.checklist = exports.ulist = exports.blockquote = exports.paragraph = exports.heading = void 0;
 const Katex = require("katex");
 const hljs = require("highlight.js");
+require("katex/dist/katex.css");
+require("highlight.js/styles/atom-one-dark.css");
 require("../type");
 const heading = (level, value) => {
     return `<h${level} class="h${level}">${value}</h${level}>\n`;

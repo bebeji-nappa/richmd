@@ -10,3 +10,5 @@ yarn-error.log
 debug.js
 richmd/
 
+lib/highlight/
+lib/katex/
