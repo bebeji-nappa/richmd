@@ -96,8 +96,3 @@ const parse = (text, converter) => {
 export const richmd = (text) => {
   return parse(text, convert)
 };
-
-// RIchMD CLI 用
-export const richmdCli = (text) => {
-  return parse(text, convert)
-};

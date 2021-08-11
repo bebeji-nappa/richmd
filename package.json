@@ -4,6 +4,7 @@
   "description": "RichMD is a tool for making Markdown richer.",
   "main": "./src/index.js",
   "scripts": {
+    "build": "tsc --build",
     "test": "jest"
   },
   "bin": "./lib/script.js",
