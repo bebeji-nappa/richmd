@@ -9,4 +9,5 @@ node_modules/
 yarn-error.log
 debug.js
 richmd/
-
+dist/
+lib/
