@@ -7,7 +7,6 @@
     "baseUrl": "./",
     "noEmit": false,
     "noImplicitAny": true,
-    // "declaration": true,
     /* Additional Options */
     "strict": true,
     "skipLibCheck": true,
