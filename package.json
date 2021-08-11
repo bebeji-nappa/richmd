@@ -1,10 +1,10 @@
 {
   "name": "richmd",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "RichMD is a tool for making Markdown richer.",
   "main": "./dist/index.js",
   "scripts": {
-    "build": "tsc --build",
+    "build": "tsc",
     "test": "jest"
   },
   "bin": "./lib/script.js",

@@ -5,7 +5,7 @@ import SyntaxError from "../parser/syntax-error";
 
 class Import extends Node {
   value: string
-  constructor(text) {
+  constructor(text: string) {
     super("import", "block");
     this.value = text;
   }
@@ -13,7 +13,7 @@ class Import extends Node {
 
 class Paragraph extends Node {
   values: object
-  constructor(text) {
+  constructor(text: string) {
     super("paragraph", "block");
     this.values = inlineParser(text);
   }
@@ -35,7 +35,7 @@ class Code extends Node {
   syntax: string
   file: string
   values: object
-  constructor(text, syntax, file) {
+  constructor(text: string, syntax: string, file: string) {
     super("code", "block");
     this.syntax = syntax;
     this.file = file;
@@ -45,7 +45,7 @@ class Code extends Node {
 
 class Katex extends Node {
   values: object
-  constructor(text) {
+  constructor(text: string) {
     super("katex", "block");
     this.values = [new inline.Text(text)];
   }
@@ -54,7 +54,7 @@ class Katex extends Node {
 class ColorBlock extends Node {
   style: string
   values: object
-  constructor(text, style) {
+  constructor(text: string, style: string) {
     super("color", "block");
     this.style = style;
     this.values = inlineParser(text);
@@ -64,7 +64,7 @@ class ColorBlock extends Node {
 class Blockquote extends Node {
   level: number
   values: object
-  constructor(text, level) {
+  constructor(text: string, level:number) {
     super("blockquote", "block");
     this.level = level;
     this.values = inlineParser(text);
@@ -74,7 +74,7 @@ class Blockquote extends Node {
 class Heading extends Node {
   level: number
   values: object
-  constructor(text, level) {
+  constructor(text: string, level: number) {
     if (level === 0 || level > 6) {
       throw new SyntaxError("Invalid heading: heading support only between H1 and H6");
     }
@@ -87,7 +87,7 @@ class Heading extends Node {
 class List extends Node {
   level: number
   values: object
-  constructor(text, level) {
+  constructor(text: string, level: number) {
     super("list", "block");
     this.level = level;
     this.values = inlineParser(text);
@@ -98,7 +98,7 @@ class OrderedList extends Node {
   level: number
   order: number
   values: object
-  constructor(text, order, level) {
+  constructor(text: string, order: number, level: number) {
     super("orderedlist", "block");
     this.level = level;
     this.order = order;
@@ -110,7 +110,7 @@ class CheckList extends Node {
   level: number
   checked: boolean
   values: object
-  constructor(text, checked, level) {
+  constructor(text: string, checked: boolean, level: number) {
     super("checklist", "block");
     this.level = level;
     this.checked = checked;
@@ -119,20 +119,20 @@ class CheckList extends Node {
 }
 
 class Table extends Node {
-  headings: Array<object>
-  aligns: Array<object>
-  rows: Array<object>
-  constructor(_rows) {
+  headings: string[]
+  aligns: string[]
+  rows: object[]
+  constructor(_rows: string[]) {
     super("table", "block");
     this.headings = []
     this.aligns = []
     this.rows = []
     const [heading, separator, ...rows]  = _rows.map((line) => line.replace(/^\||\|$/g, "").split("|"));
     if (heading !== undefined) {
-      this.headings = heading.map((cell) => cell.trim());
+      this.headings = heading.map((cell: string) => cell.trim());
     }
     if (separator !== undefined) {
-      this.aligns = separator.map((cell) => {
+      this.aligns = separator.map((cell: string) => {
         cell = cell.trim();
         let align = "left";
         if (cell[cell.length - 1] === ":") {
@@ -151,7 +151,7 @@ class Table extends Node {
 
 class StartDetails extends Node {
   summary: string
-  constructor(text) {
+  constructor(text: string) {
     super("startDetails", "block");
     this.summary = text;
   }
@@ -166,7 +166,7 @@ class EndDetails extends Node {
 class StartTag extends Node {
   style: string
   tag: string
-  constructor(tag, style) {
+  constructor(tag: string, style: string) {
     super("startTag", "block");
     this.style = style;
     this.tag = tag;
@@ -175,7 +175,7 @@ class StartTag extends Node {
 
 class EndTag extends Node {
   tag: string
-  constructor(tag) {
+  constructor(tag: string) {
     super("endTag", "block");
     this.tag = tag;
   }

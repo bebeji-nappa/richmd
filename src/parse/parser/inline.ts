@@ -19,7 +19,7 @@ type Prev = {
   value: string
 }
 
-export default (text) => {
+export default (text: string[] | string) => {
   const ast: object[] & Prev[] = [];
 
   let stack: string = "";
@@ -153,7 +153,7 @@ export default (text) => {
           }
           stack = "";
         }
-        let c = char;
+        let c: string = char;
         do {
           stack += c;
           c = text[++i];

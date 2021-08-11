@@ -1,19 +1,8 @@
-type mdTree = {
-  level: number
-  name: string
-  values: object[] & value[]
-  checked: boolean
-  summary: string
-
-}
-
-type value = {
-  value: string
-}
+import "../type"
 
 export default class Tree {
-  ast: object[] & mdTree[]
-  constructor(ast) {
+  ast: object[] & Convert[]
+  constructor(ast: object[] & Convert[]) {
     this.ast = ast;
   }
 };

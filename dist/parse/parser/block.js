@@ -1,5 +1,9 @@
-import nodes from "../nodes/block";
-import helper from "./helper";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.parser = void 0;
+const block_1 = require("../nodes/block");
+const helper_1 = require("./helper");
+require("../../type");
 const HEADING_REGEX = /^(#{1,})\s(.+)$/;
 const ULIST_REGEX = /^(\s*)?(?:\-|\*)\s(.+)$/;
 const OLIST_REGEX = /^(\s*)?([0-9]+)\.\s(.+)$/;
@@ -20,7 +24,7 @@ const MODE_CODE = 1;
 const MODE_KATEX = 2;
 const MODE_COLORBLOCK = 3;
 let tagData;
-export const parser = (str) => {
+const parser = (str) => {
     const ast = [];
     if (!/\n$/.test(str)) {
         str += "\n";
@@ -35,11 +39,11 @@ export const parser = (str) => {
     let messageType = "default";
     const parseParagraph = (stack) => {
         if (tables.length > 0) {
-            ast.push(new nodes.Table(tables));
+            ast.push(new block_1.default.Table(tables));
             tables = [];
         }
-        if (!helper.isEmpty(stack)) {
-            ast.push(new nodes.Paragraph(stack));
+        if (!helper_1.default.isEmpty(stack)) {
+            ast.push(new block_1.default.Paragraph(stack));
         }
     };
     for (let i = 0; i < str.length; ++i) {
@@ -50,29 +54,29 @@ export const parser = (str) => {
         if (char === "\n") {
             if (IMPORT_REGEX.test(line)) {
                 const importPath = line.replace(/\:style\:/, "").trim();
-                ast.push(new nodes.Import(importPath));
+                ast.push(new block_1.default.Import(importPath));
                 stack = "";
             }
             else if (START_DETAILS_REGEX.test(line)) {
                 parseParagraph(stack);
                 const summaryData = line.replace(/\:\>/, "").trim();
-                ast.push(new nodes.StartDetails(summaryData));
+                ast.push(new block_1.default.StartDetails(summaryData));
                 stack = "";
             }
             else if (END_DETAILS_REGEX.test(line)) {
                 parseParagraph(stack);
-                ast.push(new nodes.EndDetails());
+                ast.push(new block_1.default.EndDetails());
                 stack = "";
             }
             else if (START_TAG_REGEX.test(line)) {
                 parseParagraph(stack);
                 tagData = line.replace(/\:\:/, "").trim().split(`\.`);
-                ast.push(new nodes.StartTag(tagData[0], tagData[1]));
+                ast.push(new block_1.default.StartTag(tagData[0], tagData[1]));
                 stack = "";
             }
             else if (END_TAG_REGEX.test(line)) {
                 parseParagraph(stack);
-                ast.push(new nodes.EndTag(tagData[0]));
+                ast.push(new block_1.default.EndTag(tagData[0]));
                 stack = "";
             }
             else if (null !== (match = line.match(LINEBREAK_REGEX))) {
@@ -81,7 +85,7 @@ export const parser = (str) => {
             }
             else if (CODE_REGEX.test(line)) {
                 if (mode === MODE_CODE) {
-                    ast.push(new nodes.Code(stack.trim(), codeLang, filename));
+                    ast.push(new block_1.default.Code(stack.trim(), codeLang, filename));
                     codeLang = "";
                     filename = "";
                     mode = MODE_DEFAULT;
@@ -100,7 +104,7 @@ export const parser = (str) => {
             }
             else if (KATEX_REGEX.test(line)) {
                 if (mode === MODE_KATEX) {
-                    ast.push(new nodes.Katex(stack.trim()));
+                    ast.push(new block_1.default.Katex(stack.trim()));
                     mode = MODE_DEFAULT;
                 }
                 else {
@@ -111,7 +115,7 @@ export const parser = (str) => {
             }
             else if (COLORBLOCK_REGEX.test(line)) {
                 if (mode === MODE_COLORBLOCK) {
-                    ast.push(new nodes.ColorBlock(stack.trim(), messageType));
+                    ast.push(new block_1.default.ColorBlock(stack.trim(), messageType));
                     messageType = "default";
                     mode = MODE_DEFAULT;
                 }
@@ -128,17 +132,17 @@ export const parser = (str) => {
             else if (null !== (match = line.match(BLOCKQUOTE_REGEX))) {
                 parseParagraph(stack);
                 stack = "";
-                ast.push(new nodes.Blockquote(match[2], match[1].length));
+                ast.push(new block_1.default.Blockquote(match[2], match[1].length));
             }
             else if (HORIZONTAL_RULE_REGEX.test(line) && line.split(/[\*\-_]/).length > 3) {
                 parseParagraph(stack);
                 stack = "";
-                ast.push(new nodes.Horizontal());
+                ast.push(new block_1.default.Horizontal());
             }
             else if (null !== (match = line.match(HEADING_REGEX))) {
                 parseParagraph(stack);
                 stack = "";
-                ast.push(new nodes.Heading(match[2], match[1].length));
+                ast.push(new block_1.default.Heading(match[2], match[1].length));
             }
             else if (null !== (match = line.match(ULIST_REGEX))) {
                 parseParagraph(stack);
@@ -165,14 +169,15 @@ export const parser = (str) => {
                         continue;
                     }
                 }
-                const list = check ? new nodes.CheckList(check[2], check[1] === "x", level) : new nodes.List(match[2], level);
+                const list = check ? new block_1.default.CheckList(check[2], check[1] === "x", level) : new block_1.default.List(match[2], level);
                 ast.push(list);
                 stack = "";
             }
             else if (null !== (match = line.match(OLIST_REGEX))) {
                 parseParagraph(stack);
                 let level = 1;
-                const list = new nodes.OrderedList(match[3], match[2] | 0, level);
+                const order = match[2];
+                const list = new block_1.default.OrderedList(match[3], order | 0, level);
                 ast.push(list);
                 stack = "";
             }
@@ -183,7 +188,7 @@ export const parser = (str) => {
             else if (line === "") {
                 if (mode === MODE_DEFAULT) {
                     parseParagraph(stack);
-                    ast.push(new nodes.Br());
+                    ast.push(new block_1.default.Br());
                     stack = "";
                 }
             }
@@ -199,3 +204,4 @@ export const parser = (str) => {
     parseParagraph(stack.slice(0, -1));
     return ast;
 };
+exports.parser = parser;

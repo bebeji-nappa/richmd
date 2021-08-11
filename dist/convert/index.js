@@ -1,9 +1,14 @@
-import Katex from "katex";
-import hljs from "highlight.js";
-export const heading = (level, value) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.endTag = exports.startTag = exports.endDetails = exports.startDetails = exports.Import = exports.colorBlock = exports.br = exports.table = exports.horizontal = exports.katex = exports.code = exports.orderedlist = exports.checklist = exports.ulist = exports.blockquote = exports.paragraph = exports.heading = void 0;
+const Katex = require("katex");
+const hljs = require("highlight.js");
+require("../type");
+const heading = (level, value) => {
     return `<h${level} class="h${level}">${value}</h${level}>\n`;
 };
-export const paragraph = (values) => {
+exports.heading = heading;
+const paragraph = (values) => {
     let text = `<p class="p">\n`;
     for (const key in values) {
         if (values[key].name === "em") {
@@ -44,35 +49,37 @@ export const paragraph = (values) => {
     text += `</p>\n`;
     return text;
 };
-export const blockquote = (values) => {
+exports.paragraph = paragraph;
+const blockquote = (values) => {
     let bq = `<blockquote class="blockquote">\n`;
     for (const key in values) {
         let text = `<p class="p">\n`;
-        for (const val of values[key]) {
-            if (val.name === "em") {
-                text += `<strong>${val.value}</strong>`;
+        const data = values[key];
+        for (const val in data) {
+            if (data[val].name === "em") {
+                text += `<strong>${data[val].value}</strong>`;
             }
-            else if (val.name === "strikethrough") {
-                text += `<del>${val.value}</del>`;
+            else if (data[val].name === "strikethrough") {
+                text += `<del>${data[val].value}</del>`;
             }
-            else if (val.name === "italic") {
-                text += `<em>${val.value}</em>`;
+            else if (data[val].name === "italic") {
+                text += `<em>${data[val].value}</em>`;
             }
-            else if (val.name === "emitalic") {
-                text += `<em><strong>${val.value}</strong></em>`;
+            else if (data[val].name === "emitalic") {
+                text += `<em><strong>${data[val].value}</strong></em>`;
             }
-            else if (val.name === "link") {
-                const path = changeHtml(val.href);
-                text += `<a href="${path.href}" class="a">${val.title}</a>`;
+            else if (data[val].name === "link") {
+                const path = changeHtml(data[val].href);
+                text += `<a href="${path}" class="a">${data[val].title}</a>`;
             }
-            else if (val.name === "image") {
-                text += `<img src="${val.src}" alt="${val.alt}" />`;
+            else if (data[val].name === "image") {
+                text += `<img src="${data[val].src}" alt="${data[val].alt}" />`;
             }
-            else if (val.name === "code") {
-                text += `<code class="inline-code">${val.value}</code>`;
+            else if (data[val].name === "code") {
+                text += `<code class="inline-code">${data[val].value}</code>`;
             }
             else {
-                text += val.value;
+                text += data[val].value;
             }
         }
         text += `</p>\n`;
@@ -81,14 +88,15 @@ export const blockquote = (values) => {
     bq += `</blockquote>\n`;
     return bq;
 };
-export const ulist = (values) => {
+exports.blockquote = blockquote;
+const ulist = (values) => {
     let prev = null;
     let ulist = `<ul class="ul">\n`;
     for (const key in values) {
         if (prev && values[key].level > prev.level) {
             ulist += `<ul class="ul">\n`;
             ulist += `<li class="li">\n`;
-            ulist += `${values[key].value[0].value}\n`;
+            ulist += `${values[key].values[0].value}\n`;
             ulist += `</li>\n`;
         }
         else if (prev && values[key].level < prev.level) {
@@ -96,17 +104,17 @@ export const ulist = (values) => {
                 ulist += `</ul>\n`;
             }
             ulist += `<li class="li">\n`;
-            ulist += `${values[key].value[0].value}\n`;
+            ulist += `${values[key].values[0].value}\n`;
             ulist += `</li>\n`;
         }
         else if (prev && values[key].level === prev.level) {
             ulist += `<li class="li">\n`;
-            ulist += `${values[key].value[0].value}\n`;
+            ulist += `${values[key].values[0].value}\n`;
             ulist += `</li>\n`;
         }
         else {
             ulist += `<li class="li">\n`;
-            ulist += `${values[key].value[0].value}\n`;
+            ulist += `${values[key].values[0].value}\n`;
             ulist += `</li>\n`;
         }
         prev = values[key];
@@ -114,18 +122,19 @@ export const ulist = (values) => {
     ulist += `</ul>\n`;
     return ulist;
 };
-export const checklist = (values) => {
+exports.ulist = ulist;
+const checklist = (values) => {
     let prev = null;
-    let clist = `<ul class="ul">\n`;
+    let clist = `<ul class="ul checklist">\n`;
     for (const key in values) {
         if (prev && values[key].level > prev.level) {
             clist += `<ul class="ul">\n`;
             clist += `<li class="li checklist">\n`;
             if (values[key].checked) {
-                clist += `<input type="checkbox" checked="checked">${values[key].value[0].value}\n`;
+                clist += `<input type="checkbox" checked="checked">${values[key].values[0].value}\n`;
             }
             else {
-                clist += `<input type="checkbox">${values[key].value[0].value}\n`;
+                clist += `<input type="checkbox">${values[key].values[0].value}\n`;
             }
             clist += `</li>\n`;
         }
@@ -135,30 +144,30 @@ export const checklist = (values) => {
             }
             clist += `<li class="li checklist">\n`;
             if (values[key].checked) {
-                clist += `<input type="checkbox" checked="checked">${values[key].value[0].value}\n`;
+                clist += `<input type="checkbox" checked="checked">${values[key].values[0].value}\n`;
             }
             else {
-                clist += `<input type="checkbox">${values[key].value[0].value}\n`;
+                clist += `<input type="checkbox">${values[key].values[0].value}\n`;
             }
             clist += `</li>\n`;
         }
         else if (prev && values[key].level === prev.level) {
             clist += `<li class="li checklist">\n`;
             if (values[key].checked) {
-                clist += `<input type="checkbox" checked="checked">${values[key].value[0].value}\n`;
+                clist += `<input type="checkbox" checked="checked">${values[key].values[0].value}\n`;
             }
             else {
-                clist += `<input type="checkbox">${values[key].value[0].value}\n`;
+                clist += `<input type="checkbox">${values[key].values[0].value}\n`;
             }
             clist += `</li>\n`;
         }
         else {
             clist += `<li class="li checklist">\n`;
             if (values[key].checked) {
-                clist += `<input type="checkbox" checked="checked">${values[key].value[0].value}\n`;
+                clist += `<input type="checkbox" checked="checked">${values[key].values[0].value}\n`;
             }
             else {
-                clist += `<input type="checkbox">${values[key].value[0].value}\n`;
+                clist += `<input type="checkbox">${values[key].values[0].value}\n`;
             }
             clist += `</li>\n`;
         }
@@ -167,17 +176,20 @@ export const checklist = (values) => {
     clist += `</ul>\n`;
     return clist;
 };
-export const orderedlist = (values) => {
+exports.checklist = checklist;
+const orderedlist = (values) => {
     let olist = `<ol class="ol">\n`;
     for (const key in values) {
-        for (const data of values[key]) {
-            olist += `<li class="li">${data.value}</li>\n`;
+        const data = values[key];
+        for (const key in data) {
+            olist += `<li class="li">${data[key].value}</li>\n`;
         }
     }
     olist += `</ol>\n`;
     return olist;
 };
-export const code = (data) => {
+exports.orderedlist = orderedlist;
+const code = (data) => {
     let codeblock = `<pre class="code">\n`;
     if (data.file !== undefined) {
         codeblock += `<span class="filename">${data.file}</span>\n`;
@@ -194,16 +206,19 @@ export const code = (data) => {
     codeblock += `</pre>\n`;
     return codeblock;
 };
-export const katex = (data) => {
+exports.code = code;
+const katex = (data) => {
     const html = Katex.renderToString(String.raw `\displaystyle${data.values[0].value}`, {
         throwOnError: false,
     });
     return `<pre class="math katex-center">\n${html}\n</pre>\n`;
 };
-exports.horizontal = () => {
+exports.katex = katex;
+const horizontal = () => {
     return `<hr />\n`;
 };
-export const table = (data) => {
+exports.horizontal = horizontal;
+const table = (data) => {
     let tableblock = `<table class="table">\n`;
     tableblock += `<thead>\n<tr>\n`;
     for (const heading of data.headings) {
@@ -214,8 +229,8 @@ export const table = (data) => {
     for (const row of data.rows) {
         tableblock += `<tr>\n`;
         for (const column of row) {
-            for (const obj of column) {
-                tableblock += `<td>${obj.value}</td>\n`;
+            for (const key in column) {
+                tableblock += `<td>${column[key].value}</td>\n`;
             }
         }
         tableblock += `</tr>\n`;
@@ -224,51 +239,58 @@ export const table = (data) => {
     tableblock += `</table>\n`;
     return tableblock;
 };
-exports.br = () => {
+exports.table = table;
+const br = () => {
     return `<br class="br" />\n`;
 };
-export const colorBlock = (datas) => {
+exports.br = br;
+const colorBlock = (datas) => {
     let text = `<pre class="message message-${datas.style}">\n`;
-    for (const data of datas.values) {
-        if (data.name === "em") {
-            text += `<strong>${data.value}</strong>`;
+    const data = datas.values;
+    for (const key in data) {
+        if (data[key].name === "em") {
+            text += `<strong>${data[key].value}</strong>`;
         }
-        else if (data.name === "strikethrough") {
-            text += `<del>${data.value}</del>`;
+        else if (data[key].name === "strikethrough") {
+            text += `<del>${data[key].value}</del>`;
         }
-        else if (data.name === "italic") {
-            text += `<em>${data.value}</em>`;
+        else if (data[key].name === "italic") {
+            text += `<em>${data[key].value}</em>`;
         }
-        else if (data.name === "emitalic") {
-            text += `<em><strong>${data.value}</strong></em>`;
+        else if (data[key].name === "emitalic") {
+            text += `<em><strong>${data[key].value}</strong></em>`;
         }
-        else if (data.name === "link") {
-            const path = changeHtml(data.href);
-            text += `<a href="${path}" class="a">${data.title}</a>`;
+        else if (data[key].name === "link") {
+            const path = changeHtml(data[key].href);
+            text += `<a href="${path}" class="a">${data[key].title}</a>`;
         }
-        else if (data.name === "image") {
-            text += `<img src="${data.src}" alt="${data.alt}" />`;
+        else if (data[key].name === "image") {
+            text += `<img src="${data[key].src}" alt="${data[key].alt}" />`;
         }
-        else if (data.name === "code") {
-            text += `<code class="inline-code">${data.value}</code>`;
+        else if (data[key].name === "code") {
+            text += `<code class="inline-code">${data[key].value}</code>`;
         }
         else {
-            text += data.value;
+            text += data[key].value;
         }
     }
     text += `</pre>\n`;
     return text;
 };
-export const Import = (data) => {
+exports.colorBlock = colorBlock;
+const Import = (data) => {
     return `<link rel="stylesheet" href="${data}">\n`;
 };
-export const startDetails = (data) => {
+exports.Import = Import;
+const startDetails = (data) => {
     return `<details><summary>${data}</summary>\n`;
 };
-exports.endDetails = () => {
+exports.startDetails = startDetails;
+const endDetails = () => {
     return `</details>\n`;
 };
-export const startTag = (data) => {
+exports.endDetails = endDetails;
+const startTag = (data) => {
     const tags = ["div", "menu", "main", "section", "article", "header", "aside", "nav", "footer"];
     if (!data.tag) {
         if (!data.style) {
@@ -292,7 +314,8 @@ export const startTag = (data) => {
         }
     }
 };
-export const endTag = (data) => {
+exports.startTag = startTag;
+const endTag = (data) => {
     const tags = ["div", "menu", "main", "section", "article", "header", "aside", "nav", "footer"];
     if (!data.tag) {
         return `</div>\n`;
@@ -304,6 +327,7 @@ export const endTag = (data) => {
         return `</div>\n`;
     }
 };
+exports.endTag = endTag;
 //リンク先の拡張子が .richmd の場合は .html に変換する
 const changeHtml = (path) => {
     const url = path.trim().split(`\/`);

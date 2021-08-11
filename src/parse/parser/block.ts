@@ -1,5 +1,6 @@
 import nodes from "../nodes/block";
 import helper from "./helper";
+import "../../type"
 
 const HEADING_REGEX = /^(#{1,})\s(.+)$/;
 const ULIST_REGEX = /^(\s*)?(?:\-|\*)\s(.+)$/;
@@ -29,8 +30,8 @@ type Prev = {
   name: string
 }
 
-export const parser = (str) => {
-  const ast: object[] & Prev[] = [];
+export const parser = (str: string) => {
+  const ast: object[] & Convert[] = [];
 
   if (!/\n$/.test(str)) {
     str += "\n";
@@ -39,12 +40,12 @@ export const parser = (str) => {
   let stack = "";
   let line = "";
   let mode = MODE_DEFAULT;
-  let tables: Array<string> = [];
-  let match;
+  let tables: string[] = [];
+  let match: RegExpMatchArray | null;
   let codeLang = "";
   let filename = "";
   let messageType = "default";
-  const parseParagraph = (stack) => {
+  const parseParagraph = (stack: string) => {
     if (tables.length > 0) {
       ast.push(new nodes.Table(tables));
       tables = [];
@@ -166,7 +167,8 @@ export const parser = (str) => {
       } else if (null !== (match = line.match(OLIST_REGEX))) {
         parseParagraph(stack);
         let level = 1;
-        const list = new nodes.OrderedList(match[3], match[2] | 0, level);
+        const order: number = ((match[2] as unknown) as number)
+        const list = new nodes.OrderedList(match[3], order | 0, level);
         ast.push(list);
         stack = "";
       } else if (null !== (match = line.match(TABLE_REGEX))) {

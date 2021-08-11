@@ -1,5 +1,7 @@
-import nodes from "../nodes/inline";
-import helper from "./helper";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const inline_1 = require("../nodes/inline");
+const helper_1 = require("./helper");
 const MODE_DEFAULT = 0;
 const MODE_ASTERISK = 1;
 const MODE_ASTERISK_DOUBLE = 2;
@@ -13,7 +15,7 @@ const MODE_LINK = 9;
 const MODE_INLINE_CODE = 10;
 const MODE_INLINE_KATEX = 11;
 const MODE_VIDEO = 12;
-export default (text) => {
+exports.default = (text) => {
     const ast = [];
     let stack = "";
     let mode = MODE_DEFAULT;
@@ -33,22 +35,22 @@ export default (text) => {
                     if (text[i + 1] === "*") {
                         i++;
                         if (mode === MODE_ASTERISK_TRIPLE) {
-                            ast.push(new nodes.EmItalic(stack));
+                            ast.push(new inline_1.default.EmItalic(stack));
                             mode = MODE_DEFAULT;
                         }
                         else {
-                            ast.push(new nodes.Text(stack));
+                            ast.push(new inline_1.default.Text(stack));
                             mode = MODE_ASTERISK_TRIPLE;
                         }
                         stack = "";
                     }
                     else {
                         if (mode === MODE_ASTERISK_DOUBLE) {
-                            ast.push(new nodes.Em(stack));
+                            ast.push(new inline_1.default.Em(stack));
                             mode = MODE_DEFAULT;
                         }
                         else {
-                            ast.push(new nodes.Text(stack));
+                            ast.push(new inline_1.default.Text(stack));
                             mode = MODE_ASTERISK_DOUBLE;
                         }
                         stack = "";
@@ -56,11 +58,11 @@ export default (text) => {
                     continue;
                 }
                 if (mode === MODE_ASTERISK) {
-                    ast.push(new nodes.Italic(stack));
+                    ast.push(new inline_1.default.Italic(stack));
                     mode = MODE_DEFAULT;
                 }
                 else {
-                    ast.push(new nodes.Text(stack));
+                    ast.push(new inline_1.default.Text(stack));
                     mode = MODE_ASTERISK;
                 }
                 stack = "";
@@ -71,22 +73,22 @@ export default (text) => {
                     if (text[i + 1] === "_") {
                         i++;
                         if (mode === MODE_UNDERLINE_TRIPLE) {
-                            ast.push(new nodes.EmItalic(stack));
+                            ast.push(new inline_1.default.EmItalic(stack));
                             mode = MODE_DEFAULT;
                         }
                         else {
-                            ast.push(new nodes.Text(stack));
+                            ast.push(new inline_1.default.Text(stack));
                             mode = MODE_UNDERLINE_TRIPLE;
                         }
                         stack = "";
                     }
                     else {
                         if (mode === MODE_UNDERLINE_DOUBLE) {
-                            ast.push(new nodes.Em(stack));
+                            ast.push(new inline_1.default.Em(stack));
                             mode = MODE_DEFAULT;
                         }
                         else {
-                            ast.push(new nodes.Text(stack));
+                            ast.push(new inline_1.default.Text(stack));
                             mode = MODE_UNDERLINE_DOUBLE;
                         }
                         stack = "";
@@ -94,11 +96,11 @@ export default (text) => {
                     continue;
                 }
                 if (mode === MODE_UNDERLINE) {
-                    ast.push(new nodes.Italic(stack));
+                    ast.push(new inline_1.default.Italic(stack));
                     mode = MODE_DEFAULT;
                 }
                 else {
-                    ast.push(new nodes.Text(stack));
+                    ast.push(new inline_1.default.Text(stack));
                     mode = MODE_UNDERLINE;
                 }
                 stack = "";
@@ -107,11 +109,11 @@ export default (text) => {
                 if (text[i + 1] === "~") {
                     i++;
                     if (mode === MODE_STRIKETHROUGH) {
-                        ast.push(new nodes.Strikethrough(stack));
+                        ast.push(new inline_1.default.Strikethrough(stack));
                         mode = MODE_DEFAULT;
                     }
                     else {
-                        ast.push(new nodes.Text(stack));
+                        ast.push(new inline_1.default.Text(stack));
                         mode = MODE_STRIKETHROUGH;
                     }
                     stack = "";
@@ -121,12 +123,12 @@ export default (text) => {
                 continue;
             case "`":
                 if (mode === MODE_INLINE_CODE) {
-                    ast.push(new nodes.InlineCode(stack));
+                    ast.push(new inline_1.default.InlineCode(stack));
                     mode = MODE_DEFAULT;
                 }
                 else {
-                    if (!helper.isEmpty(stack)) {
-                        ast.push(new nodes.Text(stack));
+                    if (!helper_1.default.isEmpty(stack)) {
+                        ast.push(new inline_1.default.Text(stack));
                     }
                     mode = MODE_INLINE_CODE;
                 }
@@ -134,21 +136,21 @@ export default (text) => {
                 continue;
             case "$":
                 if (mode === MODE_INLINE_KATEX) {
-                    ast.push(new nodes.InlineKatex(stack));
+                    ast.push(new inline_1.default.InlineKatex(stack));
                     mode = MODE_DEFAULT;
                 }
                 else {
-                    if (!helper.isEmpty(stack)) {
-                        ast.push(new nodes.Text(stack));
+                    if (!helper_1.default.isEmpty(stack)) {
+                        ast.push(new inline_1.default.Text(stack));
                     }
                     mode = MODE_INLINE_KATEX;
                 }
                 stack = "";
                 continue;
             case "<":
-                if (!helper.isEmpty(stack)) {
+                if (!helper_1.default.isEmpty(stack)) {
                     if (html.length === 0) {
-                        ast.push(new nodes.Text(stack));
+                        ast.push(new inline_1.default.Text(stack));
                     }
                     else {
                         html[html.length - 1] += stack;
@@ -163,10 +165,10 @@ export default (text) => {
                 stack += c;
                 if (stack[1] === "/") {
                     const h = html.pop() + stack;
-                    ast.push(new nodes.Html(h));
+                    ast.push(new inline_1.default.Html(h));
                 }
                 else if (stack[1] === "!") {
-                    ast.push(new nodes.HtmlComment(stack));
+                    ast.push(new inline_1.default.HtmlComment(stack));
                 }
                 else {
                     html.push(stack);
@@ -174,16 +176,16 @@ export default (text) => {
                 stack = "";
                 continue;
             case "!":
-                if (!helper.isEmpty(stack)) {
-                    ast.push(new nodes.Text(stack));
+                if (!helper_1.default.isEmpty(stack)) {
+                    ast.push(new inline_1.default.Text(stack));
                 }
                 stack = "";
                 mode = MODE_IMAGE;
                 stack = char;
                 continue;
             case "@":
-                if (!helper.isEmpty(stack)) {
-                    ast.push(new nodes.Text(stack));
+                if (!helper_1.default.isEmpty(stack)) {
+                    ast.push(new inline_1.default.Text(stack));
                 }
                 stack = "";
                 mode = MODE_VIDEO;
@@ -191,7 +193,7 @@ export default (text) => {
                 continue;
             case "[":
                 if (mode !== MODE_IMAGE && mode !== MODE_VIDEO) {
-                    ast.push(new nodes.Text(stack));
+                    ast.push(new inline_1.default.Text(stack));
                     mode = MODE_LINK;
                     stack = char;
                     continue;
@@ -201,17 +203,17 @@ export default (text) => {
             case ")":
                 stack += char;
                 if (mode === MODE_IMAGE) {
-                    ast.push(new nodes.Image(stack));
+                    ast.push(new inline_1.default.Image(stack));
                     mode = MODE_DEFAULT;
                     stack = "";
                 }
                 else if (mode === MODE_VIDEO) {
-                    ast.push(new nodes.Video(stack));
+                    ast.push(new inline_1.default.Video(stack));
                     mode = MODE_DEFAULT;
                     stack = "";
                 }
                 else if (mode === MODE_LINK) {
-                    ast.push(new nodes.Link(stack));
+                    ast.push(new inline_1.default.Link(stack));
                     mode = MODE_DEFAULT;
                     stack = "";
                 }
@@ -224,10 +226,10 @@ export default (text) => {
                 break;
         }
     }
-    if (!helper.isEmpty(stack)) {
+    if (!helper_1.default.isEmpty(stack)) {
         const prev = ast[ast.length - 1];
         if (!prev || mode === MODE_DEFAULT) {
-            ast.push(new nodes.Text(stack));
+            ast.push(new inline_1.default.Text(stack));
         }
         else {
             let prefix = "";

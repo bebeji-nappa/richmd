@@ -172,20 +172,20 @@ describe("list", () => {
 describe("checklist", () => {
   it("checked checkbox", () => {
     const text = `- [x] list1`;
-    const convertedResult = `<ul class="ul"><li class="li checklist"><input type="checkbox" checked="checked">list1</li></ul>`;
+    const convertedResult = `<ul class="ul checklist"><li class="li checklist"><input type="checkbox" checked="checked">list1</li></ul>`;
     const result = richmd(text).replace(/\n/g, "");
     expect(result).toEqual(convertedResult);
   });
   it("case 1", () => {
     const text = `- [ ] list1\n- [ ] list2\n`;
-    const convertedResult = `<ul class="ul"><li class="li checklist"><input type="checkbox">list1</li><li class="li checklist"><input type="checkbox">list2</li></ul>`;
+    const convertedResult = `<ul class="ul checklist"><li class="li checklist"><input type="checkbox">list1</li><li class="li checklist"><input type="checkbox">list2</li></ul>`;
     const result = richmd(text).replace(/\n/g, "");
     expect(result).toEqual(convertedResult);
   });
 
   it("case 2", () => {
     const text = `- [ ] list1\n  - [ ] list2\n- [ ] list3\n`;
-    const convertedResult = `<ul class="ul"><li class="li checklist"><input type="checkbox">list1</li><ul class="ul"><li class="li checklist"><input type="checkbox">list2</li></ul><li class="li checklist"><input type="checkbox">list3</li></ul>`;
+    const convertedResult = `<ul class="ul checklist"><li class="li checklist"><input type="checkbox">list1</li><ul class="ul"><li class="li checklist"><input type="checkbox">list2</li></ul><li class="li checklist"><input type="checkbox">list3</li></ul>`;
     const result = richmd(text).replace(/\n/g, "");
     expect(result).toEqual(convertedResult);
   });

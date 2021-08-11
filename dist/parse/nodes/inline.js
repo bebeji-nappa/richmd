@@ -1,66 +1,58 @@
-import Node from "./Node";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const Node_1 = require("./Node");
 const IMAGE_REGEX = /^!\[([^\]]*)?\]\(([^\)]+)\)$/;
 const VIDEO_REGEX = /^@\[([^\]]*)?\]\(([^\)]+)\)$/;
 const LINK_REGEX = /^\[([^\]]*)?\]\(([^\)]+)\)$/;
-class Text extends Node {
-    value;
+class Text extends Node_1.default {
     constructor(text) {
         super("text", "inline");
         this.value = text;
     }
 }
-class Html extends Node {
-    value;
+class Html extends Node_1.default {
     constructor(text) {
         super("html", "inline");
         this.value = text;
     }
 }
-class HtmlComment extends Node {
-    value;
+class HtmlComment extends Node_1.default {
     constructor(text) {
         super("htmlcomment", "inline");
         this.value = text;
     }
 }
-class Em extends Node {
-    value;
+class Em extends Node_1.default {
     constructor(text) {
         super("em", "inline");
         this.value = text;
     }
 }
-class Italic extends Node {
-    value;
+class Italic extends Node_1.default {
     constructor(text) {
         super("italic", "inline");
         this.value = text;
     }
 }
-class EmItalic extends Node {
-    value;
+class EmItalic extends Node_1.default {
     constructor(text) {
         super("emitalic", "inline");
         this.value = text;
     }
 }
-class Strikethrough extends Node {
-    value;
+class Strikethrough extends Node_1.default {
     constructor(text) {
         super("strikethrough", "inline");
         this.value = text;
     }
 }
-class InlineCode extends Node {
-    value;
+class InlineCode extends Node_1.default {
     constructor(text) {
         super("code", "inline");
         this.value = text;
     }
 }
-class Image extends Node {
-    alt;
-    src;
+class Image extends Node_1.default {
     constructor(text) {
         const match = text.match(IMAGE_REGEX);
         super("image", "inline");
@@ -74,8 +66,7 @@ class Image extends Node {
         }
     }
 }
-class Video extends Node {
-    src;
+class Video extends Node_1.default {
     constructor(text) {
         const match = text.match(VIDEO_REGEX);
         super("video", "inline");
@@ -87,9 +78,7 @@ class Video extends Node {
         }
     }
 }
-class Link extends Node {
-    title;
-    href;
+class Link extends Node_1.default {
     constructor(text) {
         const match = text.match(LINK_REGEX);
         super("link", "inline");
@@ -103,14 +92,13 @@ class Link extends Node {
         }
     }
 }
-class InlineKatex extends Node {
-    value;
+class InlineKatex extends Node_1.default {
     constructor(text) {
         super("katex", "inline");
         this.value = text;
     }
 }
-export default {
+exports.default = {
     Text,
     Html,
     HtmlComment,

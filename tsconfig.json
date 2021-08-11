@@ -1,12 +1,13 @@
 {
   "include": ["src"],
   "compilerOptions": {
-    "module": "esnext",
-    "target": "esnext",
+    "module": "commonjs",
+    "target": "es2015",
     "moduleResolution": "node",
     "baseUrl": "./",
     "noEmit": false,
-    "noImplicitAny": false,
+    "noImplicitAny": true,
+    // "declaration": true,
     /* Additional Options */
     "strict": true,
     "skipLibCheck": true,
