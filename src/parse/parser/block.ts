@@ -1,5 +1,6 @@
-const nodes = require("../nodes/block.js");
-const helper = require("./helper.js");
+import nodes from "../nodes/block";
+import helper from "./helper";
+import "../../type"
 
 const HEADING_REGEX = /^(#{1,})\s(.+)$/;
 const ULIST_REGEX = /^(\s*)?(?:\-|\*)\s(.+)$/;
@@ -22,10 +23,15 @@ const MODE_CODE = 1;
 const MODE_KATEX = 2;
 const MODE_COLORBLOCK = 3;
 
-let tagData = "";
+let tagData: Array<string>;
 
-exports.parser = (str) => {
-  const ast = [];
+type Prev = {
+  level: number
+  name: string
+}
+
+export const parser = (str: string) => {
+  const ast: object[] & Convert[] = [];
 
   if (!/\n$/.test(str)) {
     str += "\n";
@@ -34,12 +40,12 @@ exports.parser = (str) => {
   let stack = "";
   let line = "";
   let mode = MODE_DEFAULT;
-  let tables = [];
-  let match;
+  let tables: string[] = [];
+  let match: RegExpMatchArray | null;
   let codeLang = "";
   let filename = "";
   let messageType = "default";
-  const parseParagraph = (stack) => {
+  const parseParagraph = (stack: string) => {
     if (tables.length > 0) {
       ast.push(new nodes.Table(tables));
       tables = [];
@@ -136,7 +142,7 @@ exports.parser = (str) => {
         ast.push(new nodes.Heading(match[2], match[1].length));
       } else if (null !== (match = line.match(ULIST_REGEX))) {
         parseParagraph(stack);
-        const prev = ast[ast.length - 1];
+        const prev: Prev = ast[ast.length - 1];
         const check = match[2].match(/^\[(x|\u0020)?\]\s(.+)$/);
         let level = 1;
         if (prev && (prev.name === "list" || prev.name === "checklist")) {
@@ -161,7 +167,8 @@ exports.parser = (str) => {
       } else if (null !== (match = line.match(OLIST_REGEX))) {
         parseParagraph(stack);
         let level = 1;
-        const list = new nodes.OrderedList(match[3], match[2] | 0, level);
+        const order: number = ((match[2] as unknown) as number)
+        const list = new nodes.OrderedList(match[3], order | 0, level);
         ast.push(list);
         stack = "";
       } else if (null !== (match = line.match(TABLE_REGEX))) {

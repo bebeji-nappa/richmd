@@ -1,0 +1,19 @@
+{
+  "include": ["src"],
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2015",
+    "moduleResolution": "node",
+    "baseUrl": "./",
+    "noEmit": false,
+    "noImplicitAny": true,
+    /* Additional Options */
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "importsNotUsedAsValues": "error",
+    "outDir": "dist/"
+  }
+}

@@ -1,9 +1,9 @@
 const EMPTY_REGEX = /^\s*$/;
 
-const isEmpty = (str) => {
+const isEmpty = (str: string) => {
   return str.length === 0 || EMPTY_REGEX.test(str);
 };
 
-module.exports = {
+export default {
   isEmpty,
 };

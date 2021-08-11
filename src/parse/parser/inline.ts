@@ -1,5 +1,5 @@
-const nodes = require("../nodes/inline.js");
-const helper = require("./helper.js");
+import nodes from "../nodes/inline";
+import helper from "./helper";
 
 const MODE_DEFAULT = 0;
 const MODE_ASTERISK = 1;
@@ -15,13 +15,17 @@ const MODE_INLINE_CODE = 10;
 const MODE_INLINE_KATEX = 11;
 const MODE_VIDEO = 12;
 
-module.exports = (text) => {
-  const ast = [];
+type Prev = {
+  value: string
+}
 
-  let stack = "";
+export default (text: string[] | string) => {
+  const ast: object[] & Prev[] = [];
+
+  let stack: string = "";
   let mode = MODE_DEFAULT;
   let escapeSequence = false;
-  const html = [];
+  const html: string[] = [];
 
   for (let i = 0; i < text.length; ++i) {
     const char = text[i];
@@ -149,7 +153,7 @@ module.exports = (text) => {
           }
           stack = "";
         }
-        let c = char;
+        let c: string = char;
         do {
           stack += c;
           c = text[++i];

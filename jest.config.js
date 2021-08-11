@@ -1,5 +1,5 @@
 module.exports = {
-  moduleFileExtensions: ["js"],
+  moduleFileExtensions: ["js", "ts"],
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/src/$1",
   },
