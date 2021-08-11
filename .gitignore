@@ -5,10 +5,8 @@
 !.yarn/sdks
 !.yarn/versions
 
-dist/
 node_modules/
 yarn-error.log
 debug.js
-dist/
 richmd/
 

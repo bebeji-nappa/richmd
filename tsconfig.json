@@ -14,6 +14,6 @@
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "importsNotUsedAsValues": "error",
-    "outDir": "src/dist/"
+    "outDir": "dist/"
   }
 }
