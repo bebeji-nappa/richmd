@@ -1,6 +1,6 @@
 {
   "name": "richmd",
-  "version": "2.1.3",
+  "version": "2.1.4",
   "description": "RichMD is a tool for making Markdown richer.",
   "main": "./dist/index.js",
   "scripts": {
