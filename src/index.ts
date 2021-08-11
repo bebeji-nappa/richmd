@@ -97,3 +97,7 @@ const parse = (text: string) => {
 export const richmd = (text: string) => {
   return parse(text)
 };
+
+export const richmdCli = (text: string) => {
+  return parse(text)
+};
