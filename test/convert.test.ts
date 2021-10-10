@@ -175,6 +175,13 @@ describe("list", () => {
     const result = richmd(text).replace(/\n/g, "");
     expect(result).toEqual(convertedResult);
   });
+
+  it("inline link", () => {
+    const text = `- [list1](http://example.com)\n`;
+    const convertedResult = `<ul class="ul"><li class="li"><a href="http://example.com" class="a">list1</a></li></ul>`;
+    const result = richmd(text).replace(/\n/g, "");
+    expect(result).toEqual(convertedResult);
+  });
 });
 
 describe("checklist", () => {
