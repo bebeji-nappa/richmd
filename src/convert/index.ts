@@ -3,7 +3,6 @@ const hljs = require("highlight.js");
 import "../type"
 
 export const heading = (level: number, values: Convert[]) => {
-  // return `<h${level} class="h${level}">${value}</h${level}>\n`;
   let text = `<h${level} class="h${level}">\n`;
   for (const key in values) {
     if (values[key].name === "em") {
@@ -108,22 +107,126 @@ export const ulist = (values: List[]) => {
     if (prev && values[key].level > prev.level) {
       ulist += `<ul class="ul">\n`;
       ulist += `<li class="li">\n`;
-      ulist += `${values[key].values[0].value}\n`;
+      for (const i in values[key].values) {
+        if (values[key].values[i].name === "em") {
+          ulist += `<strong>${values[key].values[i].value}</strong>`;
+        } else if (values[key].values[i].name === "strikethrough") {
+          ulist += `<del>${values[key].values[i].value}</del>`;
+        } else if (values[key].values[i].name === "italic") {
+          ulist += `<em>${values[key].values[i].value}</em>`;
+        } else if (values[key].values[i].name === "emitalic") {
+          ulist += `<em><strong>${values[key].values[i].value}</strong></em>`;
+        } else if (values[key].values[i].name === "link") {
+          const path = changeHtml(values[key].values[i].href);
+          ulist += `<a href="${path}" class="a">${values[key].values[i].title}</a>`;
+        } else if (values[key].values[i].name === "image") {
+          ulist += `<img src="${values[key].values[i].src}" alt="${values[key].values[i].alt}" class="img" />`;
+        } else if (values[key].values[i].name === "video") {
+          ulist += `<video controls preload="none" class="video">\n<source src="${values[key].values[i].src}" />\nSorry, your browser doesn't support embedded videos.\n</video>`;
+        } else if (values[key].values[i].name === "code") {
+          ulist += `<code class="inline-code">${values[key].values[i].value}</code>`;
+        } else if (values[key].values[i].name === "katex") {
+          const html = Katex.renderToString(String.raw`\textstyle ${values[key].values[i].value}`, {
+            throwOnError: false,
+          });
+          ulist += html;
+        } else {
+          ulist += values[key].values[i].value;
+        }
+      }
       ulist += `</li>\n`;
     } else if (prev && values[key].level < prev.level) {
       for (let i = 0; i < prev.level - values[key].level; i++) {
         ulist += `</ul>\n`;
       }
       ulist += `<li class="li">\n`;
-      ulist += `${values[key].values[0].value}\n`;
+      for (const i in values[key].values) {
+        if (values[key].values[i].name === "em") {
+          ulist += `<strong>${values[key].values[i].value}</strong>`;
+        } else if (values[key].values[i].name === "strikethrough") {
+          ulist += `<del>${values[key].values[i].value}</del>`;
+        } else if (values[key].values[i].name === "italic") {
+          ulist += `<em>${values[key].values[i].value}</em>`;
+        } else if (values[key].values[i].name === "emitalic") {
+          ulist += `<em><strong>${values[key].values[i].value}</strong></em>`;
+        } else if (values[key].values[i].name === "link") {
+          const path = changeHtml(values[key].values[i].href);
+          ulist += `<a href="${path}" class="a">${values[key].values[i].title}</a>`;
+        } else if (values[key].values[i].name === "image") {
+          ulist += `<img src="${values[key].values[i].src}" alt="${values[key].values[i].alt}" class="img" />`;
+        } else if (values[key].values[i].name === "video") {
+          ulist += `<video controls preload="none" class="video">\n<source src="${values[key].values[i].src}" />\nSorry, your browser doesn't support embedded videos.\n</video>`;
+        } else if (values[key].values[i].name === "code") {
+          ulist += `<code class="inline-code">${values[key].values[i].value}</code>`;
+        } else if (values[key].values[i].name === "katex") {
+          const html = Katex.renderToString(String.raw`\textstyle ${values[key].values[i].value}`, {
+            throwOnError: false,
+          });
+          ulist += html;
+        } else {
+          ulist += values[key].values[i].value;
+        }
+      }
       ulist += `</li>\n`;
     } else if (prev && values[key].level === prev.level) {
       ulist += `<li class="li">\n`;
-      ulist += `${values[key].values[0].value}\n`;
+      for (const i in values[key].values) {
+        if (values[key].values[i].name === "em") {
+          ulist += `<strong>${values[key].values[i].value}</strong>`;
+        } else if (values[key].values[i].name === "strikethrough") {
+          ulist += `<del>${values[key].values[i].value}</del>`;
+        } else if (values[key].values[i].name === "italic") {
+          ulist += `<em>${values[key].values[i].value}</em>`;
+        } else if (values[key].values[i].name === "emitalic") {
+          ulist += `<em><strong>${values[key].values[i].value}</strong></em>`;
+        } else if (values[key].values[i].name === "link") {
+          const path = changeHtml(values[key].values[i].href);
+          ulist += `<a href="${path}" class="a">${values[key].values[i].title}</a>`;
+        } else if (values[key].values[i].name === "image") {
+          ulist += `<img src="${values[key].values[i].src}" alt="${values[key].values[i].alt}" class="img" />`;
+        } else if (values[key].values[i].name === "video") {
+          ulist += `<video controls preload="none" class="video">\n<source src="${values[key].values[i].src}" />\nSorry, your browser doesn't support embedded videos.\n</video>`;
+        } else if (values[key].values[i].name === "code") {
+          ulist += `<code class="inline-code">${values[key].values[i].value}</code>`;
+        } else if (values[key].values[i].name === "katex") {
+          const html = Katex.renderToString(String.raw`\textstyle ${values[key].values[i].value}`, {
+            throwOnError: false,
+          });
+          ulist += html;
+        } else {
+          ulist += values[key].values[i].value;
+        }
+      }
       ulist += `</li>\n`;
     } else {
       ulist += `<li class="li">\n`;
-      ulist += `${values[key].values[0].value}\n`;
+      for (const i in values[key].values) {
+        if (values[key].values[i].name === "em") {
+          ulist += `<strong>${values[key].values[i].value}</strong>`;
+        } else if (values[key].values[i].name === "strikethrough") {
+          ulist += `<del>${values[key].values[i].value}</del>`;
+        } else if (values[key].values[i].name === "italic") {
+          ulist += `<em>${values[key].values[i].value}</em>`;
+        } else if (values[key].values[i].name === "emitalic") {
+          ulist += `<em><strong>${values[key].values[i].value}</strong></em>`;
+        } else if (values[key].values[i].name === "link") {
+          const path = changeHtml(values[key].values[i].href);
+          ulist += `<a href="${path}" class="a">${values[key].values[i].title}</a>`;
+        } else if (values[key].values[i].name === "image") {
+          ulist += `<img src="${values[key].values[i].src}" alt="${values[key].values[i].alt}" class="img" />`;
+        } else if (values[key].values[i].name === "video") {
+          ulist += `<video controls preload="none" class="video">\n<source src="${values[key].values[i].src}" />\nSorry, your browser doesn't support embedded videos.\n</video>`;
+        } else if (values[key].values[i].name === "code") {
+          ulist += `<code class="inline-code">${values[key].values[i].value}</code>`;
+        } else if (values[key].values[i].name === "katex") {
+          const html = Katex.renderToString(String.raw`\textstyle ${values[key].values[i].value}`, {
+            throwOnError: false,
+          });
+          ulist += html;
+        } else {
+          ulist += values[key].values[i].value;
+        }
+      }
       ulist += `</li>\n`;
     }
     prev = values[key];
