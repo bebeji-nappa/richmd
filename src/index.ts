@@ -11,7 +11,7 @@ const parse = (text: string) => {
   for (const line in mdTree) {
     if (mdTree[line].name === "heading") {
       if (mdTree[line].values.length !== 0) {
-        htmlValue += convert.heading(mdTree[line].level, mdTree[line].values[0].value);
+        htmlValue += convert.heading(mdTree[line].level, mdTree[line].values);
       }
       prev = mdTree[line];
     } else if (mdTree[line].name === "paragraph") {
@@ -113,7 +113,7 @@ const cli = (text: string) => {
     }
     if (mdTree[line].name === "heading") {
       if (mdTree[line].values.length !== 0) {
-        htmlValue += convert.heading(mdTree[line].level, mdTree[line].values[0].value);
+        htmlValue += convert.heading(mdTree[line].level, mdTree[line].values);
       }
       prev = mdTree[line];
     } else if (mdTree[line].name === "paragraph") {

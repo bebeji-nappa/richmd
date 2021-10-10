@@ -42,6 +42,14 @@ describe("heading convert", () => {
     const result = richmd(text).replace(/\n/g, "");
     expect(result).toEqual(convertedResult);
   });
+
+  it("heading1 inline link", () => {
+    const text = `# [Link](http://example.com)`;
+    const convertedResult = `<h1 class="h1"><a href="http://example.com" class="a">Link</a></h1>`;
+    const result = richmd(text).replace(/\n/g, "");
+    expect(result).toEqual(convertedResult);
+  });
+
 });
 
 describe("paragraph convert", () => {
