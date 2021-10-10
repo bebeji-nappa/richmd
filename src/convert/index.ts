@@ -2,8 +2,38 @@ const Katex = require("katex");
 const hljs = require("highlight.js");
 import "../type"
 
-export const heading = (level: number, value: string) => {
-  return `<h${level} class="h${level}">${value}</h${level}>\n`;
+export const heading = (level: number, values: Convert[]) => {
+  // return `<h${level} class="h${level}">${value}</h${level}>\n`;
+  let text = `<h${level} class="h${level}">\n`;
+  for (const key in values) {
+    if (values[key].name === "em") {
+      text += `<strong>${values[key].value}</strong>`;
+    } else if (values[key].name === "strikethrough") {
+      text += `<del>${values[key].value}</del>`;
+    } else if (values[key].name === "italic") {
+      text += `<em>${values[key].value}</em>`;
+    } else if (values[key].name === "emitalic") {
+      text += `<em><strong>${values[key].value}</strong></em>`;
+    } else if (values[key].name === "link") {
+      const path = changeHtml(values[key].href);
+      text += `<a href="${path}" class="a">${values[key].title}</a>`;
+    } else if (values[key].name === "image") {
+      text += `<img src="${values[key].src}" alt="${values[key].alt}" class="img" />`;
+    } else if (values[key].name === "video") {
+      text += `<video controls preload="none" class="video">\n<source src="${values[key].src}" />\nSorry, your browser doesn't support embedded videos.\n</video>`;
+    } else if (values[key].name === "code") {
+      text += `<code class="inline-code">${values[key].value}</code>`;
+    } else if (values[key].name === "katex") {
+      const html = Katex.renderToString(String.raw`\textstyle ${values[key].value}`, {
+        throwOnError: false,
+      });
+      text += html;
+    } else {
+      text += values[key].value;
+    }
+  }
+  text += `</h${level}>\n`;
+  return text;
 };
 
 export const paragraph = (values: Convert[]) => {
