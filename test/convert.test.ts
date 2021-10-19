@@ -230,6 +230,23 @@ console.log(hello)
 \`\`\`
 `;
 
+const codeblockBr = `\`\`\`js
+const hello = "Hello world"
+
+console.log(hello)
+\`\`\`
+`;
+
+const convertedResultBr = `<pre class="code">
+<code class="codefont js">
+<span class=\"hljs-keyword\">const</span> hello = <span class=\"hljs-string\">&quot;Hello world&quot;</span>
+
+console.<span class=\"hljs-built_in\">log</span>(hello)
+
+</code>
+</pre>
+`;
+
 describe("codeblock", () => {
   it("Not language & Not filename", () => {
     const convertedResult = `<pre class="code"><code class="codefont txt">code block</code></pre>`;
@@ -247,6 +264,11 @@ describe("codeblock", () => {
     const convertedResult = `<pre class="code"><code class="codefont js"><span class=\"hljs-keyword\">const</span> hello = <span class=\"hljs-string\">&quot;Hello world&quot;</span>console.<span class=\"hljs-built_in\">log</span>(hello)</code></pre>`;
     const result = richmd(codeblockJs).replace(/\n/g, "");
     expect(result).toEqual(convertedResult);
+  });
+
+  it("pre-line", () => {
+    const result = richmd(codeblockBr);
+    expect(result).toEqual(convertedResultBr);
   });
 });
 
@@ -287,10 +309,21 @@ const text = `|  TH1  |  TH2  |
 |  TD1  |  TD2  |
 `;
 
+const text2 = `|  TH1  |  TH2  |
+| ---- | ---- |
+|  **TD1**  |  *TD2*  |
+`;
+
 describe("table", () => {
   it("create table", () => {
     const convertedResult = `<table class="table"><thead><tr><th>TH1</th><th>TH2</th></thead></tr><tbody><tr><td>TD1</td><td>TD2</td></tr></tbody></table>`;
     const result = richmd(text).replace(/\n/g, "");
+    expect(result).toEqual(convertedResult);
+  });
+
+  it("inline column", () => {
+    const convertedResult = `<table class="table"><thead><tr><th>TH1</th><th>TH2</th></thead></tr><tbody><tr><td><strong>TD1</strong></td><td><em>TD2</em></td></tr></tbody></table>`;
+    const result = richmd(text2).replace(/\n/g, "");
     expect(result).toEqual(convertedResult);
   });
 });

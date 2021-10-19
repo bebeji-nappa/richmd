@@ -295,6 +295,7 @@ export const orderedlist = (values: Convert[][]) => {
 };
 
 export const code = (data: OptionalConvert) => {
+  console.log(data.values[0].value)
   let codeblock = `<pre class="code">\n`;
   if (data.file !== undefined) {
     codeblock += `<span class="filename">${data.file}</span>\n`;
@@ -334,9 +335,35 @@ export const table = (data: Convert) => {
   for (const row of data.rows) {
     tableblock += `<tr>\n`;
     for (const column of row) {
+      tableblock += `<td>`;
       for (const key in column) {
-        tableblock += `<td>${column[key].value}</td>\n`;
+        if (column[key].name === "em") {
+          tableblock += `<strong>${column[key].value}</strong>`;
+        } else if (column[key].name === "strikethrough") {
+          tableblock += `<del>${column[key].value}</del>`;
+        } else if (column[key].name === "italic") {
+          tableblock += `<em>${column[key].value}</em>`;
+        } else if (column[key].name === "emitalic") {
+          tableblock += `<em><strong>${column[key].value}</strong></em>`;
+        } else if (column[key].name === "link") {
+          const path = changeHtml(column[key].href);
+          tableblock += `<a href="${path}" class="a">${column[key].title}</a>`;
+        } else if (column[key].name === "image") {
+          tableblock += `<img src="${column[key].src}" alt="${column[key].alt}" class="img" />`;
+        } else if (column[key].name === "video") {
+          tableblock += `<video controls preload="none" class="video">\n<source src="${column[key].src}" />\nSorry, your browser doesn't support embedded videos.\n</video>`;
+        } else if (column[key].name === "code") {
+          tableblock += `<code class="inline-code">${column[key].value}</code>`;
+        } else if (column[key].name === "katex") {
+          const html = Katex.renderToString(String.raw`\textstyle ${column[key].value}`, {
+            throwOnError: false,
+          });
+          tableblock += html;
+        } else {
+          tableblock += column[key].value;
+        }
       }
+      tableblock += `</td>\n`;
     }
     tableblock += `</tr>\n`;
   }
