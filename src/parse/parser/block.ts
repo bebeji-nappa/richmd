@@ -181,7 +181,6 @@ export const parser = (str: string) => {
           stack = "";
         }
         if (mode === MODE_CODE) {
-          console.log("preeee")
           stack += line !== "" ? `${line}\n` : "\n";
         } 
       } else {

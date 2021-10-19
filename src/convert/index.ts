@@ -295,7 +295,6 @@ export const orderedlist = (values: Convert[][]) => {
 };
 
 export const code = (data: OptionalConvert) => {
-  console.log(data.values[0].value)
   let codeblock = `<pre class="code">\n`;
   if (data.file !== undefined) {
     codeblock += `<span class="filename">${data.file}</span>\n`;
