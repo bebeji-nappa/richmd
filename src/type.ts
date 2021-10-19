@@ -13,7 +13,7 @@ interface Convert {
   file: string
   syntax: string
   headings: string[]
-  rows: {value: string}[][][]
+  rows: Convert[][][]
   summary: string
 }
 interface List {

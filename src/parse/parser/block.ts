@@ -180,6 +180,9 @@ export const parser = (str: string) => {
           ast.push(new nodes.Br());
           stack = "";
         }
+        if (mode === MODE_CODE) {
+          stack += line !== "" ? `${line}\n` : `\n`;
+        } 
       } else {
         stack += line !== "" ? `${line}\n` : "";
       }
