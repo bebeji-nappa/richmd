@@ -300,14 +300,21 @@ export const code = (data: OptionalConvert) => {
     codeblock += `<span class="filename">${data.file}</span>\n`;
   }
   if (!data.syntax) {
-    codeblock += `<code class="codefont txt">\n${data.values[0].value}\n</code>\n`;
+    codeblock += `<code class="codefont txt">\n`;
   } else if (data.syntax === "txt") {
-    codeblock += `<code class="codefont txt">\n${data.values[0].value}\n</code>\n`;
+    codeblock += `<code class="codefont txt">\n`;
   } else {
-    codeblock += `<code class="codefont ${data.syntax}">\n${
-      hljs.highlightAuto(`${data.values[0].value}`).value
-    }\n</code>\n`;
+    codeblock += `<code class="codefont ${data.syntax}">\n`;
   }
+  
+  const code_data = data.values[0].value.split(/\r?\n{2,}/g)
+  for(const key in code_data) {
+    codeblock += data.syntax && data.syntax !== "txt" ? `${hljs.highlight(code_data[key], {language: data.syntax}).value}\n` : `${code_data[key]}\n`
+    if (Number(key) !== code_data.length - 1) {
+      codeblock += '<br />\n'
+    }
+  }
+  codeblock += `</code>\n`;
   codeblock += `</pre>\n`;
   return codeblock;
 };

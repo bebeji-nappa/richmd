@@ -90,7 +90,7 @@ export const parser = (str: string) => {
         stack = "";
       } else if (CODE_REGEX.test(line)) {
         if (mode === MODE_CODE) {
-          ast.push(new nodes.Code(stack, codeLang, filename));
+          ast.push(new nodes.Code(stack.trim(), codeLang, filename));
           codeLang = "";
           filename = "";
           mode = MODE_DEFAULT;
@@ -181,7 +181,7 @@ export const parser = (str: string) => {
           stack = "";
         }
         if (mode === MODE_CODE) {
-          stack += line !== "" ? `${line}\n` : "\n";
+          stack += line !== "" ? `${line}\n` : `\n`;
         } 
       } else {
         stack += line !== "" ? `${line}\n` : "";

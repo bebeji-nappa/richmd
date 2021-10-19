@@ -240,9 +240,8 @@ console.log(hello)
 const convertedResultBr = `<pre class="code">
 <code class="codefont js">
 <span class=\"hljs-keyword\">const</span> hello = <span class=\"hljs-string\">&quot;Hello world&quot;</span>
-
-console.<span class=\"hljs-built_in\">log</span>(hello)
-
+<br />
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(hello)
 </code>
 </pre>
 `;
@@ -261,7 +260,7 @@ describe("codeblock", () => {
   });
 
   it("language js & Not filename", () => {
-    const convertedResult = `<pre class="code"><code class="codefont js"><span class=\"hljs-keyword\">const</span> hello = <span class=\"hljs-string\">&quot;Hello world&quot;</span>console.<span class=\"hljs-built_in\">log</span>(hello)</code></pre>`;
+    const convertedResult = `<pre class="code"><code class="codefont js"><span class=\"hljs-keyword\">const</span> hello = <span class=\"hljs-string\">&quot;Hello world&quot;</span><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(hello)</code></pre>`;
     const result = richmd(codeblockJs).replace(/\n/g, "");
     expect(result).toEqual(convertedResult);
   });
