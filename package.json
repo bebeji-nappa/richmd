@@ -10,7 +10,7 @@
   },
   "bin": "./lib/script.js",
   "keywords": [
-    "RichMD",
+    "Richmd",
     "markdown",
     "front-end",
     "webpack",
