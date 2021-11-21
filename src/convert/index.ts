@@ -64,7 +64,7 @@ export const paragraph = (values: Convert[]) => {
       if (values[key].value === "\n") {
         text += `<br>`;
       } else {
-        text += values[key].value;
+        text += values[key].value.replace(/\n/g, `<br>`);
       }
     }
   }
