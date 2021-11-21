@@ -1,6 +1,6 @@
 {
   "name": "richmd",
-  "version": "2.1.10",
+  "version": "2.2.0",
   "description": "RichMD is a tool for making Markdown richer.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -10,7 +10,7 @@
   },
   "bin": "./lib/script.js",
   "keywords": [
-    "RichMD",
+    "Richmd",
     "markdown",
     "front-end",
     "webpack",

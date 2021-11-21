@@ -61,7 +61,11 @@ export const paragraph = (values: Convert[]) => {
       });
       text += html;
     } else {
-      text += values[key].value;
+      if (values[key].value === "\n") {
+        text += `<br>`;
+      } else {
+        text += values[key].value.replace(/\n/g, `<br>`);
+      }
     }
   }
   text += `</p>\n`;
@@ -295,26 +299,31 @@ export const orderedlist = (values: Convert[][]) => {
 };
 
 export const code = (data: OptionalConvert) => {
-  let codeblock = `<pre class="code">\n`;
+  let language = null;
+  let codeblock = `<pre class="code-block">\n`;
   if (data.file !== undefined) {
-    codeblock += `<span class="filename">${data.file}</span>\n`;
+    codeblock += `<span class="filename"><span>${data.file}</span></span>\n`;
   }
   if (!data.syntax) {
-    codeblock += `<code class="codefont txt">\n`;
+    codeblock += `<div class="code"><code class="codefont txt">\n`;
   } else if (data.syntax === "txt") {
-    codeblock += `<code class="codefont txt">\n`;
+    codeblock += `<div class="code"><code class="codefont txt">\n`;
   } else {
-    codeblock += `<code class="codefont ${data.syntax}">\n`;
+    codeblock += `<div class="code"><code class="codefont language-${data.syntax}">\n`;
+    language = hljs.getLanguage(data.syntax)
   }
   
   const code_data = data.values[0].value.split(/\r?\n{2,}/g)
   for(const key in code_data) {
-    codeblock += data.syntax && data.syntax !== "txt" ? `${hljs.highlight(code_data[key], {language: data.syntax}).value}\n` : `${code_data[key]}\n`
-    if (Number(key) !== code_data.length - 1) {
-      codeblock += '<br />\n'
+    
+    if (language !== undefined) {
+      codeblock += language && data.syntax !== "txt" ? `${hljs.highlight(code_data[key], {language: language.name}).value}\n` : `${code_data[key]}\n`
+      if (Number(key) !== code_data.length - 1) {
+        codeblock += '<br />\n'
+      }
     }
   }
-  codeblock += `</code>\n`;
+  codeblock += `</code></div>\n`;
   codeblock += `</pre>\n`;
   return codeblock;
 };
@@ -383,8 +392,10 @@ export const br = () => {
 };
 
 export const colorBlock = (datas: Convert) => {
-  let text = `<pre class="message message-${datas.style}">\n`;
+  let text = `<div class="message message-${datas.style}"><div class="message-icon-${datas.style}"></div>`;
+  text += `<pre class="message-box">`;
   const data = datas.values;
+  text += `<span>`;
   for (const key in data) {
     if (data[key].name === "em") {
       text += `<strong>${data[key].value}</strong>`;
@@ -402,10 +413,15 @@ export const colorBlock = (datas: Convert) => {
     } else if (data[key].name === "code") {
       text += `<code class="inline-code">${data[key].value}</code>`;
     } else {
-      text += data[key].value;
+      if (data[key].value === "\n") {
+        text += `<br>`;
+      } else {
+        text += data[key].value.replace(/\n/g, `\n`);
+      }
     }
   }
-  text += `</pre>\n`;
+  text += `</span>`;
+  text += `</pre></div>\n`;
   return text;
 };
 
@@ -458,7 +474,7 @@ export const endTag = (data: Convert) => {
 
 //リンク先の拡張子が .richmd の場合は .html に変換する
 const changeHtml = (path: string) => {
-  const url = path.trim().split(`\/`);
+  const url = path.split(`\/`);
   let dirpath = url.slice(0, -1).join(`\/`);
   if (!dirpath) {
     dirpath = `\.`;

@@ -145,6 +145,14 @@ describe("blockquote", () => {
     const result = richmd(text).replace(/\n/g, "");
     expect(result).toEqual(convertedResult);
   });
+
+  it("case 5", () => {
+    const text = `> text\n\ntext`;
+    const convertedResult = `<blockquote class="blockquote"><p class="p">text</p></blockquote><p class="p">text</p>`;
+    const result = richmd(text).replace(/\n/g, "");
+    console.log(result)
+    expect(result).toEqual(convertedResult);
+  });
 });
 
 describe("list", () => {
@@ -237,30 +245,30 @@ console.log(hello)
 \`\`\`
 `;
 
-const convertedResultBr = `<pre class="code">
-<code class="codefont js">
+const convertedResultBr = `<pre class="code-block">
+<div class="code"><code class="codefont language-js">
 <span class=\"hljs-keyword\">const</span> hello = <span class=\"hljs-string\">&quot;Hello world&quot;</span>
 <br />
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(hello)
-</code>
+</code></div>
 </pre>
 `;
 
 describe("codeblock", () => {
   it("Not language & Not filename", () => {
-    const convertedResult = `<pre class="code"><code class="codefont txt">code block</code></pre>`;
+    const convertedResult = `<pre class="code-block"><div class="code"><code class="codefont txt">code block</code></div></pre>`;
     const result = richmd(codeblockData).replace(/\n/g, "");
     expect(result).toEqual(convertedResult);
   });
 
   it("language txt & Not filename", () => {
-    const convertedResult = `<pre class="code"><code class="codefont txt">const hello = "Hello world"console.log(hello)</code></pre>`;
+    const convertedResult = `<pre class="code-block"><div class="code"><code class="codefont txt">const hello = "Hello world"console.log(hello)</code></div></pre>`;
     const result = richmd(codeblockTxt).replace(/\n/g, "");
     expect(result).toEqual(convertedResult);
   });
 
   it("language js & Not filename", () => {
-    const convertedResult = `<pre class="code"><code class="codefont js"><span class=\"hljs-keyword\">const</span> hello = <span class=\"hljs-string\">&quot;Hello world&quot;</span><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(hello)</code></pre>`;
+    const convertedResult = `<pre class="code-block"><div class="code"><code class="codefont language-js"><span class=\"hljs-keyword\">const</span> hello = <span class=\"hljs-string\">&quot;Hello world&quot;</span><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(hello)</code></div></pre>`;
     const result = richmd(codeblockJs).replace(/\n/g, "");
     expect(result).toEqual(convertedResult);
   });
@@ -332,4 +340,55 @@ test("video", () => {
   const convertedResult = `<p class="p"><video controls preload="none" class="video"><source src="./hoge.mp4" />Sorry, your browser doesn't support embedded videos.</video></p>`;
   const result = richmd(text).replace(/\n/g, "");
   expect(result).toEqual(convertedResult);
+})
+
+const default_block = `===
+test
+===`;
+
+const info_block = `===info
+test
+===`;
+
+const success_block = `===success
+test
+===`;
+const warning_block = `===warning
+test
+===`;
+
+const danger_block = `===danger
+test
+===`;
+
+describe("colorBlock", () => {
+  it("default", () => {
+    const result = richmd(default_block);
+    const convertResult = `<div class="message message-default"><div class="message-icon-default"></div><pre class="message-box"><span>test</span></pre></div>\n`;
+    expect(result).toEqual(convertResult);
+  })
+
+  it("info", () => {
+    const result = richmd(info_block);
+    const convertResult = `<div class="message message-info"><div class="message-icon-info"></div><pre class="message-box"><span>test</span></pre></div>\n`;
+    expect(result).toEqual(convertResult);
+  })
+
+  it("success", () => {
+    const result = richmd(success_block);
+    const convertResult = `<div class="message message-success"><div class="message-icon-success"></div><pre class="message-box"><span>test</span></pre></div>\n`;
+    expect(result).toEqual(convertResult);
+  })
+
+  it("warning", () => {
+    const result = richmd(warning_block);
+    const convertResult = `<div class="message message-warning"><div class="message-icon-warning"></div><pre class="message-box"><span>test</span></pre></div>\n`;
+    expect(result).toEqual(convertResult);
+  })
+
+  it("danger", () => {
+    const result = richmd(danger_block);
+    const convertResult = `<div class="message message-danger"><div class="message-icon-danger"></div><pre class="message-box"><span>test</span></pre></div>\n`;
+    expect(result).toEqual(convertResult);
+  })
 })

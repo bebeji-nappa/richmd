@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
 
 .body {
-  font-family: Helvetica, arial, sans-serif;
+  font-family: -apple-system,"BlinkMacSystemFont","Hiragino Kaku Gothic ProN","Hiragino Sans",Meiryo,sans-serif,"Segoe UI Emoji";
   width: 100%;
   font-size: 16px;
   line-height: 1.6;
@@ -32,6 +32,18 @@
   bottom: 0; 
 }
 
+.bold {
+  font-weight: bold;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.line-through {
+  text-decoration: line-through;
+}
+
 .h1, .h2, .h3, .h4, .h5, .h6 {
   color: #262626;
   margin: 20px 0 10px;
@@ -40,10 +52,6 @@
   -webkit-font-smoothing: antialiased;
   cursor: text;
   position: relative; }
-
-/* h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
-  background: url("../../images/modules/styleguide/para.png") no-repeat 10px center;
-  text-decoration: none; } */
 
 .h1 tt, .h1 code {
   font-size: inherit; 
@@ -75,6 +83,7 @@
 
 .h2 {
   font-size: 28px;
+  padding-bottom: 10px;
   border-bottom: 1px solid #cccccc;
 }
 
@@ -122,6 +131,13 @@ hr {
 }
 
 .br {
+  display: block;
+  content: "";
+  padding: 8px;
+  margin: 0;
+}
+
+.inline-br {
   display: block;
   content: "";
   padding: 0;
@@ -266,10 +282,10 @@ pre code {
 .highlight pre {
   background-color: #f8f8f8;
   border: 1px solid #dddddd;
-  font-size: 13px;
+  font-size: 15px;
   line-height: 19px;
   overflow: auto;
-  font-family: 'Source Code Pro', monospace;
+  font-family: -apple-system,"BlinkMacSystemFont","Hiragino Kaku Gothic ProN","Hiragino Sans",Meiryo,sans-serif,"Segoe UI Emoji";
   padding: 16px 20px;
   border-radius: 5px; }
 
@@ -291,15 +307,32 @@ pre code br {
   content: "";
 }
 
-.code {
+.code-block {
   margin: 20px 0;
   background-color: #030e2b;
+  padding: 0;
+  border-radius: 5px;
+  position: relative;
+}
+
+.filename {
+  background-color: rgba(255, 255, 255, .3);
+  color: #fff;
+  font-size: 13px;
+  padding: 5px 10px;
+  margin: 0;
+  top: 0;
+  position: absolute;
+  border-radius: 5px 0 5px 0;
+}
+
+.code {
   color: #fff;
   border: none;
-  font-size: 14px;
+  font-size: 15px;
   line-height: 19px;
   overflow: auto;
-  padding: 5px 14px;
+  padding: 5px 20px;
   border-radius: 3px;
 }
 
@@ -329,12 +362,20 @@ input[type="checkbox"] {
 }
 
 .message {
-  margin: 5px 0;
+  margin: 20px 0;
   font-size: 14px;
   line-height: 19px;
   overflow: auto;
   padding: 10px 16px;
   border-radius: 3px;
+  display: flex;
+  align-items: center;
+}
+
+.message-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .message-danger {
@@ -343,28 +384,64 @@ input[type="checkbox"] {
   color: #d13d3d;
 }
 
+.message-icon-danger {
+  background-image: url("./images/danger.svg");
+  width: 40px;
+  height: 40px;
+  margin: 10px 0;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
 .message-warning {
   background-color: #ffeca6;
   border-left: solid 10px #ffc44f;
   color: #857111;
 }
 
-.message-primary {
+.message-icon-warning {
+  background-image: url("./images/warning.svg");
+  width: 40px;
+  height: 40px;
+  margin: 10px 0;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.message-info {
   background-color: #b5e8ff;
   border-left: solid 10px #4fb6ff;
   color:#216a94;
 }
 
-.message-default {
-  background-color: #f0f0f0;
-  border-left: solid 10px #b8b8b8;
-  color:#525252;
+.message-icon-info {
+  background-image: url("./images/info.svg");
+  width: 40px;
+  height: 40px;
+  margin: 10px 0;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .message-success {
   background-color: #a4fcc6;
   border-left: solid 10px #4ad981;
   color: #1e9656;
+}
+
+.message-icon-success {
+  background-image: url("./images/success.svg");
+  width: 40px;
+  height: 40px;
+  margin: 10px 0;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.message-default {
+  background-color: #f0f0f0;
+  border-left: solid 10px #b8b8b8;
+  color:#525252;
 }
 
 .inline-code {
@@ -379,13 +456,5 @@ input[type="checkbox"] {
 }
 
 .codefont {
-  font-family: 'Source Code Pro', monospace;
-}
-
-.filename {
-  background-color: rgba(255, 255, 255, .3);
-  color: #fff;
-  font-size: 12px;
-  margin: 0;
-  padding: 5px;
+  font-family: "SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace,"Segoe UI Emoji";
 }
