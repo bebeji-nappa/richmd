@@ -23,7 +23,7 @@ webpack.config.js
 babel.config.js
 ```
 
-### Set up RichMD
+### Set up Richmd
 
 1. It create `webpack.config.js` in your project, This code add to `webpack.config.js`.
 

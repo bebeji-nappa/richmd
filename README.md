@@ -3,10 +3,10 @@
 ![npm](https://img.shields.io/npm/v/richmd)
 ![npm](https://img.shields.io/npm/dw/richmd)
 
-## What is RichMD?
+## What is Richmd?
 Richmd is a tool for making Markdown richer.
 
-![RichMD](./docs/images/preview.png)
+![Richmd](./docs/images/preview.png)
 
 ## Installation
 
@@ -25,7 +25,7 @@ $ yarn add richmd
 
 
 ## Markdown Syntax
-Please read a [RichMD Markdown Syntax Documentation](./docs/md-syntax.md).
+Please read a [Richmd Markdown Syntax Documentation](./docs/md-syntax.md).
 
 ### Suport syntax
 - strong
@@ -45,8 +45,6 @@ Please read a [RichMD Markdown Syntax Documentation](./docs/md-syntax.md).
 - Color Inline Block
 - Dropdown details
 - Video(HTML5 Video Tag)
-### To be implemented in a future release
-- Slide view mode
 
 ## License
 MIT
