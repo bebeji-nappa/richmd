@@ -22,14 +22,14 @@ const parse = (text: string) => {
         }
       } else {
         htmlValue += convert.paragraph(mdTree[line].values);
+        prev = mdTree[line];
       }
-      prev = mdTree[line];
     } else if (mdTree[line].name === "blockquote") {
       bqValue.push(mdTree[line].values);
-      prev = mdTree[line];
       if (mdTree[line] === mdTree[mdTree.length - 1]) {
         htmlValue += convert.blockquote(bqValue);
       }
+      prev = mdTree[line];
     } else if (mdTree[line].name === "list") {
       listValue.push({ level: mdTree[line].level, values: mdTree[line].values });
       if (mdTree[line] === mdTree[mdTree.length - 1]) {
@@ -71,20 +71,25 @@ const parse = (text: string) => {
       if (bqValue.length !== 0) {
         htmlValue += convert.blockquote(bqValue);
         bqValue = [];
+        prev = mdTree[line];
         continue;
       } else if (prev && prev.name === "list") {
         htmlValue += convert.ulist(listValue);
         listValue = [];
+        prev = mdTree[line];
         continue;
       } else if (prev && prev.name === "orderedlist") {
         htmlValue += convert.orderedlist(orderListValue);
         orderListValue = [];
+        prev = mdTree[line];
         continue;
       } else if (prev && prev.name === "checklist") {
         htmlValue += convert.checklist(listValue);
         listValue = [];
+        prev = mdTree[line];
         continue;
       } else if (prev && prev.name === "br") {
+        prev = mdTree[line];
         continue;
       }
       htmlValue += convert.br();
@@ -124,8 +129,8 @@ const cli = (text: string) => {
         }
       } else {
         htmlValue += convert.paragraph(mdTree[line].values);
+        prev = mdTree[line];
       }
-      prev = mdTree[line];
     } else if (mdTree[line].name === "blockquote") {
       bqValue.push(mdTree[line].values);
       prev = mdTree[line];
@@ -173,22 +178,28 @@ const cli = (text: string) => {
       if (bqValue.length !== 0) {
         htmlValue += convert.blockquote(bqValue);
         bqValue = [];
+        prev = mdTree[line];
         continue;
       } else if (prev && prev.name === "list") {
         htmlValue += convert.ulist(listValue);
         listValue = [];
+        prev = mdTree[line];
         continue;
       } else if (prev && prev.name === "orderedlist") {
         htmlValue += convert.orderedlist(orderListValue);
         orderListValue = [];
+        prev = mdTree[line];
         continue;
       } else if (prev && prev.name === "checklist") {
         htmlValue += convert.checklist(listValue);
         listValue = [];
+        prev = mdTree[line];
         continue;
       } else if (prev && prev.name === "br") {
+        prev = mdTree[line];
         continue;
       } else if (prev && prev.name === "import") {
+        prev = mdTree[line];
         continue;
       }
       htmlValue += convert.br();

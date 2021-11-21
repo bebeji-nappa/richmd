@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
 
 .body {
-  font-family: Helvetica, arial, sans-serif;
+  font-family: -apple-system,"BlinkMacSystemFont","Hiragino Kaku Gothic ProN","Hiragino Sans",Meiryo,sans-serif,"Segoe UI Emoji";
   width: 100%;
   font-size: 16px;
   line-height: 1.6;
@@ -83,6 +83,7 @@
 
 .h2 {
   font-size: 28px;
+  padding-bottom: 10px;
   border-bottom: 1px solid #cccccc;
 }
 
@@ -130,6 +131,13 @@ hr {
 }
 
 .br {
+  display: block;
+  content: "";
+  padding: 8px;
+  margin: 0;
+}
+
+.inline-br {
   display: block;
   content: "";
   padding: 0;
@@ -274,10 +282,10 @@ pre code {
 .highlight pre {
   background-color: #f8f8f8;
   border: 1px solid #dddddd;
-  font-size: 13px;
+  font-size: 15px;
   line-height: 19px;
   overflow: auto;
-  font-family: 'Source Code Pro', monospace;
+  font-family: -apple-system,"BlinkMacSystemFont","Hiragino Kaku Gothic ProN","Hiragino Sans",Meiryo,sans-serif,"Segoe UI Emoji";
   padding: 16px 20px;
   border-radius: 5px; }
 
@@ -299,12 +307,17 @@ pre code br {
   content: "";
 }
 
-.code {
+.code-block {
   margin: 20px 0;
   background-color: #030e2b;
+  padding: 0;
+  border-radius: 5px;
+}
+
+.code {
   color: #fff;
   border: none;
-  font-size: 14px;
+  font-size: 15px;
   line-height: 19px;
   overflow: auto;
   padding: 5px 14px;
@@ -431,13 +444,14 @@ input[type="checkbox"] {
 }
 
 .codefont {
-  font-family: 'Source Code Pro', monospace;
+  font-family: "SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace,"Segoe UI Emoji";
 }
 
 .filename {
   background-color: rgba(255, 255, 255, .3);
   color: #fff;
-  font-size: 12px;
+  font-size: 13px;
+  padding: 5px 8px;
   margin: 0;
-  padding: 5px;
+  border-radius: 5px 0 5px 0;
 }
