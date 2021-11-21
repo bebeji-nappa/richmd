@@ -137,9 +137,9 @@ This is $a=b+c$
 **Default**:
 This is default color block.
 ===
-===primary
-**Primary**:
-This is primary color block.
+===info
+**Infomation**:
+This is Infomation color block.
 ===
 ===success
 **Success**:

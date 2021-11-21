@@ -333,3 +333,54 @@ test("video", () => {
   const result = richmd(text).replace(/\n/g, "");
   expect(result).toEqual(convertedResult);
 })
+
+const default_block = `===
+test
+===`;
+
+const info_block = `===info
+test
+===`;
+
+const success_block = `===success
+test
+===`;
+const warning_block = `===warning
+test
+===`;
+
+const danger_block = `===danger
+test
+===`;
+
+describe("colorBlock", () => {
+  it("default", () => {
+    const result = richmd(default_block);
+    const convertResult = `<div class="message message-default"><div class="message-icon-default"></div><pre class="message-box"><span>test</span></pre></div>\n`;
+    expect(result).toEqual(convertResult);
+  })
+
+  it("info", () => {
+    const result = richmd(info_block);
+    const convertResult = `<div class="message message-info"><div class="message-icon-info"></div><pre class="message-box"><span>test</span></pre></div>\n`;
+    expect(result).toEqual(convertResult);
+  })
+
+  it("success", () => {
+    const result = richmd(success_block);
+    const convertResult = `<div class="message message-success"><div class="message-icon-success"></div><pre class="message-box"><span>test</span></pre></div>\n`;
+    expect(result).toEqual(convertResult);
+  })
+
+  it("warning", () => {
+    const result = richmd(warning_block);
+    const convertResult = `<div class="message message-warning"><div class="message-icon-warning"></div><pre class="message-box"><span>test</span></pre></div>\n`;
+    expect(result).toEqual(convertResult);
+  })
+
+  it("danger", () => {
+    const result = richmd(danger_block);
+    const convertResult = `<div class="message message-danger"><div class="message-icon-danger"></div><pre class="message-box"><span>test</span></pre></div>\n`;
+    expect(result).toEqual(convertResult);
+  })
+})

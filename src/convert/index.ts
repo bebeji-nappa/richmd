@@ -383,8 +383,10 @@ export const br = () => {
 };
 
 export const colorBlock = (datas: Convert) => {
-  let text = `<pre class="message message-${datas.style}">\n`;
+  let text = `<div class="message message-${datas.style}"><div class="message-icon-${datas.style}"></div>`;
+  text += `<pre class="message-box">`;
   const data = datas.values;
+  text += `<span>`;
   for (const key in data) {
     if (data[key].name === "em") {
       text += `<strong>${data[key].value}</strong>`;
@@ -402,10 +404,15 @@ export const colorBlock = (datas: Convert) => {
     } else if (data[key].name === "code") {
       text += `<code class="inline-code">${data[key].value}</code>`;
     } else {
-      text += data[key].value;
+      if (data[key].value === "\n") {
+        text += `<br>`;
+      } else {
+        text += data[key].value.replace(/\n/g, `\n`);
+      }
     }
   }
-  text += `</pre>\n`;
+  text += `</span>`;
+  text += `</pre></div>\n`;
   return text;
 };
 
@@ -458,7 +465,7 @@ export const endTag = (data: Convert) => {
 
 //リンク先の拡張子が .richmd の場合は .html に変換する
 const changeHtml = (path: string) => {
-  const url = path.trim().split(`\/`);
+  const url = path.split(`\/`);
   let dirpath = url.slice(0, -1).join(`\/`);
   if (!dirpath) {
     dirpath = `\.`;
