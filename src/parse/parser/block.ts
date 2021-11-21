@@ -67,25 +67,25 @@ export const parser = (str: string) => {
         const importPath = line.replace(/\:style\:/, "").trim();
         ast.push(new nodes.Import(importPath));
         stack = "";
-      } else if (START_DETAILS_REGEX.test(line)) {
+      } else if (mode === MODE_DEFAULT && START_DETAILS_REGEX.test(line)) {
         parseParagraph(stack);
         const summaryData = line.replace(/\:\>/, "").trim();
         ast.push(new nodes.StartDetails(summaryData));
         stack = "";
-      } else if (END_DETAILS_REGEX.test(line)) {
+      } else if (mode === MODE_DEFAULT && END_DETAILS_REGEX.test(line)) {
         parseParagraph(stack);
         ast.push(new nodes.EndDetails());
         stack = "";
-      } else if (START_TAG_REGEX.test(line)) {
+      } else if (mode === MODE_DEFAULT && START_TAG_REGEX.test(line)) {
         parseParagraph(stack);
         tagData = line.replace(/\:\:/, "").trim().split(`\.`);
         ast.push(new nodes.StartTag(tagData[0], tagData[1]));
         stack = "";
-      } else if (END_TAG_REGEX.test(line)) {
+      } else if (mode === MODE_DEFAULT && END_TAG_REGEX.test(line)) {
         parseParagraph(stack);
         ast.push(new nodes.EndTag(tagData[0]));
         stack = "";
-      } else if (null !== (match = line.match(LINEBREAK_REGEX))) {
+      } else if (mode === MODE_DEFAULT && null !== (match = line.match(LINEBREAK_REGEX))) {
         parseParagraph(stack + match[1]);
         stack = "";
       } else if (CODE_REGEX.test(line)) {
@@ -94,7 +94,8 @@ export const parser = (str: string) => {
           codeLang = "";
           filename = "";
           mode = MODE_DEFAULT;
-        } else {
+          stack = "";
+        } else if (mode === MODE_DEFAULT) {
           parseParagraph(stack);
           const codeData = line
             .replace(/\`\`\`/, "")
@@ -103,44 +104,52 @@ export const parser = (str: string) => {
           codeLang = codeData[0];
           filename = codeData[1];
           mode = MODE_CODE;
+          stack = "";
+        } else {
+          stack += line !== "" ? `${line}\n` : `\n`;
         }
-        stack = "";
       } else if (KATEX_REGEX.test(line)) {
         if (mode === MODE_KATEX) {
           ast.push(new nodes.Katex(stack.trim()));
           mode = MODE_DEFAULT;
-        } else {
+          stack = "";
+        } else if (mode === MODE_DEFAULT) {
           parseParagraph(stack);
           mode = MODE_KATEX;
+          stack = "";
+        } else {
+          stack += line !== "" ? `${line}\n` : `\n`;
         }
-        stack = "";
       } else if (COLORBLOCK_REGEX.test(line)) {
         if (mode === MODE_COLORBLOCK) {
           ast.push(new nodes.ColorBlock(stack.trim(), messageType));
           messageType = "default";
           mode = MODE_DEFAULT;
-        } else {
+          stack = "";
+        } else if(mode === MODE_DEFAULT) {
           parseParagraph(stack);
           messageType = line.replace(/\=\=\=/, "").trim();
           if (messageType === "") {
             messageType = "default";
           }
           mode = MODE_COLORBLOCK;
+          stack = "";
+        } else {
+          stack += line !== "" ? `${line}\n` : `\n`;
         }
-        stack = "";
-      } else if (null !== (match = line.match(BLOCKQUOTE_REGEX))) {
+      } else if (mode === MODE_DEFAULT && null !== (match = line.match(BLOCKQUOTE_REGEX))) {
         parseParagraph(stack);
         stack = "";
         ast.push(new nodes.Blockquote(match[2], match[1].length));
-      } else if (HORIZONTAL_RULE_REGEX.test(line) && line.split(/[\*\-_]/).length > 3) {
+      } else if (mode === MODE_DEFAULT && HORIZONTAL_RULE_REGEX.test(line) && line.split(/[\*\-_]/).length > 3) {
         parseParagraph(stack);
         stack = "";
         ast.push(new nodes.Horizontal());
-      } else if (null !== (match = line.match(HEADING_REGEX))) {
+      } else if (mode === MODE_DEFAULT && null !== (match = line.match(HEADING_REGEX))) {
         parseParagraph(stack);
         stack = "";
         ast.push(new nodes.Heading(match[2], match[1].length));
-      } else if (null !== (match = line.match(ULIST_REGEX))) {
+      } else if (mode === MODE_DEFAULT && null !== (match = line.match(ULIST_REGEX))) {
         parseParagraph(stack);
         const prev: Prev = ast[ast.length - 1];
         const check = match[2].match(/^\[(x|\u0020)?\]\s(.+)$/);
@@ -164,7 +173,7 @@ export const parser = (str: string) => {
         const list = check ? new nodes.CheckList(check[2], check[1] === "x", level) : new nodes.List(match[2], level);
         ast.push(list);
         stack = "";
-      } else if (null !== (match = line.match(OLIST_REGEX))) {
+      } else if (mode === MODE_DEFAULT && null !== (match = line.match(OLIST_REGEX))) {
         parseParagraph(stack);
         let level = 1;
         const order: number = ((match[2] as unknown) as number)
