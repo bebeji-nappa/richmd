@@ -13,7 +13,7 @@ const TABLE_REGEX = /(?:\s*)?\|(.+)\|(?:\s*)$/;
 const KATEX_REGEX = /^[\$]{3}(.*)|[\$]{3}(.*)$/;
 const COLORBLOCK_REGEX = /^[\=]{3}(.*)|[\=]{3}(.*)\b[\l]+\b$/;
 const IMPORT_REGEX = /^\:style\:[\w_\.\/]*$/;
-const START_DETAILS_REGEX = /^\:\>\b[\w_\.\/]+\b$/;
+const START_DETAILS_REGEX = /^\:\>(\b[\w_\.\/]+\b|[\u3040-\u309F\u30A0-\u30FF\u3400-\u9FFF])+$/;
 const END_DETAILS_REGEX = /^\:\>$/;
 const START_TAG_REGEX = /^\:\:\b[a-z]+\b|\:\:\b[a-z]+\b\.\b[a-z]+\b$/;
 const END_TAG_REGEX = /^\:\:$/;
