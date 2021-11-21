@@ -462,12 +462,12 @@ input[type="checkbox"] {
 .details {
   border: solid 1px #b8b8b8;
   border-radius: 5px;
-  padding: 20px;
+  padding: 15px 20px;
 }
 
 .summary {
   border-radius: 5px;
-  font-size: 18px;
+  font-size: 16px;
   cursor: pointer;
   font-weight: bold;
 }
