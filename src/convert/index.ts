@@ -430,7 +430,7 @@ export const Import = (data: string) => {
 };
 
 export const startDetails = (data: string) => {
-  return `<details><summary>${data}</summary>\n`;
+  return `<details class="details"><summary class="summary">${data}</summary>\n`;
 };
 
 export const endDetails = () => {

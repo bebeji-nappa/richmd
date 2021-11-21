@@ -297,15 +297,15 @@ describe("horizontal", () => {
 
 describe("br", () => {
   it("once break line", () => {
-    const text = `\n`;
-    const convertedResult = `<br class="br" />`;
+    const text = `# h1\n\ntest`;
+    const convertedResult = `<h1 class="h1">h1</h1><p class="p">test</p>`;
     const result = richmd(text).replace(/\n/g, "");
     expect(result).toEqual(convertedResult);
   });
 
   it("continuous break line", () => {
-    const text = `\n\n\n`;
-    const convertedResult = `<br class="br" />`;
+    const text = `test\n\ntest`;
+    const convertedResult = `<p class="p">test<br></p><br class="br" /><p class="p">test</p>`;
     const result = richmd(text).replace(/\n/g, "");
     expect(result).toEqual(convertedResult);
   });

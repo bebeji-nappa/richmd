@@ -119,7 +119,7 @@ $$$
 ```
 
 #### Preview
-![Preview](./images/preview1.png)
+<img src="./images/preview1.png" width="600">
 
 ### Inline Mathematical formula
 #### Syntax
@@ -128,7 +128,7 @@ This is $a=b+c$
 ```
 
 #### Preview
-![Preview2](./images/preview2.png)
+<img src="./images/preview2.png" width="600">
 
 ### Color Block
 #### Syntax
@@ -155,7 +155,7 @@ This is danger color block.
 ===
 ```
 #### Preview
-![Preview3](./images/preview3.png)
+<img src="./images/preview3.png" width="600">
 
 ### Dropdown details
 #### Syntax
@@ -165,7 +165,7 @@ text...
 :>
 ```
 #### Preview
-![Preview5](./images/preview5.png)
+<img src="./images/preview5.png" width="600">
 
 ### Video(HTML5 Video Tag)
 #### Syntax

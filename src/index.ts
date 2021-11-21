@@ -91,9 +91,13 @@ const parse = (text: string) => {
       } else if (prev && prev.name === "br") {
         prev = mdTree[line];
         continue;
+      } else if (prev && prev.name === "heading") {
+        prev = mdTree[line];
+        continue;
+      } else {
+        htmlValue += convert.br();
+        prev = mdTree[line];
       }
-      htmlValue += convert.br();
-      prev = mdTree[line];
     }
   }
   return htmlValue;
@@ -201,9 +205,13 @@ const cli = (text: string) => {
       } else if (prev && prev.name === "import") {
         prev = mdTree[line];
         continue;
+      } else if (prev && prev.name === "paragraph") {
+        htmlValue += convert.br();
+        prev = mdTree[line];
+      } else if (prev && prev.name === "heading") {
+        prev = mdTree[line];
+        continue;
       }
-      htmlValue += convert.br();
-      prev = mdTree[line];
     }
   }
   return htmlValue;
