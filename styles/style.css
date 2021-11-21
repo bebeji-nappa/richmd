@@ -113,16 +113,16 @@
 }
 
 .ol {
-  margin: 0;
+  margin: 20px 0;
 }
 
 .ul {
-  margin: 0;
+  margin: 20px 0;
   color: #262626;
 }
 
 .li {
-  margin: 0;
+  margin: 10px 0;
 }
 
 hr {
