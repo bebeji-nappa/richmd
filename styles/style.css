@@ -386,8 +386,8 @@ input[type="checkbox"] {
 
 .message-icon-danger {
   background-image: url("./images/danger.svg");
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   margin: 10px 0;
   background-size: contain;
   background-repeat: no-repeat;
@@ -401,8 +401,8 @@ input[type="checkbox"] {
 
 .message-icon-warning {
   background-image: url("./images/warning.svg");
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   margin: 10px 0;
   background-size: contain;
   background-repeat: no-repeat;
@@ -416,8 +416,8 @@ input[type="checkbox"] {
 
 .message-icon-info {
   background-image: url("./images/info.svg");
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   margin: 10px 0;
   background-size: contain;
   background-repeat: no-repeat;
@@ -431,8 +431,8 @@ input[type="checkbox"] {
 
 .message-icon-success {
   background-image: url("./images/success.svg");
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   margin: 10px 0;
   background-size: contain;
   background-repeat: no-repeat;
