@@ -312,6 +312,18 @@ pre code br {
   background-color: #030e2b;
   padding: 0;
   border-radius: 5px;
+  position: relative;
+}
+
+.filename {
+  background-color: rgba(255, 255, 255, .3);
+  color: #fff;
+  font-size: 13px;
+  padding: 5px 10px;
+  margin: 0;
+  top: 0;
+  position: absolute;
+  border-radius: 5px 0 5px 0;
 }
 
 .code {
@@ -320,7 +332,7 @@ pre code br {
   font-size: 15px;
   line-height: 19px;
   overflow: auto;
-  padding: 5px 14px;
+  padding: 5px 20px;
   border-radius: 3px;
 }
 
@@ -445,13 +457,4 @@ input[type="checkbox"] {
 
 .codefont {
   font-family: "SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace,"Segoe UI Emoji";
-}
-
-.filename {
-  background-color: rgba(255, 255, 255, .3);
-  color: #fff;
-  font-size: 13px;
-  padding: 5px 8px;
-  margin: 0;
-  border-radius: 5px 0 5px 0;
 }
