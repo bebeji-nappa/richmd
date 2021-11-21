@@ -1,4 +1,4 @@
-# Usage RichMD for React
+# Usage Richmd for React
 It is usage example RichMD for React. 
 
 This code add to JSX or TSX.

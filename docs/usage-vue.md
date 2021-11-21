@@ -1,4 +1,4 @@
-# Usage RichMD for Vue
+# Usage Richmd for Vue
 It is usage example RichMD by Vue. 
 
 This code add to Vue SFC.

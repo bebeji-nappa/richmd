@@ -451,7 +451,7 @@ input[type="checkbox"] {
   border: 1px solid #eaeaea;
   background-color: #f8f8f8;
   color: #24374a;
-  font-family: 'Source Code Pro', monospace;
+  font-family: "SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace,"Segoe UI Emoji";
   border-radius: 3px;
 }
 
