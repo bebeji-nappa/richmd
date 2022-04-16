@@ -78,12 +78,17 @@ export const parser = (str: string) => {
         stack = "";
       } else if (mode === MODE_DEFAULT && START_TAG_REGEX.test(line)) {
         parseParagraph(stack);
-        tagData = line.replace(/\:\:/, "").trim().split(`\.`);
+        const lineData = line.replace(/\:\:/, "").trim();
+        if (lineData) {
+          tagData = lineData.split(`\.`);
+        } else {
+          tagData = ["div", ""];
+        }
         ast.push(new nodes.StartTag(tagData[0], tagData[1]));
         stack = "";
       } else if (mode === MODE_DEFAULT && END_TAG_REGEX.test(line)) {
         parseParagraph(stack);
-        ast.push(new nodes.EndTag(tagData[0]));
+        ast.push(new nodes.EndTag(tagData ? tagData[0] : "div"));
         stack = "";
       } else if (mode === MODE_DEFAULT && null !== (match = line.match(LINEBREAK_REGEX))) {
         parseParagraph(stack + match[1]);
