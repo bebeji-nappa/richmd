@@ -154,16 +154,22 @@ export default (text: string[] | string) => {
           stack = "";
         }
         let c: string = char;
-        do {
+        if (c !== "<") {
+          do {
+            stack += c;
+            c = text[++i];
+          } while (c !== ">");
           stack += c;
-          c = text[++i];
-        } while (c != ">");
-        stack += c;
+        } else {
+          stack += c;
+        }
         if (stack[1] === "/") {
           const h = html.pop() + stack;
           ast.push(new nodes.Html(h));
         } else if (stack[1] === "!") {
           ast.push(new nodes.HtmlComment(stack));
+        } else if (stack === "<") {
+          ast.push(new nodes.Text(stack));
         } else {
           html.push(stack);
         }

@@ -392,3 +392,15 @@ describe("colorBlock", () => {
     expect(result).toEqual(convertResult);
   })
 })
+
+it("html", () => {
+  const result = richmd("<span>aaa</span>");
+  const convertResult = `<p class="p">\n<span>aaa</span></p>\n`;
+  expect(result).toEqual(convertResult);
+})
+
+it("html empty", () => {
+  const result = richmd("<");
+  const convertResult = `<p class="p">\n<</p>\n`;
+  expect(result).toEqual(convertResult);
+})
