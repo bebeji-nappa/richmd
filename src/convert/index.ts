@@ -23,7 +23,7 @@ export const heading = (level: number, values: Convert[]) => {
     } else if (values[key].name === "code") {
       text += `<code class="inline-code">${values[key].value}</code>`;
     } else if (values[key].name === "katex") {
-      const html = Katex.renderToString(String.raw`\textstyle ${values[key].value}`, {
+      const html = Katex.renderToString(String.raw`\displaystyle ${values[key].value}`, {
         throwOnError: false,
       });
       text += html;
@@ -56,7 +56,7 @@ export const paragraph = (values: Convert[]) => {
     } else if (values[key].name === "code") {
       text += `<code class="inline-code">${values[key].value}</code>`;
     } else if (values[key].name === "katex") {
-      const html = Katex.renderToString(String.raw`\textstyle ${values[key].value}`, {
+      const html = Katex.renderToString(String.raw`\displaystyle ${values[key].value}`, {
         throwOnError: false,
       });
       text += html;
@@ -130,7 +130,7 @@ export const ulist = (values: List[]) => {
         } else if (values[key].values[i].name === "code") {
           ulist += `<code class="inline-code">${values[key].values[i].value}</code>`;
         } else if (values[key].values[i].name === "katex") {
-          const html = Katex.renderToString(String.raw`\textstyle ${values[key].values[i].value}`, {
+          const html = Katex.renderToString(String.raw`\displaystyle ${values[key].values[i].value}`, {
             throwOnError: false,
           });
           ulist += html;
@@ -163,7 +163,7 @@ export const ulist = (values: List[]) => {
         } else if (values[key].values[i].name === "code") {
           ulist += `<code class="inline-code">${values[key].values[i].value}</code>`;
         } else if (values[key].values[i].name === "katex") {
-          const html = Katex.renderToString(String.raw`\textstyle ${values[key].values[i].value}`, {
+          const html = Katex.renderToString(String.raw`\displaystyle ${values[key].values[i].value}`, {
             throwOnError: false,
           });
           ulist += html;
@@ -193,7 +193,7 @@ export const ulist = (values: List[]) => {
         } else if (values[key].values[i].name === "code") {
           ulist += `<code class="inline-code">${values[key].values[i].value}</code>`;
         } else if (values[key].values[i].name === "katex") {
-          const html = Katex.renderToString(String.raw`\textstyle ${values[key].values[i].value}`, {
+          const html = Katex.renderToString(String.raw`\displaystyle ${values[key].values[i].value}`, {
             throwOnError: false,
           });
           ulist += html;
@@ -223,7 +223,7 @@ export const ulist = (values: List[]) => {
         } else if (values[key].values[i].name === "code") {
           ulist += `<code class="inline-code">${values[key].values[i].value}</code>`;
         } else if (values[key].values[i].name === "katex") {
-          const html = Katex.renderToString(String.raw`\textstyle ${values[key].values[i].value}`, {
+          const html = Katex.renderToString(String.raw`\displaystyle ${values[key].values[i].value}`, {
             throwOnError: false,
           });
           ulist += html;
@@ -329,7 +329,7 @@ export const code = (data: OptionalConvert) => {
 };
 
 export const katex = (data: OptionalConvert) => {
-  const html = Katex.renderToString(String.raw`\textstyle ${data.values[0].value}`, {
+  const html = Katex.renderToString(String.raw`\displaystyle ${data.values[0].value}`, {
     throwOnError: false,
   });
   return `<pre class="math katex-center">\n${html}\n</pre>\n`;
@@ -370,7 +370,7 @@ export const table = (data: Convert) => {
         } else if (column[key].name === "code") {
           tableblock += `<code class="inline-code">${column[key].value}</code>`;
         } else if (column[key].name === "katex") {
-          const html = Katex.renderToString(String.raw`\textstyle ${column[key].value}`, {
+          const html = Katex.renderToString(String.raw`\displaystyle ${column[key].value}`, {
             throwOnError: false,
           });
           tableblock += html;
