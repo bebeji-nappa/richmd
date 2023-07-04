@@ -134,14 +134,14 @@ describe("blockquote", () => {
 
   it("case 3", () => {
     const text = `> text\ntext\n\ntext`;
-    const convertedResult = `<blockquote class="blockquote"><p class="p">text</p><p class="p">text</p></blockquote><p class="p">text</p>`;
+    const convertedResult = `<blockquote class="blockquote"><p class="p">text</p><p class="p">text<br></p></blockquote><p class="p">text</p>`;
     const result = richmd(text).replace(/\n/g, "");
     expect(result).toEqual(convertedResult);
   });
 
   it("case 4", () => {
     const text = `> text\n> \ntext\n\ntext`;
-    const convertedResult = `<blockquote class="blockquote"><p class="p">text</p><p class="p"></p><p class="p">text</p></blockquote><p class="p">text</p>`;
+    const convertedResult = `<blockquote class="blockquote"><p class="p">text</p><p class="p"></p><p class="p">text<br></p></blockquote><p class="p">text</p>`;
     const result = richmd(text).replace(/\n/g, "");
     expect(result).toEqual(convertedResult);
   });
@@ -151,6 +151,13 @@ describe("blockquote", () => {
     const convertedResult = `<blockquote class="blockquote"><p class="p">text</p></blockquote><p class="p">text</p>`;
     const result = richmd(text).replace(/\n/g, "");
     console.log(result)
+    expect(result).toEqual(convertedResult);
+  });
+
+  it("case 6", () => {
+    const text = `> text\ntext\ntext\n\ntext`;
+    const convertedResult = `<blockquote class="blockquote"><p class="p">text</p><p class="p">text<br>text<br></p></blockquote><p class="p">text</p>`;
+    const result = richmd(text).replace(/\n/g, "");
     expect(result).toEqual(convertedResult);
   });
 });
