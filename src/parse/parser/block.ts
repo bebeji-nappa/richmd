@@ -180,8 +180,25 @@ export const parser = (str: string) => {
         stack = "";
       } else if (mode === MODE_DEFAULT && null !== (match = line.match(OLIST_REGEX))) {
         parseParagraph(stack);
+        const prev: Prev = ast[ast.length - 1];
         let level = 1;
         const order: number = ((match[2] as unknown) as number)
+        if (prev) {
+          const indent = (match[1] || "").length;
+          if (indent % 2 === 0) {
+            if (prev.level * 2 <= indent) {
+              level = prev.level + 1;
+            } else if ((prev.level - 1) * 2 === indent) {
+              level = prev.level;
+            } else if (indent === 0) {
+              level = 1;
+            } else if (prev.level * 2 > indent) {
+              level = prev.level - 1;
+            }
+          } else {
+            continue;
+          }
+        }
         const list = new nodes.OrderedList(match[3], order | 0, level);
         ast.push(list);
         stack = "";

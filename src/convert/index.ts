@@ -94,7 +94,11 @@ export const blockquote = (values: Convert[][]) => {
       } else if (data[val].name === "code") {
         text += `<code class="inline-code">${data[val].value}</code>`;
       } else {
-        text += data[val].value;
+        if (data[val].value === "\n") {
+          text += `<br>`;
+        } else {
+          text += data[val].value.replace(/\n/g, `<br>`);
+        }
       }
     }
     text += `</p>\n`;
@@ -135,7 +139,11 @@ export const ulist = (values: List[]) => {
           });
           ulist += html;
         } else {
-          ulist += values[key].values[i].value;
+          if (values[key].values[i].value === "\n") {
+            ulist += `<br>`;
+          } else {
+            ulist += values[key].values[i].value;
+          }
         }
       }
       ulist += `</li>\n`;
@@ -168,7 +176,11 @@ export const ulist = (values: List[]) => {
           });
           ulist += html;
         } else {
-          ulist += values[key].values[i].value;
+          if (values[key].values[i].value === "\n") {
+            ulist += `<br>`;
+          } else {
+            ulist += values[key].values[i].value;
+          }
         }
       }
       ulist += `</li>\n`;
@@ -198,7 +210,11 @@ export const ulist = (values: List[]) => {
           });
           ulist += html;
         } else {
-          ulist += values[key].values[i].value;
+          if (values[key].values[i].value === "\n") {
+            ulist += `<br>`;
+          } else {
+            ulist += values[key].values[i].value;
+          }
         }
       }
       ulist += `</li>\n`;
@@ -228,7 +244,11 @@ export const ulist = (values: List[]) => {
           });
           ulist += html;
         } else {
-          ulist += values[key].values[i].value;
+          if (values[key].values[i].value === "\n") {
+            ulist += `<br>`;
+          } else {
+            ulist += values[key].values[i].value;
+          }
         }
       }
       ulist += `</li>\n`;
@@ -293,6 +313,168 @@ export const orderedlist = (values: Convert[][]) => {
     for (const key in data) {
       olist += `<li class="li">${data[key].value}</li>\n`;
     }
+  }
+  olist += `</ol>\n`;
+  return olist;
+};
+
+export const olist = (values: List[]) => {
+  let prev: List | null = null;
+  const type = (level: number) => {
+    if (level === 1) {
+      return "1";
+    } else if (level % 2 === 0) {
+      return "i";
+    } else if (level % 3 === 0) {
+      return "a";
+    } else {
+      return "1";
+    }
+  };
+  let olist = `<ol class="ol" type="1">\n`;
+  for (const key in values) {
+    if (prev && values[key].level > prev.level) {
+      olist += `<ol class="ol" type="${type(values[key].level)}">\n`;
+      olist += `<li class="li">\n`;
+      for (const i in values[key].values) {
+        if (values[key].values[i].name === "em") {
+          olist += `<strong>${values[key].values[i].value}</strong>`;
+        } else if (values[key].values[i].name === "strikethrough") {
+          olist += `<del>${values[key].values[i].value}</del>`;
+        } else if (values[key].values[i].name === "italic") {
+          olist += `<em>${values[key].values[i].value}</em>`;
+        } else if (values[key].values[i].name === "emitalic") {
+          olist += `<em><strong>${values[key].values[i].value}</strong></em>`;
+        } else if (values[key].values[i].name === "link") {
+          const path = changeHtml(values[key].values[i].href);
+          olist += `<a href="${path}" class="a">${values[key].values[i].title}</a>`;
+        } else if (values[key].values[i].name === "image") {
+          olist += `<img src="${values[key].values[i].src}" alt="${values[key].values[i].alt}" class="img" />`;
+        } else if (values[key].values[i].name === "video") {
+          olist += `<video controls preload="none" class="video">\n<source src="${values[key].values[i].src}" />\nSorry, your browser doesn't support embedded videos.\n</video>`;
+        } else if (values[key].values[i].name === "code") {
+          olist += `<code class="inline-code">${values[key].values[i].value}</code>`;
+        } else if (values[key].values[i].name === "katex") {
+          const html = Katex.renderToString(String.raw`\displaystyle ${values[key].values[i].value}`, {
+            throwOnError: false,
+          });
+          olist += html;
+        } else {
+          if (values[key].values[i].value === "\n") {
+            olist += `<br>`;
+          } else {
+            olist += values[key].values[i].value;
+          }
+        }
+      }
+      olist += `</li>\n`;
+    } else if (prev && values[key].level < prev.level) {
+      for (let i = 0; i < prev.level - values[key].level; i++) {
+        olist += `</ol>\n`;
+      }
+      olist += `<li class="li">\n`;
+      for (const i in values[key].values) {
+        if (values[key].values[i].name === "em") {
+          olist += `<strong>${values[key].values[i].value}</strong>`;
+        } else if (values[key].values[i].name === "strikethrough") {
+          olist += `<del>${values[key].values[i].value}</del>`;
+        } else if (values[key].values[i].name === "italic") {
+          olist += `<em>${values[key].values[i].value}</em>`;
+        } else if (values[key].values[i].name === "emitalic") {
+          olist += `<em><strong>${values[key].values[i].value}</strong></em>`;
+        } else if (values[key].values[i].name === "link") {
+          const path = changeHtml(values[key].values[i].href);
+          olist += `<a href="${path}" class="a">${values[key].values[i].title}</a>`;
+        } else if (values[key].values[i].name === "image") {
+          olist += `<img src="${values[key].values[i].src}" alt="${values[key].values[i].alt}" class="img" />`;
+        } else if (values[key].values[i].name === "video") {
+          olist += `<video controls preload="none" class="video">\n<source src="${values[key].values[i].src}" />\nSorry, your browser doesn't support embedded videos.\n</video>`;
+        } else if (values[key].values[i].name === "code") {
+          olist += `<code class="inline-code">${values[key].values[i].value}</code>`;
+        } else if (values[key].values[i].name === "katex") {
+          const html = Katex.renderToString(String.raw`\displaystyle ${values[key].values[i].value}`, {
+            throwOnError: false,
+          });
+          olist += html;
+        } else {
+          if (values[key].values[i].value === "\n") {
+            olist += `<br>`;
+          } else {
+            olist += values[key].values[i].value;
+          }
+        }
+      }
+      olist += `</li>\n`;
+    } else if (prev && values[key].level === prev.level) {
+      olist += `<li class="li">\n`;
+      for (const i in values[key].values) {
+        if (values[key].values[i].name === "em") {
+          olist += `<strong>${values[key].values[i].value}</strong>`;
+        } else if (values[key].values[i].name === "strikethrough") {
+          olist += `<del>${values[key].values[i].value}</del>`;
+        } else if (values[key].values[i].name === "italic") {
+          olist += `<em>${values[key].values[i].value}</em>`;
+        } else if (values[key].values[i].name === "emitalic") {
+          olist += `<em><strong>${values[key].values[i].value}</strong></em>`;
+        } else if (values[key].values[i].name === "link") {
+          const path = changeHtml(values[key].values[i].href);
+          olist += `<a href="${path}" class="a">${values[key].values[i].title}</a>`;
+        } else if (values[key].values[i].name === "image") {
+          olist += `<img src="${values[key].values[i].src}" alt="${values[key].values[i].alt}" class="img" />`;
+        } else if (values[key].values[i].name === "video") {
+          olist += `<video controls preload="none" class="video">\n<source src="${values[key].values[i].src}" />\nSorry, your browser doesn't support embedded videos.\n</video>`;
+        } else if (values[key].values[i].name === "code") {
+          olist += `<code class="inline-code">${values[key].values[i].value}</code>`;
+        } else if (values[key].values[i].name === "katex") {
+          const html = Katex.renderToString(String.raw`\displaystyle ${values[key].values[i].value}`, {
+            throwOnError: false,
+          });
+          olist += html;
+        } else {
+          if (values[key].values[i].value === "\n") {
+            olist += `<br>`;
+          } else {
+            olist += values[key].values[i].value;
+          }
+        }
+      }
+      olist += `</li>\n`;
+    } else {
+      olist += `<li class="li">\n`;
+      for (const i in values[key].values) {
+        if (values[key].values[i].name === "em") {
+          olist += `<strong>${values[key].values[i].value}</strong>`;
+        } else if (values[key].values[i].name === "strikethrough") {
+          olist += `<del>${values[key].values[i].value}</del>`;
+        } else if (values[key].values[i].name === "italic") {
+          olist += `<em>${values[key].values[i].value}</em>`;
+        } else if (values[key].values[i].name === "emitalic") {
+          olist += `<em><strong>${values[key].values[i].value}</strong></em>`;
+        } else if (values[key].values[i].name === "link") {
+          const path = changeHtml(values[key].values[i].href);
+          olist += `<a href="${path}" class="a">${values[key].values[i].title}</a>`;
+        } else if (values[key].values[i].name === "image") {
+          olist += `<img src="${values[key].values[i].src}" alt="${values[key].values[i].alt}" class="img" />`;
+        } else if (values[key].values[i].name === "video") {
+          olist += `<video controls preload="none" class="video">\n<source src="${values[key].values[i].src}" />\nSorry, your browser doesn't support embedded videos.\n</video>`;
+        } else if (values[key].values[i].name === "code") {
+          olist += `<code class="inline-code">${values[key].values[i].value}</code>`;
+        } else if (values[key].values[i].name === "katex") {
+          const html = Katex.renderToString(String.raw`\displaystyle ${values[key].values[i].value}`, {
+            throwOnError: false,
+          });
+          olist += html;
+        } else {
+          if (values[key].values[i].value === "\n") {
+            olist += `<br>`;
+          } else {
+            olist += values[key].values[i].value;
+          }
+        }
+      }
+      olist += `</li>\n`;
+    }
+    prev = values[key];
   }
   olist += `</ol>\n`;
   return olist;
