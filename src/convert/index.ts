@@ -94,7 +94,11 @@ export const blockquote = (values: Convert[][]) => {
       } else if (data[val].name === "code") {
         text += `<code class="inline-code">${data[val].value}</code>`;
       } else {
-        text += data[val].value;
+        if (data[val].value === "\n") {
+          text += `<br>`;
+        } else {
+          text += data[val].value.replace(/\n/g, `<br>`);
+        }
       }
     }
     text += `</p>\n`;
@@ -135,7 +139,11 @@ export const ulist = (values: List[]) => {
           });
           ulist += html;
         } else {
-          ulist += values[key].values[i].value;
+          if (values[key].values[i].value === "\n") {
+            ulist += `<br>`;
+          } else {
+            ulist += values[key].values[i].value;
+          }
         }
       }
       ulist += `</li>\n`;
@@ -168,7 +176,11 @@ export const ulist = (values: List[]) => {
           });
           ulist += html;
         } else {
-          ulist += values[key].values[i].value;
+          if (values[key].values[i].value === "\n") {
+            ulist += `<br>`;
+          } else {
+            ulist += values[key].values[i].value;
+          }
         }
       }
       ulist += `</li>\n`;
@@ -198,7 +210,11 @@ export const ulist = (values: List[]) => {
           });
           ulist += html;
         } else {
-          ulist += values[key].values[i].value;
+          if (values[key].values[i].value === "\n") {
+            ulist += `<br>`;
+          } else {
+            ulist += values[key].values[i].value;
+          }
         }
       }
       ulist += `</li>\n`;
@@ -228,7 +244,11 @@ export const ulist = (values: List[]) => {
           });
           ulist += html;
         } else {
-          ulist += values[key].values[i].value;
+          if (values[key].values[i].value === "\n") {
+            ulist += `<br>`;
+          } else {
+            ulist += values[key].values[i].value;
+          }
         }
       }
       ulist += `</li>\n`;
