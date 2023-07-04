@@ -1,12 +1,4 @@
-.yarn/*
-!.yarn/patches
-!.yarn/releases
-!.yarn/plugins
-!.yarn/sdks
-!.yarn/versions
-
 node_modules/
-yarn-error.log
 debug.js
 richmd/
 dist/
