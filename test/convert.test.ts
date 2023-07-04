@@ -153,6 +153,13 @@ describe("blockquote", () => {
     console.log(result)
     expect(result).toEqual(convertedResult);
   });
+
+  it("case 6", () => {
+    const text = `> text\ntext\ntext\n\ntext`;
+    const convertedResult = `<blockquote class="blockquote"><p class="p">text</p><p class="p">text</p><p class="p">text</p></blockquote><p class="p">text</p>`;
+    const result = richmd(text).replace(/\n/g, "");
+    expect(result).toEqual(convertedResult);
+  });
 });
 
 describe("list", () => {
