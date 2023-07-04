@@ -88,9 +88,15 @@ const parse = (text: string) => {
         listValue = [];
         prev = mdTree[line];
         continue;
+      } else if (prev && prev.name === "import") {
+        prev = mdTree[line];
+        continue;
       } else if (prev && prev.name === "br") {
         prev = mdTree[line];
         continue;
+      } else if (prev && prev.name === "paragraph") {
+        htmlValue += convert.br();
+        prev = mdTree[line];
       } else if (prev && prev.name === "heading") {
         prev = mdTree[line];
         continue;

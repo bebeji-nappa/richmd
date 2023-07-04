@@ -306,6 +306,18 @@ export const checklist = (values: List[]) => {
   return clist;
 };
 
+export const orderedlist = (values: Convert[][]) => {
+  let olist = `<ol class="ol">\n`;
+  for (const key in values) {
+    const data = values[key]
+    for (const key in data) {
+      olist += `<li class="li">${data[key].value}</li>\n`;
+    }
+  }
+  olist += `</ol>\n`;
+  return olist;
+};
+
 export const olist = (values: List[]) => {
   let prev: List | null = null;
   let olist = `<ol class="ol">\n`;
