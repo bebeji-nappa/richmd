@@ -7,7 +7,7 @@ const parse = (text: string) => {
   let prev;
   let bqValue: Convert[][] = [];
   let listValue: List[] = [];
-  let orderListValue: Convert[][] = [];
+  let orderListValue: List[] = [];
   for (const line in mdTree) {
     if (mdTree[line].name === "heading") {
       if (mdTree[line].values.length !== 0) {
@@ -43,9 +43,9 @@ const parse = (text: string) => {
       }
       prev = mdTree[line];
     } else if (mdTree[line].name === "orderedlist") {
-      orderListValue.push(mdTree[line].values);
+      orderListValue.push({ level: mdTree[line].level, values: mdTree[line].values });
       if (mdTree[line] === mdTree[mdTree.length - 1]) {
-        htmlValue += convert.orderedlist(orderListValue);
+        htmlValue += convert.olist(orderListValue);
       }
       prev = mdTree[line];
     } else if (mdTree[line].name === "code") {
@@ -79,7 +79,7 @@ const parse = (text: string) => {
         prev = mdTree[line];
         continue;
       } else if (prev && prev.name === "orderedlist") {
-        htmlValue += convert.orderedlist(orderListValue);
+        htmlValue += convert.olist(orderListValue);
         orderListValue = [];
         prev = mdTree[line];
         continue;
