@@ -320,7 +320,6 @@ export const orderedlist = (values: Convert[][]) => {
 
 export const olist = (values: List[]) => {
   let prev: List | null = null;
-  let olist = `<ol class="ol">\n`;
   const type = (level: number) => {
     if (level === 1) {
       return "1";
@@ -331,7 +330,8 @@ export const olist = (values: List[]) => {
     } else {
       return "1";
     }
-  };  
+  };
+  let olist = `<ol class="ol" type="1">\n`;
   for (const key in values) {
     if (prev && values[key].level > prev.level) {
       olist += `<ol class="ol" type="${type(values[key].level)}">\n`;

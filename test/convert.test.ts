@@ -223,7 +223,7 @@ describe("checklist", () => {
 
 it("orderedlist", () => {
   const text = `1. list1\n2. list2\n  3. list3`;
-  const convertedResult = `<ol class="ol"><li class="li">list1</li><li class="li">list2</li><li class="li">list3</li></ol>`;
+  const convertedResult = `<ol class="ol" type="1"><li class="li">list1</li><li class="li">list2</li><ol class="ol" type="i"><li class="li">list3</li></ol>`;
   const result = richmd(text).replace(/\n/g, "");
   expect(result).toEqual(convertedResult);
 });
