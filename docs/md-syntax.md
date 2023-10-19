@@ -118,6 +118,12 @@ $$
 $$
 ```
 
+or
+
+```txt
+$$ \frac{a}{b} $$
+```
+
 #### Preview
 <img src="./images/preview1.png" width="600">
 
