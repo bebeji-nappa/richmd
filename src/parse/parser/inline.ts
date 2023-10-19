@@ -217,8 +217,10 @@ export default (text: string[] | string) => {
         }
         continue;
       case "\\":
-        escapeSequence = true;
-        continue;
+        if (mode !== MODE_INLINE_CODE && mode !== MODE_INLINE_KATEX) {
+          escapeSequence = true;
+          continue;
+        }
       default:
         stack += char;
         break;

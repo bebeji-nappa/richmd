@@ -113,9 +113,15 @@ Please TeX Syntax details read a [KaTeX Functions Documentation](https://katex.o
 
 #### Syntax
 ```txt
-$$$
+$$
 \frac{a}{b}
-$$$
+$$
+```
+
+or
+
+```txt
+$$ \frac{a}{b} $$
 ```
 
 #### Preview
