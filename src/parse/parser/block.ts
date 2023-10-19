@@ -10,7 +10,7 @@ const CODE_REGEX = /^[`~]{3}(.*)|[`~]{3}(.*)\b[\l]+\b\:\b[\u\l]+\b$/;
 const BLOCKQUOTE_REGEX = /^(>{1,})\s?(.+)$/;
 const LINEBREAK_REGEX = /(.+?)[\u0020]{2}$/;
 const TABLE_REGEX = /(?:\s*)?\|(.+)\|(?:\s*)$/;
-const KATEX_REGEX = /^[\$]{3}(.*)|[\$]{3}(.*)$/;
+const KATEX_REGEX = /^[\$]{2}(.*)|[\$]{2}(.*)$/;
 const COLORBLOCK_REGEX = /^[\=]{3}(.*)|[\=]{3}(.*)\b[\l]+\b$/;
 const IMPORT_REGEX = /^\:style\:[\w_\.\/]*$/;
 const START_DETAILS_REGEX = /^\:\>(\b[\w_\.\/]+\b|[\u3040-\u309F\u30A0-\u30FF\u3400-\u9FFF])+$/;
