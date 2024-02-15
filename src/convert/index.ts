@@ -1,39 +1,9 @@
 const Katex = require("katex");
 const hljs = require("highlight.js");
 import "../type.d.ts";
+import { changeHtml } from "./changeHtml";
 
-export const heading = (level: number, values: Convert[]) => {
-  let text = `<h${level} class="h${level}">\n`;
-  for (const key in values) {
-    if (values[key].name === "em") {
-      text += `<strong>${values[key].value}</strong>`;
-    } else if (values[key].name === "strikethrough") {
-      text += `<del>${values[key].value}</del>`;
-    } else if (values[key].name === "italic") {
-      text += `<em>${values[key].value}</em>`;
-    } else if (values[key].name === "emitalic") {
-      text += `<em><strong>${values[key].value}</strong></em>`;
-    } else if (values[key].name === "link") {
-      const path = changeHtml(values[key].href);
-      text += `<a href="${path}" class="a">${values[key].title}</a>`;
-    } else if (values[key].name === "image") {
-      text += `<img src="${values[key].src}" alt="${values[key].alt}" class="img" />`;
-    } else if (values[key].name === "video") {
-      text += `<video controls preload="none" class="video">\n<source src="${values[key].src}" />\nSorry, your browser doesn't support embedded videos.\n</video>`;
-    } else if (values[key].name === "code") {
-      text += `<code class="inline-code">${values[key].value}</code>`;
-    } else if (values[key].name === "katex") {
-      const html = Katex.renderToString(String.raw`\displaystyle ${values[key].value}`, {
-        throwOnError: false,
-      });
-      text += html;
-    } else {
-      text += values[key].value;
-    }
-  }
-  text += `</h${level}>\n`;
-  return text;
-};
+import "./heading";
 
 export const paragraph = (values: Convert[]) => {
   let text = `<p class="p">\n`;
@@ -653,20 +623,3 @@ export const endTag = (data: Convert) => {
     return `</div>\n`;
   }
 };
-
-//リンク先の拡張子が .richmd の場合は .html に変換する
-const changeHtml = (path: string) => {
-  const url = path.split(`\/`);
-  let dirpath = url.slice(0, -1).join(`\/`);
-  if (!dirpath) {
-    dirpath = `\.`;
-  }
-  const file = url[url.length - 1].split(`\.`);
-  if (file[1] === "richmd") {
-    file[1] = "html"
-    const newfile = file.join(`\.`);
-    return [dirpath, newfile].join(`\/`);
-  } else {
-    return path;
-  }
-}
