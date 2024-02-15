@@ -3,7 +3,9 @@ const hljs = require("highlight.js");
 import "../type.d.ts";
 import { changeHtml } from "./changeHtml";
 
-import "./heading";
+import { heading } from "./heading";
+
+export { heading };
 
 export const paragraph = (values: Convert[]) => {
   let text = `<p class="p">\n`;
