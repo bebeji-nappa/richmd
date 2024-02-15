@@ -1,6 +1,6 @@
 import nodes from "../nodes/block";
 import helper from "./helper";
-import "../../type"
+import "../../type.d.ts"
 
 const HEADING_REGEX = /^(#{1,})\s(.+)$/;
 const ULIST_REGEX = /^(\s*)?(?:\-|\*)\s(.+)$/;
