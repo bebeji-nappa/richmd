@@ -1,9 +1,9 @@
 {
   "name": "richmd",
-  "version": "2.2.11",
+  "version": "2.2.12",
   "description": "Richmd is a tool for making Markdown richer.",
-  "main": "./src/index.ts",
-  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsc",
     "test": "jest"
