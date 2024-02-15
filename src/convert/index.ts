@@ -1,6 +1,6 @@
 const Katex = require("katex");
 const hljs = require("highlight.js");
-import "../type"
+import "../type.d.ts";
 
 export const heading = (level: number, values: Convert[]) => {
   let text = `<h${level} class="h${level}">\n`;
