@@ -55,63 +55,63 @@ describe("heading convert", () => {
 describe("paragraph convert", () => {
   it("p", () => {
     const text = `text test`;
-    const convertedResult = `<p class="p">text test</p>`;
+    const convertedResult = `<span class="span">text test</span>`;
     const result = richmd(text).replace(/\n/g, "");
     expect(result).toEqual(convertedResult);
   });
 
   it("strong", () => {
     const text = `**text**`;
-    const convertedResult = `<p class="p"><strong>text</strong></p>`;
+    const convertedResult = `<span class="span"><strong>text</strong></span>`;
     const result = richmd(text).replace(/\n/g, "");
     expect(result).toEqual(convertedResult);
   });
 
   it("strong (underline syntax)", () => {
     const text = `__text__`;
-    const convertedResult = `<p class="p"><strong>text</strong></p>`;
+    const convertedResult = `<span class="span"><strong>text</strong></span>`;
     const result = richmd(text).replace(/\n/g, "");
     expect(result).toEqual(convertedResult);
   });
 
   it("del", () => {
     const text = `~~text~~`;
-    const convertedResult = `<p class="p"><del>text</del></p>`;
+    const convertedResult = `<span class="span"><del>text</del></span>`;
     const result = richmd(text).replace(/\n/g, "");
     expect(result).toEqual(convertedResult);
   });
 
   it("em", () => {
     const text = `*text*`;
-    const convertedResult = `<p class="p"><em>text</em></p>`;
+    const convertedResult = `<span class="span"><em>text</em></span>`;
     const result = richmd(text).replace(/\n/g, "");
     expect(result).toEqual(convertedResult);
   });
 
   it("em (underline syntax)", () => {
     const text = `_text_`;
-    const convertedResult = `<p class="p"><em>text</em></p>`;
+    const convertedResult = `<span class="span"><em>text</em></span>`;
     const result = richmd(text).replace(/\n/g, "");
     expect(result).toEqual(convertedResult);
   });
 
   it("link", () => {
     const text = `[text](http://localhost)`;
-    const convertedResult = `<p class="p"><a href="http://localhost" class="a">text</a></p>`;
+    const convertedResult = `<span class="span"><a href="http://localhost" class="a">text</a></span>`;
     const result = richmd(text).replace(/\n/g, "");
     expect(result).toEqual(convertedResult);
   });
 
   it("image", () => {
     const text = `![text](image.jpg)`;
-    const convertedResult = `<p class="p"><img src="image.jpg" alt="text" class="img" /></p>`;
+    const convertedResult = `<span class="span"><img src="image.jpg" alt="text" class="img" /></span>`;
     const result = richmd(text).replace(/\n/g, "");
     expect(result).toEqual(convertedResult);
   });
 
   it("inline code", () => {
     const text = `\`code\``;
-    const convertedResult = `<p class="p"><code class="inline-code">code</code></p>`;
+    const convertedResult = `<span class="span"><code class="inline-code">code</code></span>`;
     const result = richmd(text).replace(/\n/g, "");
     expect(result).toEqual(convertedResult);
   });
@@ -120,35 +120,35 @@ describe("paragraph convert", () => {
 describe("blockquote", () => {
   it("case 1", () => {
     const text = `> text`;
-    const convertedResult = `<blockquote class="blockquote"><p class="p">text</p></blockquote>`;
+    const convertedResult = `<blockquote class="blockquote"><span class="span">text</span></blockquote>`;
     const result = richmd(text).replace(/\n/g, "");
     expect(result).toEqual(convertedResult);
   });
 
   it("case 2", () => {
     const text = `> text\ntext`;
-    const convertedResult = `<blockquote class="blockquote"><p class="p">text</p><p class="p">text</p></blockquote>`;
+    const convertedResult = `<blockquote class="blockquote"><span class="span">text</span><span class="span">text</span></blockquote>`;
     const result = richmd(text).replace(/\n/g, "");
     expect(result).toEqual(convertedResult);
   });
 
   it("case 3", () => {
     const text = `> text\ntext\n\ntext`;
-    const convertedResult = `<blockquote class="blockquote"><p class="p">text</p><p class="p">text<br></p></blockquote><p class="p">text</p>`;
+    const convertedResult = `<blockquote class="blockquote"><span class="span">text</span><span class="span">text<br></span></blockquote><span class="span">text</span>`;
     const result = richmd(text).replace(/\n/g, "");
     expect(result).toEqual(convertedResult);
   });
 
   it("case 4", () => {
     const text = `> text\n> \ntext\n\ntext`;
-    const convertedResult = `<blockquote class="blockquote"><p class="p">text</p><p class="p"></p><p class="p">text<br></p></blockquote><p class="p">text</p>`;
+    const convertedResult = `<blockquote class="blockquote"><span class="span">text</span><span class="span"></span><span class="span">text<br></span></blockquote><span class="span">text</span>`;
     const result = richmd(text).replace(/\n/g, "");
     expect(result).toEqual(convertedResult);
   });
 
   it("case 5", () => {
     const text = `> text\n\ntext`;
-    const convertedResult = `<blockquote class="blockquote"><p class="p">text</p></blockquote><p class="p">text</p>`;
+    const convertedResult = `<blockquote class="blockquote"><span class="span">text</span></blockquote><span class="span">text</span>`;
     const result = richmd(text).replace(/\n/g, "");
     console.log(result)
     expect(result).toEqual(convertedResult);
@@ -156,7 +156,7 @@ describe("blockquote", () => {
 
   it("case 6", () => {
     const text = `> text\ntext\ntext\n\ntext`;
-    const convertedResult = `<blockquote class="blockquote"><p class="p">text</p><p class="p">text<br>text<br></p></blockquote><p class="p">text</p>`;
+    const convertedResult = `<blockquote class="blockquote"><span class="span">text</span><span class="span">text<br>text<br></span></blockquote><span class="span">text</span>`;
     const result = richmd(text).replace(/\n/g, "");
     expect(result).toEqual(convertedResult);
   });
@@ -305,14 +305,14 @@ describe("horizontal", () => {
 describe("br", () => {
   it("once break line", () => {
     const text = `# h1\n\ntest`;
-    const convertedResult = `<h1 class="h1">h1</h1><p class="p">test</p>`;
+    const convertedResult = `<h1 class="h1">h1</h1><span class="span">test</span>`;
     const result = richmd(text).replace(/\n/g, "");
     expect(result).toEqual(convertedResult);
   });
 
   it("continuous break line", () => {
     const text = `test\n\ntest`;
-    const convertedResult = `<p class="p">test<br></p><br class="br" /><p class="p">test</p>`;
+    const convertedResult = `<span class="span">test<br></span><br class="br" /><span class="span">test</span>`;
     const result = richmd(text).replace(/\n/g, "");
     expect(result).toEqual(convertedResult);
   });
@@ -344,7 +344,7 @@ describe("table", () => {
 
 test("video", () => {
   const text = `@[video](./hoge.mp4)`;
-  const convertedResult = `<p class="p"><video controls preload="none" class="video"><source src="./hoge.mp4" />Sorry, your browser doesn't support embedded videos.</video></p>`;
+  const convertedResult = `<span class="span"><video controls preload="none" class="video"><source src="./hoge.mp4" />Sorry, your browser doesn't support embedded videos.</video></span>`;
   const result = richmd(text).replace(/\n/g, "");
   expect(result).toEqual(convertedResult);
 })
@@ -402,12 +402,12 @@ describe("colorBlock", () => {
 
 it("html", () => {
   const result = richmd("<span>aaa</span>");
-  const convertResult = `<p class="p">\n<span>aaa</span></p>\n`;
+  const convertResult = `<span class="span"><span>aaa</span></span>\n`;
   expect(result).toEqual(convertResult);
 })
 
 it("html empty", () => {
   const result = richmd("<");
-  const convertResult = `<p class="p">\n<</p>\n`;
+  const convertResult = `<span class="span">\<</span>\n`;
   expect(result).toEqual(convertResult);
 })

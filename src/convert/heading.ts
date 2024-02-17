@@ -2,7 +2,7 @@ import Katex from "katex";
 import { changeHtml } from "./changeHtml";
 
 export const heading = (level: number, values: Convert[]) => {
-  let text = `<h${level} class="h${level}">\n`;
+  let text = `<h${level} class="h${level}">`;
   for (const key in values) {
     switch (values[key].name) {
       case  "em":

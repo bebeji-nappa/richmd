@@ -2,7 +2,7 @@ import Katex from "katex";
 import { changeHtml } from "./changeHtml";
 
 export const paragraph = (values: Convert[]) => {
-  let text = `<p class="p">\n`;
+  let text = `<span class="span">`;
   for (const key in values) {
     switch (values[key].name) {
       case "em":
@@ -45,6 +45,6 @@ export const paragraph = (values: Convert[]) => {
         break;
     }
   }
-  text += `</p>\n`;
+  text += `</span>\n`;
   return text;
 };
