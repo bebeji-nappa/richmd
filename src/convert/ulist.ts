@@ -12,7 +12,7 @@ export const ulist = (values: List[]) => {
         ulist += `</ul>\n`;
       }
     }
-    ulist += `<li class="li">\n`;
+    ulist += `<li class="li">`;
     for (const i in values[key].values) {
       switch (values[key].values[i].name) {
         case "em":

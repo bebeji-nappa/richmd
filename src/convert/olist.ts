@@ -24,7 +24,7 @@ export const olist = (values: List[]) => {
         olist += `</ol>\n`;
       }
     }
-    olist += `<li class="li">\n`;
+    olist += `<li class="li">`;
     for (const i in values[key].values) {
       switch (values[key].values[i].name) {
         case "em":

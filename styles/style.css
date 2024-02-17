@@ -104,12 +104,13 @@
   font-size: 18px; 
 }
 
-.p {
-  color: #262626;
-}
-
 .p, .blockquote, .ul, .ol, .dl, .table, pre {
   margin: 5px 0; 
+}
+
+.p {
+  color: #262626;
+  margin: 0;
 }
 
 .ol {
@@ -122,7 +123,8 @@
 }
 
 .li {
-  margin: 10px 0;
+  margin: 5px 0;
+  white-space: pre-line;
 }
 
 hr {
@@ -175,7 +177,8 @@ body > .h3:first-child, body > .h4:first-child, body > .h5:first-child, body > .
 }
 
 .ul, .ol {
-  padding-left: 30px; }
+  padding-left: 20px;
+}
 
 .ul :first-child, .ol :first-child {
   margin-top: 0; 

@@ -8,6 +8,7 @@ const parse = (text: string) => {
   let bqValue: Convert[][] = [];
   let listValue: List[] = [];
   let orderListValue: List[] = [];
+  let checkListValue: List[] = [];
   for (const line in mdTree) {
     if (mdTree[line].name === "heading") {
       if (mdTree[line].values.length !== 0) {
@@ -37,9 +38,9 @@ const parse = (text: string) => {
       }
       prev = mdTree[line];
     } else if (mdTree[line].name === "checklist") {
-      listValue.push({ level: mdTree[line].level, values: mdTree[line].values, checked: mdTree[line].checked });
+      checkListValue.push({ level: mdTree[line].level, values: mdTree[line].values, checked: mdTree[line].checked });
       if (mdTree[line] === mdTree[mdTree.length - 1]) {
-        htmlValue += convert.checklist(listValue);
+        htmlValue += convert.checklist(checkListValue);
       }
       prev = mdTree[line];
     } else if (mdTree[line].name === "orderedlist") {
@@ -84,8 +85,8 @@ const parse = (text: string) => {
         prev = mdTree[line];
         continue;
       } else if (prev && prev.name === "checklist") {
-        htmlValue += convert.checklist(listValue);
-        listValue = [];
+        htmlValue += convert.checklist(checkListValue);
+        checkListValue = [];
         prev = mdTree[line];
         continue;
       } else if (prev && prev.name === "br") {

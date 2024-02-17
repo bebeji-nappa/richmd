@@ -13,7 +13,7 @@ export const checklist = (values: List[]) => {
         clist += `</ul>\n`;
       }
     }
-    clist += `<li class="li checklist">\n`;
+    clist += `<li class="li checklist">`;
     if (values[key].checked) {
       clist += `<input type="checkbox" checked="checked">`;
     } else {
