@@ -1,6 +1,4 @@
-const Katex = require("katex");
 import "../type";
-import { changeHtml } from "./changeHtml";
 
 import { heading } from "./heading";
 import { paragraph } from "./paragraph";
