@@ -8,6 +8,7 @@
   margin: 10px auto;
   display: flex;
   flex-direction: column;
+  color: #262626;
 }
 
 .body > *:first-child {
@@ -45,7 +46,6 @@
 }
 
 .h1, .h2, .h3, .h4, .h5, .h6 {
-  color: #262626;
   margin: 20px 0 10px;
   padding: 0;
   font-weight: bold;
@@ -104,12 +104,11 @@
   font-size: 18px; 
 }
 
-.p, .blockquote, .ul, .ol, .dl, .table, pre {
+.span, .blockquote, .ul, .ol, .dl, .table, pre {
   margin: 5px 0; 
 }
 
-.p {
-  color: #262626;
+.span {
   margin: 0;
 }
 
@@ -119,7 +118,6 @@
 
 .ul {
   margin: 5px 0;
-  color: #262626;
 }
 
 .li {
@@ -168,11 +166,11 @@ body > .h3:first-child, body > .h4:first-child, body > .h5:first-child, body > .
   padding-top: 0; 
 }
 
-.h1 .p, .h2 .p, .h3 .p, .h4 .p, .h5 .p, .h6 .p {
+.h1 .span, .h2 .span, .h3 .span, .h4 .span, .h5 .span, .h6 .span {
   margin-top: 0; 
 }
 
-.li .p.first {
+.li .span.first {
   display: inline-block; 
 }
 
@@ -216,7 +214,7 @@ body > .h3:first-child, body > .h4:first-child, body > .h5:first-child, body > .
   color: #777777; 
 }
 
-.blockquote .p {
+.blockquote .span {
   color: #777777; 
 }
 

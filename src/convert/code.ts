@@ -1,7 +1,7 @@
-import hljs from "highlight.js";
+import hljs, { Language } from "highlight.js";
 
 export const code = (data: OptionalConvert) => {
-  let language = null;
+  let language: Language | undefined = undefined;
   let codeblock = `<pre class="code-block">\n`;
   if (data.file !== undefined) {
     codeblock += `<span class="filename"><span>${data.file}</span></span>\n`;
@@ -17,12 +17,9 @@ export const code = (data: OptionalConvert) => {
   
   const code_data = data.values[0].value.split(/\r?\n{2,}/g)
   for(const key in code_data) {
-    
-    if (language !== undefined) {
-      codeblock += language && data.syntax !== "txt" ? `${hljs.highlight(code_data[key], {language: language.name ?? "text"}).value}\n` : `${code_data[key]}\n`
-      if (Number(key) !== code_data.length - 1) {
-        codeblock += '<br />\n'
-      }
+    codeblock += language && data.syntax !== "txt" ? `${hljs.highlight(code_data[key], {language: language?.name ?? "text"}).value}\n` : `${code_data[key]}\n`
+    if (Number(key) !== code_data.length - 1) {
+      codeblock += '<br />\n'
     }
   }
   codeblock += `</code></div>\n`;

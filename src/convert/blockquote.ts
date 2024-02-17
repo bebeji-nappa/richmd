@@ -4,7 +4,7 @@ import { changeHtml } from "./changeHtml";
 export const blockquote = (values: Convert[][]) => {
   let bq = `<blockquote class="blockquote">\n`;
   for (const key in values) {
-    let text = `<p class="p">\n`;
+    let text = `<span class="span">`;
     const data: Convert[] = values[key];
     for (const val in data) {
       switch (data[val].name) {
@@ -48,7 +48,7 @@ export const blockquote = (values: Convert[][]) => {
           break;
       }
     }
-    text += `</p>\n`;
+    text += `</span>\n`;
     bq += text;
   }
   bq += `</blockquote>\n`;

@@ -45,6 +45,7 @@ Please read a [Richmd Markdown Syntax Documentation](./docs/md-syntax.md).
 - Color Inline Block
 - Dropdown details
 - Video(HTML5 Video Tag)
+- Custom HTML Tag
 
 ## License
 MIT

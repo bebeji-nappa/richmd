@@ -180,6 +180,8 @@ text...
 ```
 
 ### Custom HTML Tag
+It creaties custom HTML Tag.
+(defalut tag `span`)
 
 #### Syntax
 ```txt
@@ -201,18 +203,23 @@ article
 ::div
 div
 ::
+
+# only className
+::.className
+only Class
+::
 ```
 ##### Preview
 ```html
 <menu>
-<p class="p">menu</p>
+<span class="span">menu</span>
 </menu>
 
 <article class="className">
-<p class="p">article</p>
+<span class="span">article</span>
 </article>
 
 <div>
-<p class="p">div</p>
+<span class="span">div</span>
 </div>
 ```

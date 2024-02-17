@@ -16,7 +16,7 @@ const COLORBLOCK_REGEX = /^[\=]{3}(.*)|[\=]{3}(.*)\b[\l]+\b$/;
 const IMPORT_REGEX = /^\:style\:[\w_\.\/]*$/;
 const START_DETAILS_REGEX = /^\:\>(\b[\w_\.\/]+\b|[\u3040-\u309F\u30A0-\u30FF\u3400-\u9FFF])+$/;
 const END_DETAILS_REGEX = /^\:\>$/;
-const START_TAG_REGEX = /^\:\:\b[a-z]+\b|\:\:\b[a-z]+\b\.\b[a-z]+\b$/;
+const START_TAG_REGEX = /^\:\:\b[a-z]+\b|\:\:\b[a-z]+\b\.\b[a-z]+\b|\:\:\.\b[a-z]+\b$/;
 const END_TAG_REGEX = /^\:\:$/;
 
 const MODE_DEFAULT = 0;
@@ -83,10 +83,11 @@ export const parser = (str: string) => {
         const lineData = line.replace(/\:\:/, "").trim();
         if (lineData) {
           tagData = lineData.split(`\.`);
+          console.log(tagData)
         } else {
-          tagData = ["div", ""];
+          tagData = ["span", ""];
         }
-        ast.push(new nodes.StartTag(tagData[0], tagData[1]));
+        ast.push(new nodes.StartTag(tagData[0] ?? "span", tagData[1]));
         stack = "";
       } else if (mode === MODE_DEFAULT && END_TAG_REGEX.test(line)) {
         parseParagraph(stack);
