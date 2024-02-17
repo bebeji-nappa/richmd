@@ -1,4 +1,4 @@
-import "../type.d.ts"
+import "../type"
 
 export default class Tree {
   ast: object[] & Convert[]

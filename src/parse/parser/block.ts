@@ -1,6 +1,6 @@
 import nodes from "../nodes/block";
 import helper from "./helper";
-import "../../type.d.ts"
+import "../../type"
 
 const HEADING_REGEX = /^(#{1,})\s(.+)$/;
 const ULIST_REGEX = /^(\s*)?(?:\-|\*)\s(.+)$/;
@@ -29,12 +29,13 @@ let tagData: Array<string>;
 type Prev = {
   level: number
   name: string
+  values: Convert[]
 }
 
 export const parser = (str: string) => {
   const ast: object[] & Convert[] = [];
 
-  if (!/\n$/.test(str)) {
+  if (str && !/\n$/.test(str)) {
     str += "\n";
   }
 
@@ -181,7 +182,7 @@ export const parser = (str: string) => {
             continue;
           }
         }
-        const list = check ? new nodes.CheckList(check[2], check[1] === "x", level) : new nodes.List(match[2], level);
+        const list = check ? new nodes.CheckList(check[2].trim(), check[1] === "x", level) : new nodes.List(match[2].trim(), level);
         ast.push(list);
         stack = "";
       } else if (mode === MODE_DEFAULT && null !== (match = line.match(OLIST_REGEX))) {
@@ -189,7 +190,7 @@ export const parser = (str: string) => {
         const prev: Prev = ast[ast.length - 1];
         let level = 1;
         const order: number = ((match[2] as unknown) as number)
-        if (prev) {
+        if (prev && prev.name === "orderedlist") {
           const indent = (match[1] || "").length;
           if (indent % 2 === 0) {
             if (prev.level * 2 <= indent) {
@@ -205,7 +206,7 @@ export const parser = (str: string) => {
             continue;
           }
         }
-        const list = new nodes.OrderedList(match[3], order | 0, level);
+        const list = new nodes.OrderedList(match[3].trim(), order | 0, level);
         ast.push(list);
         stack = "";
       } else if (mode === MODE_DEFAULT && null !== (match = line.match(TABLE_REGEX))) {
@@ -219,9 +220,16 @@ export const parser = (str: string) => {
         }
         if (mode === MODE_CODE) {
           stack += line !== "" ? `${line}\n` : `\n`;
-        } 
+        }
       } else {
-        stack += line !== "" ? `${line}\n` : "";
+        const prev: Prev = ast[ast.length - 1];
+        if (prev && (prev.name === "list" || prev.name === "checklist" || prev.name === "orderedlist")) {
+          const values = ast[ast.length - 1].values;
+          ast[ast.length - 1].values[values.length - 1].value += `\n${line}`;
+          stack = "";
+        } else {
+          stack += line !== "" ? `${line}\n` : "";
+        }
       }
       line = "";
     } else {

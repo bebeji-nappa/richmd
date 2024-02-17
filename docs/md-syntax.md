@@ -179,32 +179,15 @@ text...
 @[movie](./movie.mp4)
 ```
 
-### Import CSS File(Only RichMD file is supported)
-#### Syntax
-***Be sure to enter at the beginning of the line.***
-```txt
-:style:./styles/style.css
-```
-
 ### Custom HTML Tag
-#### Support HTML Tag
-- div 
-- menu
-- main
-- section
-- article
-- header
-- aside
-- nav
-- footer
 
 #### Syntax
-
 ```txt
 ::<Tag Name>[.ClassName]
 
 ::
 ```
+
 #### Example
 ```txt
 ::menu

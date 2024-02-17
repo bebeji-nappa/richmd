@@ -1,5 +1,5 @@
 {
-  "include": ["src"],
+  "include": ["src", "lib"],
   "compilerOptions": {
     "module": "commonjs",
     "target": "es2015",
