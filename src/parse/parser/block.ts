@@ -12,7 +12,6 @@ const TABLE_REGEX = /(?:\s*)?\|(.+)\|(?:\s*)$/;
 const KATEX_REGEX = /^[\$]{2}(.*)$/;
 const INLINE_KATEX_REGEX = /^[\$]{2}\s(.+)\s[\$]{2}$/;
 const COLORBLOCK_REGEX = /^[\=]{3}(.*)|[\=]{3}(.*)\b[\l]+\b$/;
-const IMPORT_REGEX = /^\:style\:[\w_\.\/]*$/;
 const START_DETAILS_REGEX = /^\:\>(\b[\w_\.\/]+\b|[\u3040-\u309F\u30A0-\u30FF\u3400-\u9FFF])+$/;
 const END_DETAILS_REGEX = /^\:\>$/;
 const START_TAG_REGEX = /^\:\:\b[a-z]+\b|\:\:\b[a-z]+\b\.\b[a-z]+\b|\:\:\.\b[a-z]+\b$/;
@@ -64,11 +63,7 @@ export const parser = (str: string) => {
     }
 
     if (char === "\n") {
-      if (IMPORT_REGEX.test(line)) {
-        const importPath = line.replace(/\:style\:/, "").trim();
-        ast.push(new nodes.Import(importPath));
-        stack = "";
-      } else if (mode === MODE_DEFAULT && START_DETAILS_REGEX.test(line)) {
+      if (mode === MODE_DEFAULT && START_DETAILS_REGEX.test(line)) {
         parseParagraph(stack);
         const summaryData = line.replace(/\:\>/, "").trim();
         ast.push(new nodes.StartDetails(summaryData));
@@ -91,11 +86,6 @@ export const parser = (str: string) => {
         parseParagraph(stack);
         ast.push(new nodes.EndTag(tagData ? tagData[0] : "div"));
         stack = "";
-      } else if (mode === MODE_DEFAULT && line.match(BLOCKQUOTE_REGEX) !== null) {
-        match = line.match(BLOCKQUOTE_REGEX);
-        if (match === null) continue;
-        parseParagraph(stack + match[1]);
-        stack = "";
       } else if (CODE_REGEX.test(line)) {
         if (mode === MODE_CODE) {
           ast.push(new nodes.Code(stack.trim(), codeLang, filename));
@@ -108,7 +98,7 @@ export const parser = (str: string) => {
           const codeData = line
             .replace(/\`\`\`/, "")
             .trim()
-            .split(":");
+            .split(`\:`);
           codeLang = codeData[0];
           filename = codeData[1];
           mode = MODE_CODE;
@@ -150,9 +140,7 @@ export const parser = (str: string) => {
         } else {
           stack += line !== "" ? `${line}\n` : "\n";
         }
-      }
-
-      if (mode === MODE_DEFAULT && line.match(BLOCKQUOTE_REGEX) !== null) {
+      } else if (mode === MODE_DEFAULT && line.match(BLOCKQUOTE_REGEX) !== null) {
         match = line.match(BLOCKQUOTE_REGEX);
         if (match === null) continue;
         parseParagraph(stack);
