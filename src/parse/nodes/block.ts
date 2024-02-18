@@ -1,10 +1,10 @@
 import Node from "./Node";
 import inlineParser from "../parser/inline";
 import inline from "./inline";
-import SyntaxError from "../parser/syntax-error";
 
 class Import extends Node {
-  value: string
+  value: string;
+
   constructor(text: string) {
     super("import", "block");
     this.value = text;
@@ -12,7 +12,8 @@ class Import extends Node {
 }
 
 class Paragraph extends Node {
-  values: object
+  values: object;
+
   constructor(text: string) {
     super("paragraph", "block");
     this.values = inlineParser(text);
@@ -32,9 +33,12 @@ class Br extends Node {
 }
 
 class Code extends Node {
-  syntax: string
-  file: string
-  values: object
+  syntax: string;
+
+  file: string;
+
+  values: object;
+
   constructor(text: string, syntax: string, file: string) {
     super("code", "block");
     this.syntax = syntax;
@@ -44,7 +48,8 @@ class Code extends Node {
 }
 
 class Katex extends Node {
-  values: object
+  values: object;
+
   constructor(text: string) {
     super("katex", "block");
     this.values = [new inline.Text(text)];
@@ -52,8 +57,10 @@ class Katex extends Node {
 }
 
 class ColorBlock extends Node {
-  style: string
-  values: object
+  style: string;
+
+  values: object;
+
   constructor(text: string, style: string) {
     super("color", "block");
     this.style = style;
@@ -62,9 +69,11 @@ class ColorBlock extends Node {
 }
 
 class Blockquote extends Node {
-  level: number
-  values: object
-  constructor(text: string, level:number) {
+  level: number;
+
+  values: object;
+
+  constructor(text: string, level: number) {
     super("blockquote", "block");
     this.level = level;
     this.values = inlineParser(text);
@@ -72,11 +81,13 @@ class Blockquote extends Node {
 }
 
 class Heading extends Node {
-  level: number
-  values: object
+  level: number;
+
+  values: object;
+
   constructor(text: string, level: number) {
     if (level === 0 || level > 6) {
-      throw new SyntaxError("Invalid heading: heading support only between H1 and H6");
+      throw new Error("Invalid heading: heading support only between H1 and H6");
     }
     super("heading", "block");
     this.level = level;
@@ -85,8 +96,10 @@ class Heading extends Node {
 }
 
 class List extends Node {
-  level: number
-  values: object
+  level: number;
+
+  values: object;
+
   constructor(text: string, level: number) {
     super("list", "block");
     this.level = level;
@@ -95,9 +108,12 @@ class List extends Node {
 }
 
 class OrderedList extends Node {
-  level: number
-  order: number
-  values: object
+  level: number;
+
+  order: number;
+
+  values: object;
+
   constructor(text: string, order: number, level: number) {
     super("orderedlist", "block");
     this.level = level;
@@ -107,9 +123,12 @@ class OrderedList extends Node {
 }
 
 class CheckList extends Node {
-  level: number
-  checked: boolean
-  values: object
+  level: number;
+
+  checked: boolean;
+
+  values: object;
+
   constructor(text: string, checked: boolean, level: number) {
     super("checklist", "block");
     this.level = level;
@@ -119,38 +138,42 @@ class CheckList extends Node {
 }
 
 class Table extends Node {
-  headings: string[]
-  aligns: string[]
-  rows: object[]
+  headings: string[];
+
+  aligns: string[];
+
+  rows: object[];
+
   constructor(_rows: string[]) {
     super("table", "block");
-    this.headings = []
-    this.aligns = []
-    this.rows = []
-    const [heading, separator, ...rows]  = _rows.map((line) => line.replace(/^\||\|$/g, "").split("|"));
+    this.headings = [];
+    this.aligns = [];
+    this.rows = [];
+    const [heading, separator, ...rows] = _rows.map((line) =>
+      line.replace(/^\||\|$/g, "").split("|"),
+    );
     if (heading !== undefined) {
       this.headings = heading.map((cell: string) => cell.trim());
     }
     if (separator !== undefined) {
       this.aligns = separator.map((cell: string) => {
-        cell = cell.trim();
+        const cellStr = cell.trim();
         let align = "left";
-        if (cell[cell.length - 1] === ":") {
-          align = cell[0] === ":" ? "center" : "right";
+        if (cellStr[cellStr.length - 1] === ":") {
+          align = cellStr[0] === ":" ? "center" : "right";
         }
         return align;
       });
     }
     if (rows !== undefined) {
-      this.rows = rows.map((row) => {
-        return row.map((cell) => inlineParser(cell.trim()));
-      });
+      this.rows = rows.map((row) => row.map((cell) => inlineParser(cell.trim())));
     }
   }
 }
 
 class StartDetails extends Node {
-  summary: string
+  summary: string;
+
   constructor(text: string) {
     super("startDetails", "block");
     this.summary = text;
@@ -164,8 +187,10 @@ class EndDetails extends Node {
 }
 
 class StartTag extends Node {
-  style: string
-  tag: string
+  style: string;
+
+  tag: string;
+
   constructor(tag: string, style: string) {
     super("startTag", "block");
     this.style = style;
@@ -174,7 +199,8 @@ class StartTag extends Node {
 }
 
 class EndTag extends Node {
-  tag: string
+  tag: string;
+
   constructor(tag: string) {
     super("endTag", "block");
     this.tag = tag;

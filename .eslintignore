@@ -1,0 +1,6 @@
+examples/
+images/
+node_modules/
+styles/
+dist/
+src/type.ts

@@ -5,7 +5,8 @@ const VIDEO_REGEX = /^@\[([^\]]*)?\]\(([^\)]+)\)$/;
 const LINK_REGEX = /^\[([^\]]*)?\]\(([^\)]+)\)$/;
 
 class Text extends Node {
-  value: string
+  value: string;
+
   constructor(text: string) {
     super("text", "inline");
     this.value = text;
@@ -13,7 +14,8 @@ class Text extends Node {
 }
 
 class Html extends Node {
-  value: string
+  value: string;
+
   constructor(text: string) {
     super("html", "inline");
     this.value = text;
@@ -21,7 +23,8 @@ class Html extends Node {
 }
 
 class HtmlComment extends Node {
-  value: string
+  value: string;
+
   constructor(text: string) {
     super("htmlcomment", "inline");
     this.value = text;
@@ -29,7 +32,8 @@ class HtmlComment extends Node {
 }
 
 class Em extends Node {
-  value: string
+  value: string;
+
   constructor(text: string) {
     super("em", "inline");
     this.value = text;
@@ -37,21 +41,24 @@ class Em extends Node {
 }
 
 class Italic extends Node {
-  value: string
+  value: string;
+
   constructor(text: string) {
     super("italic", "inline");
     this.value = text;
   }
 }
 class EmItalic extends Node {
-  value: string
+  value: string;
+
   constructor(text: string) {
     super("emitalic", "inline");
     this.value = text;
   }
 }
 class Strikethrough extends Node {
-  value: string
+  value: string;
+
   constructor(text: string) {
     super("strikethrough", "inline");
     this.value = text;
@@ -59,7 +66,8 @@ class Strikethrough extends Node {
 }
 
 class InlineCode extends Node {
-  value: string
+  value: string;
+
   constructor(text: string) {
     super("code", "inline");
     this.value = text;
@@ -67,8 +75,10 @@ class InlineCode extends Node {
 }
 
 class Image extends Node {
-  alt: string
-  src: string
+  alt: string;
+
+  src: string;
+
   constructor(text: string) {
     const match = text.match(IMAGE_REGEX);
     super("image", "inline");
@@ -83,7 +93,8 @@ class Image extends Node {
 }
 
 class Video extends Node {
-  src: string
+  src: string;
+
   constructor(text: string) {
     const match = text.match(VIDEO_REGEX);
     super("video", "inline");
@@ -96,8 +107,10 @@ class Video extends Node {
 }
 
 class Link extends Node {
-  title: string
-  href: string
+  title: string;
+
+  href: string;
+
   constructor(text: string) {
     const match = text.match(LINK_REGEX);
     super("link", "inline");
@@ -112,7 +125,8 @@ class Link extends Node {
 }
 
 class InlineKatex extends Node {
-  value: string
+  value: string;
+
   constructor(text: string) {
     super("katex", "inline");
     this.value = text;

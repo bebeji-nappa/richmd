@@ -1,3 +1,1 @@
-export const horizontal = () => {
-  return `<hr />\n`;
-};
+export const horizontal = () => "<hr />\n";

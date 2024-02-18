@@ -1,3 +1,1 @@
-export const br = () => {
-  return `<br class="br" />\n`;
-};
+export const br = () => '<br class="br" />\n';

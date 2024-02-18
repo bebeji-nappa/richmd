@@ -2,9 +2,9 @@ import { changeHtml } from "./changeHtml";
 
 export const colorBlock = (datas: Convert) => {
   let text = `<div class="message message-${datas.style}"><div class="message-icon-${datas.style}"></div>`;
-  text += `<pre class="message-box">`;
+  text += '<pre class="message-box">';
   const data = datas.values;
-  text += `<span>`;
+  text += "<span>";
   for (const key in data) {
     switch (data[key].name) {
       case "em":
@@ -19,10 +19,11 @@ export const colorBlock = (datas: Convert) => {
       case "emitalic":
         text += `<em><strong>${data[key].value}</strong></em>`;
         break;
-      case "link":
+      case "link": {
         const path = changeHtml(data[key].href);
         text += `<a href="${path}" class="a">${data[key].title}</a>`;
         break;
+      }
       case "image":
         text += `<img src="${data[key].src}" alt="${data[key].alt}" />`;
         break;
@@ -34,14 +35,14 @@ export const colorBlock = (datas: Convert) => {
         break;
       default:
         if (data[key].value === "\n") {
-          text += `<br>`;
+          text += "<br>";
         } else {
-          text += data[key].value.replace(/\n/g, `<br>`);
+          text += data[key].value.replace(/\n/g, "<br>");
         }
         break;
     }
   }
-  text += `</span>`;
-  text += `</pre></div>\n`;
+  text += "</span>";
+  text += "</pre></div>\n";
   return text;
 };

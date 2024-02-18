@@ -3,8 +3,8 @@ import { convert } from "./convert/index";
 import "./type";
 
 export const convertMdTree = (tree: Tree) => {
-  const mdTree: object[] & Convert[] = tree.ast
-  let htmlValue = ""
+  const mdTree: object[] & Convert[] = tree.ast;
+  let htmlValue = "";
   let prev;
   let bqValue: Convert[][] = [];
   let listValue: List[] = [];
@@ -44,7 +44,11 @@ export const convertMdTree = (tree: Tree) => {
         prev = mdTree[line];
         break;
       case "checklist":
-        checkListValue.push({ level: mdTree[line].level, values: mdTree[line].values, checked: mdTree[line].checked });
+        checkListValue.push({
+          level: mdTree[line].level,
+          values: mdTree[line].values,
+          checked: mdTree[line].checked,
+        });
         if (mdTree[line] === mdTree[mdTree.length - 1]) {
           htmlValue += convert.checklist(checkListValue);
         }
@@ -71,7 +75,7 @@ export const convertMdTree = (tree: Tree) => {
         break;
       case "color":
         htmlValue += convert.colorBlock(mdTree[line]);
-        break
+        break;
       case "startDetails":
         htmlValue += convert.startDetails(mdTree[line].summary);
         break;
@@ -115,6 +119,7 @@ export const convertMdTree = (tree: Tree) => {
           htmlValue += convert.br();
           prev = mdTree[line];
         }
+        break;
       default:
         break;
     }
@@ -122,10 +127,6 @@ export const convertMdTree = (tree: Tree) => {
   return htmlValue;
 };
 
-export const richmd = (text: string) => {
-  return convertMdTree(parseMdTree(text));
-};
+export const richmd = (text: string) => convertMdTree(parseMdTree(text));
 
-export const parseTree = (text: string) => {
-  return parseMdTree(text)
-}
+export const parseTree = (text: string) => parseMdTree(text);

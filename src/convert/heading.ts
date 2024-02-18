@@ -5,7 +5,7 @@ export const heading = (level: number, values: Convert[]) => {
   let text = `<h${level} class="h${level}">`;
   for (const key in values) {
     switch (values[key].name) {
-      case  "em":
+      case "em":
         text += `<strong>${values[key].value}</strong>`;
         break;
       case "strikethrough":
@@ -17,10 +17,11 @@ export const heading = (level: number, values: Convert[]) => {
       case "emitalic":
         text += `<em><strong>${values[key].value}</strong></em>`;
         break;
-      case "link":
+      case "link": {
         const path = changeHtml(values[key].href);
         text += `<a href="${path}" class="a">${values[key].title}</a>`;
         break;
+      }
       case "image":
         text += `<img src="${values[key].src}" alt="${values[key].alt}" class="img" />`;
         break;
@@ -30,12 +31,13 @@ export const heading = (level: number, values: Convert[]) => {
       case "code":
         text += `<code class="inline-code">${values[key].value}</code>`;
         break;
-      case "katex":
+      case "katex": {
         const html = Katex.renderToString(String.raw`\displaystyle ${values[key].value}`, {
           throwOnError: false,
         });
         text += html;
         break;
+      }
       default:
         text += values[key].value;
         break;

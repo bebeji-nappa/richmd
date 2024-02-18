@@ -2,9 +2,9 @@ import Katex from "katex";
 import { changeHtml } from "./changeHtml";
 
 export const blockquote = (values: Convert[][]) => {
-  let bq = `<blockquote class="blockquote">\n`;
+  let bq = '<blockquote class="blockquote">\n';
   for (const key in values) {
-    let text = `<span class="span">`;
+    let text = '<span class="span">';
     const data: Convert[] = values[key];
     for (const val in data) {
       switch (data[val].name) {
@@ -20,10 +20,11 @@ export const blockquote = (values: Convert[][]) => {
         case "emitalic":
           text += `<em><strong>${data[val].value}</strong></em>`;
           break;
-        case "link":
+        case "link": {
           const path = changeHtml(data[val].href);
           text += `<a href="${path}" class="a">${data[val].title}</a>`;
           break;
+        }
         case "image":
           text += `<img src="${data[val].src}" alt="${data[val].alt}" />`;
           break;
@@ -33,24 +34,26 @@ export const blockquote = (values: Convert[][]) => {
         case "code":
           text += `<code class="inline-code">${data[val].value}</code>`;
           break;
-        case "katex":
+        case "katex": {
           const html = Katex.renderToString(String.raw`\displaystyle ${data[val].value}`, {
             throwOnError: false,
           });
-        text += html;
-        break;
-        default:
+          text += html;
+          break;
+        }
+        default: {
           if (data[val].value === "\n") {
-            text += `<br>`;
+            text += "<br>";
           } else {
-            text += data[val].value.replace(/\n/g, `<br>`);
+            text += data[val].value.replace(/\n/g, "<br>");
           }
           break;
+        }
       }
     }
-    text += `</span>\n`;
+    text += "</span>\n";
     bq += text;
   }
-  bq += `</blockquote>\n`;
+  bq += "</blockquote>\n";
   return bq;
 };
