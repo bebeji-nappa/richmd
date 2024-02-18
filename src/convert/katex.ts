@@ -1,4 +1,4 @@
-import Katex from "katex";
+import * as Katex from "katex";
 
 export const katex = (data: OptionalConvert) => {
   const html = Katex.renderToString(String.raw`\displaystyle ${data.values[0].value}`, {
