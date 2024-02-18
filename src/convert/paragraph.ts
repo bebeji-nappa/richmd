@@ -2,7 +2,7 @@ import Katex from "katex";
 import { changeHtml } from "./changeHtml";
 
 export const paragraph = (values: Convert[]) => {
-  let text = `<span class="span">`;
+  let text = '<span class="span">';
   for (const key in values) {
     switch (values[key].name) {
       case "em":
@@ -17,10 +17,11 @@ export const paragraph = (values: Convert[]) => {
       case "emitalic":
         text += `<em><strong>${values[key].value}</strong></em>`;
         break;
-      case "link":
+      case "link": {
         const path = changeHtml(values[key].href);
         text += `<a href="${path}" class="a">${values[key].title}</a>`;
         break;
+      }
       case "image":
         text += `<img src="${values[key].src}" alt="${values[key].alt}" class="img" />`;
         break;
@@ -30,21 +31,22 @@ export const paragraph = (values: Convert[]) => {
       case "code":
         text += `<code class="inline-code">${values[key].value}</code>`;
         break;
-      case "katex":
+      case "katex": {
         const html = Katex.renderToString(String.raw`\displaystyle ${values[key].value}`, {
           throwOnError: false,
         });
         text += html;
         break;
+      }
       default:
         if (values[key].value === "\n") {
-          text += `<br>`;
+          text += "<br>";
         } else {
-          text += values[key].value.replace(/\n/g, `<br>`);
+          text += values[key].value.replace(/\n/g, "<br>");
         }
         break;
     }
   }
-  text += `</span>\n`;
+  text += "</span>\n";
   return text;
 };

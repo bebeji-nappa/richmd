@@ -3,61 +3,66 @@ import { changeHtml } from "./changeHtml";
 
 export const ulist = (values: List[]) => {
   let prev: List | null = null;
-  let ulist = `<ul class="ul">\n`;
+  let list = '<ul class="ul">\n';
   for (const key in values) {
     if (prev && values[key].level > prev.level) {
-      ulist += `<ul class="ul">\n`;
+      list += '<ul class="ul">\n';
     } else if (prev && values[key].level < prev.level) {
-      for (let i = 0; i < prev.level - values[key].level; i++) {
-        ulist += `</ul>\n`;
+      for (let i = 0; i < prev.level - values[key].level; i += 1) {
+        list += "</ul>\n";
       }
     }
-    ulist += `<li class="li">`;
+    list += '<li class="li">';
     for (const i in values[key].values) {
       switch (values[key].values[i].name) {
         case "em":
-          ulist += `<strong>${values[key].values[i].value}</strong>`;
+          list += `<strong>${values[key].values[i].value}</strong>`;
           break;
         case "strikethrough":
-          ulist += `<del>${values[key].values[i].value}</del>`;
+          list += `<del>${values[key].values[i].value}</del>`;
           break;
         case "italic":
-          ulist += `<em>${values[key].values[i].value}</em>`;
+          list += `<em>${values[key].values[i].value}</em>`;
           break;
         case "emitalic":
-          ulist += `<em><strong>${values[key].values[i].value}</strong></em>`;
+          list += `<em><strong>${values[key].values[i].value}</strong></em>`;
           break;
-        case "link":
+        case "link": {
           const path = changeHtml(values[key].values[i].href);
-          ulist += `<a href="${path}" class="a">${values[key].values[i].title}</a>`;
+          list += `<a href="${path}" class="a">${values[key].values[i].title}</a>`;
           break;
+        }
         case "image":
-          ulist += `<img src="${values[key].values[i].src}" alt="${values[key].values[i].alt}" class="img" />`;
+          list += `<img src="${values[key].values[i].src}" alt="${values[key].values[i].alt}" class="img" />`;
           break;
         case "video":
-          ulist += `<video controls preload="none" class="video">\n<source src="${values[key].values[i].src}" />\nSorry, your browser doesn't support embedded videos.\n</video>`;
+          list += `<video controls preload="none" class="video">\n<source src="${values[key].values[i].src}" />\nSorry, your browser doesn't support embedded videos.\n</video>`;
           break;
         case "code":
-          ulist += `<code class="inline-code">${values[key].values[i].value}</code>`;
+          list += `<code class="inline-code">${values[key].values[i].value}</code>`;
           break;
-        case "katex":
-          const html = Katex.renderToString(String.raw`\displaystyle ${values[key].values[i].value}`, {
-            throwOnError: false,
-          });
-          ulist += html;
+        case "katex": {
+          const html = Katex.renderToString(
+            String.raw`\displaystyle ${values[key].values[i].value}`,
+            {
+              throwOnError: false,
+            },
+          );
+          list += html;
           break;
+        }
         default:
           if (values[key].values[i].value === "\n") {
-            ulist += `<br>`;
+            list += "<br>";
           } else {
-            ulist += values[key].values[i].value;
+            list += values[key].values[i].value;
           }
           break;
       }
     }
-    ulist += `</li>\n`;
+    list += "</li>\n";
     prev = values[key];
   }
-  ulist += `</ul>\n`;
-  return ulist;
+  list += "</ul>\n";
+  return list;
 };

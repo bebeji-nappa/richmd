@@ -19,9 +19,11 @@
 } 
 
 .a {
-  color: #4183C4; }
+  color: #4183C4;
+}
 .a.absent {
-  color: #cc0000; }
+  color: #cc0000;
+}
 .a.anchor {
   display: block;
   padding-left: 30px;
@@ -133,7 +135,7 @@ hr {
 .br {
   display: block;
   content: "";
-  padding: 5px;
+  padding: 6px;
   margin: 0;
 }
 
@@ -387,8 +389,8 @@ input[type="checkbox"] {
 
 .message-icon-danger {
   background-image: url("../images/danger.svg");
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   margin: 10px 0;
   background-size: contain;
   background-repeat: no-repeat;
@@ -402,8 +404,8 @@ input[type="checkbox"] {
 
 .message-icon-warning {
   background-image: url("../images/warning.svg");
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   margin: 10px 0;
   background-size: contain;
   background-repeat: no-repeat;
@@ -417,8 +419,8 @@ input[type="checkbox"] {
 
 .message-icon-info {
   background-image: url("../images/info.svg");
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   margin: 10px 0;
   background-size: contain;
   background-repeat: no-repeat;
@@ -432,8 +434,8 @@ input[type="checkbox"] {
 
 .message-icon-success {
   background-image: url("../images/success.svg");
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   margin: 10px 0;
   background-size: contain;
   background-repeat: no-repeat;

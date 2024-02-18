@@ -1,6 +1,4 @@
-const Katex = require("katex");
 import "../type";
-import { changeHtml } from "./changeHtml";
 
 import { heading } from "./heading";
 import { paragraph } from "./paragraph";
@@ -17,7 +15,7 @@ import { colorBlock } from "./colorBlock";
 import { startDetails, endDetails } from "./details";
 import { startTag, endTag } from "./tag";
 
-export {
+export const convert = {
   heading,
   paragraph,
   blockquote,

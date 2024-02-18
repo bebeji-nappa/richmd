@@ -1,23 +1,19 @@
 export const startTag = (data: Convert) => {
   if (!data.tag) {
     if (!data.style) {
-      return `<span>`;
-    } else {
-      return `<span class="${data.style}">`;
+      return "<span>";
     }
-  } else {
-    if (!data.style) {
-      return `<${data.tag}>`;
-    } else {
-      return `<${data.tag} class="${data.style}">`;
-    }
+    return `<span class="${data.style}">`;
   }
+  if (!data.style) {
+    return `<${data.tag}>`;
+  }
+  return `<${data.tag} class="${data.style}">`;
 };
 
 export const endTag = (data: Convert) => {
   if (!data.tag) {
-    return `</span>\n`;
-  } else {
-    return `</${data.tag}>\n`;
+    return "</span>\n";
   }
+  return `</${data.tag}>\n`;
 };

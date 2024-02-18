@@ -16,8 +16,8 @@ const MODE_INLINE_KATEX = 11;
 const MODE_VIDEO = 12;
 
 type Prev = {
-  value: string
-}
+  value: string;
+};
 
 export default (text: string[] | string) => {
   const ast: object[] & Prev[] = [];
@@ -27,7 +27,7 @@ export default (text: string[] | string) => {
   let escapeSequence = false;
   const html: string[] = [];
 
-  for (let i = 0; i < text.length; ++i) {
+  for (let i = 0; i < text.length; i += 1) {
     const char = text[i];
 
     if (escapeSequence === true) {
@@ -39,9 +39,9 @@ export default (text: string[] | string) => {
     switch (char) {
       case "*":
         if (text[i + 1] === "*") {
-          i++;
+          i += 1;
           if (text[i + 1] === "*") {
-            i++;
+            i += 1;
             if (mode === MODE_ASTERISK_TRIPLE) {
               ast.push(new nodes.EmItalic(stack));
               mode = MODE_DEFAULT;
@@ -73,9 +73,9 @@ export default (text: string[] | string) => {
         continue;
       case "_":
         if (text[i + 1] === "_") {
-          i++;
+          i += 1;
           if (text[i + 1] === "_") {
-            i++;
+            i += 1;
             if (mode === MODE_UNDERLINE_TRIPLE) {
               ast.push(new nodes.EmItalic(stack));
               mode = MODE_DEFAULT;
@@ -107,7 +107,7 @@ export default (text: string[] | string) => {
         continue;
       case "~":
         if (text[i + 1] === "~") {
-          i++;
+          i += 1;
           if (mode === MODE_STRIKETHROUGH) {
             ast.push(new nodes.Strikethrough(stack));
             mode = MODE_DEFAULT;
@@ -144,7 +144,7 @@ export default (text: string[] | string) => {
         }
         stack = "";
         continue;
-      case "<":
+      case "<": {
         if (!helper.isEmpty(stack)) {
           if (html.length === 0) {
             ast.push(new nodes.Text(stack));
@@ -157,7 +157,7 @@ export default (text: string[] | string) => {
         if (c !== "<") {
           do {
             stack += c;
-            c = text[++i];
+            c = text[(i += 1)];
           } while (c !== ">");
           stack += c;
         } else {
@@ -175,6 +175,7 @@ export default (text: string[] | string) => {
         }
         stack = "";
         continue;
+      }
       case "!":
         if (!helper.isEmpty(stack)) {
           ast.push(new nodes.Text(stack));
@@ -221,6 +222,7 @@ export default (text: string[] | string) => {
           escapeSequence = true;
           continue;
         }
+        break;
       default:
         stack += char;
         break;
@@ -259,6 +261,8 @@ export default (text: string[] | string) => {
           break;
         case MODE_INLINE_KATEX:
           prefix = "$";
+          break;
+        default:
           break;
       }
       prev.value += `${prefix}${stack}`;
