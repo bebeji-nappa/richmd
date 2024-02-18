@@ -1,4 +1,4 @@
-import Katex from "katex";
+import * as Katex from "katex";
 import { changeHtml } from "./changeHtml";
 
 export const ulist = (values: List[]) => {
