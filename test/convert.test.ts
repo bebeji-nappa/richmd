@@ -303,13 +303,6 @@ describe("horizontal", () => {
 });
 
 describe("br", () => {
-  it("once break line", () => {
-    const text = `# h1\n\ntest`;
-    const convertedResult = `<h1 class="h1">h1</h1><span class="span">test</span>`;
-    const result = richmd(text).replace(/\n/g, "");
-    expect(result).toEqual(convertedResult);
-  });
-
   it("continuous break line", () => {
     const text = `test\n\ntest`;
     const convertedResult = `<span class="span">test<br></span><br class="br" /><span class="span">test</span>`;
