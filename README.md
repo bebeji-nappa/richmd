@@ -4,7 +4,7 @@
 ![npm](https://img.shields.io/npm/dw/richmd)
 
 ## What is Richmd?
-Richmd is a tool for making Markdown richer.
+Richmd is a tool for making Rich contents Markdown language.
 
 ![Richmd](./docs/images/preview.png)
 

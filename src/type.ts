@@ -44,3 +44,7 @@ interface mdTree {
 interface value {
   value: string
 }
+
+interface Tree {
+  ast: object[] & Convert[]
+}

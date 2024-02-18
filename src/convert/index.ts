@@ -15,7 +15,7 @@ import { colorBlock } from "./colorBlock";
 import { startDetails, endDetails } from "./details";
 import { startTag, endTag } from "./tag";
 
-export {
+export const convert = {
   heading,
   paragraph,
   blockquote,
