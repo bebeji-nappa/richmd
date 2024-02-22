@@ -1,4 +1,4 @@
-import { parser } from "./parser/block";
+import { parser } from "./parser";
 import Tree from "./Tree";
 
 export const parseMdTree = (mdString: string) => {
