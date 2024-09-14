@@ -3,7 +3,7 @@
 It set up Webpack with the assumption that you will use it with Vue.
 
 ### Install packages
-It execute this commands in CLI, It install required packages.
+Execute the following commands to install required packages.
 
 ```txt
 $ npm install --save-dev webpack webpack-cli webpack-dev-server clean-webpack-plugin html-webpack-plugin
@@ -25,7 +25,7 @@ babel.config.js
 
 ### Set up Richmd
 
-1. It create `webpack.config.js` in your project, This code add to `webpack.config.js`.
+1. Create `webpack.config.js` file in your project, and add the code below:
 
 ```js
 const path = require('path');
@@ -88,7 +88,7 @@ module.exports = {
 }
 ```
 
-2. And, create `babel.config.js`, this code copy and paste.
+2. Create `babel.config.js` file, and add the code below:
 
 ```js
 module.exports = {

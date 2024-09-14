@@ -25,9 +25,9 @@ $ yarn add richmd
 
 
 ## Markdown Syntax
-Please read a [Richmd Markdown Syntax Documentation](./docs/md-syntax.md).
+Please read [Richmd Markdown Syntax Documentation](./docs/md-syntax.md).
 
-### Suport syntax
+### Supported Syntax
 - strong
 - italic
 - image
@@ -41,7 +41,7 @@ Please read a [Richmd Markdown Syntax Documentation](./docs/md-syntax.md).
 - code block
 - checkbox list
 - table
-- TeX syntax(Use [KaTeX](https://katex.org/))
+- TeX syntax (using [KaTeX](https://katex.org/))
 - Color Inline Block
 - Dropdown details
 - Video(HTML5 Video Tag)
@@ -52,6 +52,6 @@ MIT
 
 ## Thank you :pray:
 - [Markdown-tree-parser](https://github.com/ysugimoto/markdown-tree-parser)
-  - RichMD markdown parser was created using the code in markdown-tree-parser as a reference.
+  - Richmd's Markdown parser was created using the code in markdown-tree-parser as a reference.
 - [KaTeX](https://github.com/KaTeX/KaTeX)
 - [highlight.js](https://github.com/highlightjs/highlight.js/)

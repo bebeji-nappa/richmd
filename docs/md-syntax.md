@@ -83,7 +83,7 @@ Code block
 ```
 ~~~
 
-#### Enable Language syntax
+#### Enable Language Syntax
 ~~~markdown
 ```js
 console.log('Hello World!')
@@ -97,8 +97,8 @@ console.log('Hello World!')
 ```
 ~~~
 
-It use [highlight.js](https://github.com/highlightjs/highlight.js) code syntax support. 
-Please code syntax support details read a [highlight.js Documentation](https://highlightjs.org/static/demo/).
+It uses [highlight.js](https://github.com/highlightjs/highlight.js) for code syntax support. 
+Please read [highlight.js Documentation](https://highlightjs.org/static/demo/) for details.
 
 ### Table
 ```markdown
@@ -108,8 +108,8 @@ Please code syntax support details read a [highlight.js Documentation](https://h
 ```
 
 ## Original Markdown Syntax
-### Mathematical formula Block (Use [KaTeX](https://katex.org/))
-Please TeX Syntax details read a [KaTeX Functions Documentation](https://katex.org/docs/supported.html).
+### Mathematical Formula Block (using [KaTeX](https://katex.org/))
+Please read [KaTeX Functions Documentation](https://katex.org/docs/supported.html) for TeX syntax details.
 
 #### Syntax
 ```txt
@@ -127,7 +127,7 @@ $$ \frac{a}{b} $$
 #### Preview
 <img src="./images/preview1.png" width="600">
 
-### Inline Mathematical formula
+### Inline Mathematical Formula
 #### Syntax
 ```txt
 This is $a=b+c$
@@ -163,7 +163,7 @@ This is danger color block.
 #### Preview
 <img src="./images/preview3.png" width="600">
 
-### Dropdown details
+### Dropdown Details
 #### Syntax
 ```txt
 :>Summary
